@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.zcl.demo.dao.log.LogDao">
+
+    <select id="queryAll" resultType="com.zcl.demo.model.log.Log">
+select create_time,user_name,action from log_info order by create_time desc
+  </select>
+
+    <insert id="addLog" parameterType="com.zcl.demo.model.log.Log">
+        <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+            select REPLACE(UUID(),'-','')
+        </selectKey>
+        insert into log_info(id,create_time,user_name,action) values (#{id},#{createTime},#{userName},#{action})
+    </insert>
+
+    <select id="queryByName" resultType="com.zcl.demo.model.log.Log">
+select create_time,user_name,action from log_info where user_name like "%"#{userName}"%"  order by create_time desc
+  </select>
+    <select id="queryByDate" resultType="com.zcl.demo.model.log.Log">
+select create_time,user_name,action from log_info where create_time like "%"#{createTime}"%" order by create_time desc
+  </select>
+    <select id="queryByNameAndDate" resultType="com.zcl.demo.model.log.Log">
+select create_time,user_name,action from log_info where user_name like "%"#{userName}"%" and create_time like "%"#{createTime}"%" order by create_time desc
+  </select>
+</mapper>
