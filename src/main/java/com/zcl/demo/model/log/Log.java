@@ -1,6 +1,10 @@
 package com.zcl.demo.model.log;
 
-public class Log {
+import java.io.Serializable;
+
+public class Log implements Serializable {
+
+    private static final long serialVersionUID = 5925249302222961923L;
     private String id;
     private String createTime;
     private String userName;

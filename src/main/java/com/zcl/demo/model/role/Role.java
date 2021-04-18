@@ -2,6 +2,8 @@ package com.zcl.demo.model.role;
 
 import org.springframework.context.annotation.Bean;
 
+import java.io.Serializable;
+
 /**
 
  * @author  zcl
@@ -11,7 +13,8 @@ import org.springframework.context.annotation.Bean;
  * @desc 角色实体类
 
  **/
-public class Role {
+public class Role implements Serializable {
+    private static final long serialVersionUID = -1388580148376174233L;
     private String rId;
     private String rName;
     private String rDesc;

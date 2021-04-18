@@ -1,11 +1,14 @@
 package com.zcl.demo.model.user;
 
 
+import java.io.Serializable;
+
 /**
  * 用户实体类
  */
-public class User {
+public class User implements Serializable {
 
+    private static final long serialVersionUID = -2423000173249137719L;
     private String uId;
 
     private String uName;

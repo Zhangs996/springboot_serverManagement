@@ -1,6 +1,7 @@
 package com.zcl.demo.service.menu;
 
 import com.zcl.demo.model.menu.Menu;
+import com.zcl.demo.vo.menu.MenuVo;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ import java.util.List;
  **/
 public interface MenuService {
 
-    List<Menu> queryTreeAll();
+    List<MenuVo> queryTreeAll();
 }

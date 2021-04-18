@@ -10,6 +10,7 @@
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/frame/jquery/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="../../static/frame/jquery/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script type="text/javascript" src="../../static/js/common/excheck.js"></script>
     <script type="text/javascript" src="../../static/js/common/exedit.js"></script>
     <script type="text/javascript" src="../../static/js/menu/index.js"></script>

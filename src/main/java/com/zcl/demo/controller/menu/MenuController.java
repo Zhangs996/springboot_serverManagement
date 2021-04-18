@@ -5,6 +5,9 @@ import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
+import com.zcl.demo.vo.menu.MenuVo;
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,9 +51,8 @@ public class MenuController {
     @RequestMapping(value = "/queryTreeAll.json", method = RequestMethod.GET)
     @ResponseBody
     public Map queryTreeAll() {
-        List<Menu> menus = menuService.queryTreeAll();
-        return CommonResponse.setResponseData(menus);
-
+        List<MenuVo> menuVos = menuService.queryTreeAll();
+        return CommonResponse.setResponseData(menuVos);
     }
 
 }

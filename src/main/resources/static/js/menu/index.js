@@ -26,21 +26,9 @@ $(function () {
                 onRename: onRename
             }
         };
-
-        var zNodes = [
-            {id: 1, pId: 0, name: "parent node 1", open: true},
-            {id: 14, pId: 1, name: "leaf node 1-1"},
-            {id: 12, pId: 1, name: "leaf node 1-2"},
-            {id: 11, pId: 1, name: "leaf node 1-3"},
-            {id: 2, pId: 0, name: "parent node 2", open: true},
-            {id: 21, pId: 2, name: "leaf node 2-1"},
-            {id: 22, pId: 2, name: "leaf node 2-2"},
-            {id: 23, pId: 2, name: "leaf node 2-3"},
-            {id: 3, pId: 0, name: "parent node 3", open: true},
-            {id: 31, pId: 3, name: "leaf node 3-1"},
-            {id: 32, pId: 3, name: "leaf node 3-2"},
-            {id: 33, pId: 3, name: "leaf node 3-3"}
-        ];
+        var zNodes = [];
+        getTree();
+        console.log(zNodes);
         var log, className = "dark";
 
         function beforeDrag(treeId, treeNodes) {
@@ -91,7 +79,7 @@ $(function () {
                     })
                     layer.close(index);
                 });
-          //  return confirm("Confirm delete node '" + treeNode.name + "' it?");
+            //  return confirm("Confirm delete node '" + treeNode.name + "' it?");
         }
 
         // function onRemove(e, treeId, treeNode) {
@@ -165,6 +153,18 @@ $(function () {
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.setting.edit.editNameSelectAll = $("#selectAll").attr("checked");
         }
+
+        //获取菜单树
+        function getTree() {
+            var url="/menuController/queryTreeAll.json";
+            sendGetAjax(url, null, function (res) {
+                if (res.status) {
+                    console.log(res.data);
+                    zNodes=res.data;
+                }
+            })
+        }
+
 
         $(document).ready(function () {
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);

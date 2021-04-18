@@ -1,6 +1,9 @@
 package com.zcl.demo.dao.menu;
 
+import com.zcl.demo.model.menu.Menu;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
 
@@ -14,6 +17,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface MenuDao {
-
-    public void queryAll();
+    /**
+     * 查询所有菜单
+     * @return
+     */
+    List<Menu> queryAll();
 }
