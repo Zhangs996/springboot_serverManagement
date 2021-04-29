@@ -23,7 +23,19 @@
 
 <div class="content_wrap">
     <div class="zTreeDemoBackground left">
-        <ul id="treeDemo" class="ztree"></ul>
+        <ul id="treeDemo" class="ztree" style="border: 3px solid #617775;height: 100%;background:white;"></ul>
+    </div>
+</div>
+
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <iframe src="/showDeafult.html" id="main" class="showTreeiframe" width="100%" style="height: 99.9%" frameborder="0"></iframe>
+    <#--
+            <iframe src="/LogController/hello.html" id="main" width="100%" style="height: 99.9%" frameborder="0"></iframe>
+    -->
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
     </div>
 </div>
 </BODY>

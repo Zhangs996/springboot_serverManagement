@@ -55,4 +55,14 @@ public class MenuController {
         return CommonResponse.setResponseData(menuVos);
     }
 
+    /**
+     * 菜单树添加页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/addpage.html",method = RequestMethod.GET)
+    public String showAddPage() {
+        return prief + "/add";
+    }
+
 }
