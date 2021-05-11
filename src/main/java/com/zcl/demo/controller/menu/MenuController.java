@@ -9,6 +9,9 @@ import com.zcl.demo.vo.menu.MenuVo;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,7 +64,10 @@ public class MenuController {
      * @return
      */
     @RequestMapping(value = "/addpage.html",method = RequestMethod.GET)
-    public String showAddPage() {
+    public String showAddPage(Model model, String treeId) {
+        //根据id返回中文描述
+        String nodeName = menuService.queryNodeNameById(treeId);
+        model.addAttribute("String", nodeName);
         return prief + "/add";
     }
 

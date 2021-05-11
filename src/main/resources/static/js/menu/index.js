@@ -132,7 +132,7 @@ $(function () {
             var btn = $("#addBtn_" + treeNode.tId);
             //添加点击事件
             if (btn) btn.bind("click", function () {
-                addTreeNode();
+                addTreeNode(treeNode.id);
                 // alert("添加事件触发");
                 // var zTree = $.fn.zTree.getZTreeObj("treeDemo");
                 // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
@@ -169,21 +169,6 @@ $(function () {
     })
 })
 //菜单树添加按钮点击事件
-function addTreeNode(){
-    $.ajax({
-        url: "/menuController/addpage.html",
-        type: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        success: function (res) {
-            if (res.status) {
-                layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
-                    location.reload();
-                })
-            } else {
-                layui.layer.msg(res.msg, {icon: 2, time: 1500})
-            }
-        }
-    })
-
+function addTreeNode(treeId){
+    $(".showTreeiframe").attr('src',"/menuController/addpage.html?"+$.param({treeId:treeId}));
 }
