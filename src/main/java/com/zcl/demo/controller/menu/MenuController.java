@@ -52,6 +52,7 @@ public class MenuController {
     @ResponseBody
     public Map queryTreeAll() {
         List<MenuVo> menuVos = menuService.queryTreeAll();
+        System.out.println("");
         return CommonResponse.setResponseData(menuVos);
     }
 
