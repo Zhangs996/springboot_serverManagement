@@ -23,14 +23,8 @@
 
 <div class="content_wrap">
     <div class="zTreeDemoBackground left">
-        <ul id="treeDemo" class="ztree" style="border: 3px solid #617775;height: 100%;background:white;"></ul>
+        <ul id="treeDemo" class="ztree"></ul>
     </div>
-</div>
-
-<div class="layui-body" style="left: 230px;overflow-y:hidden">
-    <!-- 内容主体区域 -->
-    <iframe src="/showDeafult.html" id="main" class="showTreeiframe"  width="100%" style="height: 99.9%" frameborder="0"></iframe>
-
 </div>
 </BODY>
 </HTML>

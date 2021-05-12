@@ -6,12 +6,11 @@ $(function () {
                 removeHoverDom: removeHoverDom,
                 selectedMulti: false
             },
-            //开启工具栏
             edit: {
                 enable: true,
                 editNameSelectAll: true,
-                showRemoveBtn: true,
-                showRenameBtn: true
+                showRemoveBtn: showRemoveBtn,
+                showRenameBtn: showRenameBtn
             },
             data: {
                 simpleData: {
@@ -19,16 +18,22 @@ $(function () {
                 }
             },
             callback: {
+                beforeDrag: beforeDrag,
                 beforeEditName: beforeEditName,
                 beforeRemove: beforeRemove,
                 beforeRename: beforeRename,
+                // onRemove: onRemove,
                 onRename: onRename
             }
         };
         var zNodes = [];
         getTree();
+        console.log(zNodes);
         var log, className = "dark";
 
+        function beforeDrag(treeId, treeNodes) {
+            return false;
+        }
 
         function beforeEditName(treeId, treeNode) {
             className = (className === "dark" ? "" : "dark");
@@ -52,31 +57,34 @@ $(function () {
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.selectNode(treeNode);
 
-            // layer.confirm('确定删除吗?', {icon: 3, title: '提示'},
-            //     function (index) {
-            //         var mask = layer.load();
-            //         $.ajax({
-            //             url: "/userController/deleteById.json",
-            //             type: "POST",
-            //             contentType: "application/json;charset=UTF-8",
-            //             dataType: "json",
-            //             data: JSON.stringify(userArr),
-            //             success: function (res) {
-            //                 if (res.status) {
-            //                     layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
-            //                         location.reload();
-            //                     })
-            //                 } else {
-            //                     layui.layer.msg(res.msg, {icon: 2, time: 1500})
-            //                 }
-            //                 layer.close(mask);
-            //             }
-            //         })
-            //         layer.close(index);
-            //     });
+            layer.confirm('确定删除吗?', {icon: 3, title: '提示'},
+                function (index) {
+                    var mask = layer.load();
+                    $.ajax({
+                        url: "/userController/deleteById.json",
+                        type: "POST",
+                        contentType: "application/json;charset=UTF-8",
+                        dataType: "json",
+                        data: JSON.stringify(userArr),
+                        success: function (res) {
+                            if (res.status) {
+                                layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
+                                    location.reload();
+                                })
+                            } else {
+                                layui.layer.msg(res.msg, {icon: 2, time: 1500})
+                            }
+                            layer.close(mask);
+                        }
+                    })
+                    layer.close(index);
+                });
             //  return confirm("Confirm delete node '" + treeNode.name + "' it?");
         }
 
+        // function onRemove(e, treeId, treeNode) {
+        //     showLog("[ " + getTime() + " onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        // }
 
         function beforeRename(treeId, treeNode, newName, isCancel) {
             className = (className === "dark" ? "" : "dark");
@@ -96,13 +104,13 @@ $(function () {
             showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
         }
 
-        // function showRemoveBtn(treeId, treeNode) {
-        //     return !treeNode.isFirstNode;
-        // }
-        //
-        // function showRenameBtn(treeId, treeNode) {
-        //     return !treeNode.isLastNode;
-        // }
+        function showRemoveBtn(treeId, treeNode) {
+            return !treeNode.isFirstNode;
+        }
+
+        function showRenameBtn(treeId, treeNode) {
+            return !treeNode.isLastNode;
+        }
 
         function showLog(str) {
             if (!log) log = $("#log");
@@ -130,14 +138,10 @@ $(function () {
                 + "' title='add node' onfocus='this.blur();'></span>";
             sObj.after(addStr);
             var btn = $("#addBtn_" + treeNode.tId);
-            //添加点击事件
             if (btn) btn.bind("click", function () {
-                addTreeNode(treeNode.id);
-                // alert("添加事件触发");
-                // var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
-                // return false;
-
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
+                return false;
             });
         };
 
@@ -152,11 +156,11 @@ $(function () {
 
         //获取菜单树
         function getTree() {
-            var url = "/menuController/queryTreeAll.json";
+            var url="/menuController/queryTreeAll.json";
             sendGetAjax(url, null, function (res) {
                 if (res.status) {
                     console.log(res.data);
-                    zNodes = res.data;
+                    zNodes=res.data;
                 }
             })
         }
@@ -168,7 +172,3 @@ $(function () {
         });
     })
 })
-//菜单树添加按钮点击事件
-function addTreeNode(treeId){
-    $(".showTreeiframe").attr('src',"/menuController/addpage.html?"+$.param({treeId:treeId}));
-}
