@@ -27,4 +27,11 @@ public interface MenuService {
      * @return
      */
     String queryNodeNameById(String treeId);
+
+    /**
+     * 添加url
+     * @param menu
+     * @return
+     */
+    void addUrl(Menu menu);
 }

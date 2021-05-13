@@ -71,4 +71,14 @@ public class MenuController {
         return prief + "/add";
     }
 
+    /**
+     * 添加url
+     * @param menu
+     * @return
+     */
+    @RequestMapping(value = "/addUrl.json",method = RequestMethod.POST)
+    public Map addUrl(Menu menu){
+         menuService.addUrl(menu);
+        return CommonResponse.setResponseData(null);
+    }
 }

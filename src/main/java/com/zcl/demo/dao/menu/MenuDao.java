@@ -28,4 +28,10 @@ public interface MenuDao {
      * @param treeId
      */
     String queryNodeNameById(String treeId);
+
+    /**
+     *
+     * @param menu
+     */
+    void addUrl(Menu menu);
 }

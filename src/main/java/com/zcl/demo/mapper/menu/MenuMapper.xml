@@ -11,6 +11,9 @@
         where m_id = #{treeId}
     </select>
 
+    <insert id="addUrl" parameterType="com.zcl.demo.model.menu.Menu">
+
+    </insert>
     <!--    <insert id="addUser"  parameterType="com.zcl.demo.model.user.User" >-->
     <!--      <selectKey keyProperty="uId" resultType="java.lang.String" order="BEFORE">-->
     <!--        select REPLACE(UUID(),'-','')-->

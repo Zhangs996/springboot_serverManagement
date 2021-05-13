@@ -1,5 +1,6 @@
 $(function () {
     layui.use(['table', 'laydate', 'util', 'form'], function () {
+        var form = layui.form
         var setting = {
             view: {
                 addHoverDom: addHoverDom,
@@ -153,7 +154,7 @@ $(function () {
         //获取菜单树
         function getTree() {
             var url = "/menuController/queryTreeAll.json";
-            sendGetAjax(url, null, function (res) {
+            sendAjax.sendGetAjax(url, null, function (res) {
                 if (res.status) {
                     console.log(res.data);
                     zNodes = res.data;
@@ -166,9 +167,11 @@ $(function () {
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);
             $("#selectAll").bind("click", selectAll);
         });
+
     })
 })
+
 //菜单树添加按钮点击事件
-function addTreeNode(treeId){
-    $(".showTreeiframe").attr('src',"/menuController/addpage.html?"+$.param({treeId:treeId}));
+function addTreeNode(treeId) {
+    $(".showTreeiframe").attr('src', "/menuController/addpage.html?" + $.param({treeId: treeId}));
 }

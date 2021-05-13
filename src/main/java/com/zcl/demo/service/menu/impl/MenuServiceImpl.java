@@ -52,4 +52,14 @@ public class MenuServiceImpl implements MenuService {
     public String queryNodeNameById(String treeId) {
         return menuDao.queryNodeNameById(treeId);
     }
+
+    /**
+     * 添加url
+     * @param menu
+     * @return
+     */
+    @Override
+    public void addUrl(Menu menu) {
+        menuDao.addUrl(menu);
+    }
 }

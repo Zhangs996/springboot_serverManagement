@@ -1,3 +1,10 @@
+var sendAjax;
+(function(){
+    sendAjax = {
+        sendGetAjax:sendGetAjax,
+        sendPostAjax:sendPostAjax
+    }
+})()
 //公共get请求
 function sendGetAjax(url, data, successfn) {
     $.ajax({
