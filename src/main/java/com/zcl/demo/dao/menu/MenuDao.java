@@ -22,4 +22,10 @@ public interface MenuDao {
      * @return
      */
     List<Menu> queryAll();
+
+    /**
+     * 根据id查名称
+     * @param treeId
+     */
+    String queryNodeNameById(String treeId);
 }
