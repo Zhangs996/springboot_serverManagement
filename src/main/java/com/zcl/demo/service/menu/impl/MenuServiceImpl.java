@@ -19,6 +19,11 @@ public class MenuServiceImpl implements MenuService {
         this.menuDao = menuDao;
     }
 
+    /**
+     * 展现树形结构
+     *
+     * @return
+     */
     @Override
     public List<MenuVo> queryTreeAll() {
         List<Menu> menus = menuDao.queryAll();
@@ -30,10 +35,31 @@ public class MenuServiceImpl implements MenuService {
                 .byDefault().register();
         List<MenuVo> menuVos = mapperFactory.getMapperFacade().mapAsList(menus, MenuVo.class);
         menuVos.stream().forEach(menuVo -> {
-            if ("0".equals(menuVo.getpId())) {
+            if ("0".equals(menuVo.getpId()) || "0".equals(menuVo.getId())) {
                 menuVo.setOpen(true);
             }
         });
         return menuVos;
+    }
+
+    /**
+     * 根据id返回中文描述
+     *
+     * @param treeId
+     * @return
+     */
+    @Override
+    public String queryNodeNameById(String treeId) {
+        return menuDao.queryNodeNameById(treeId);
+    }
+
+    /**
+     * 添加url
+     * @param menu
+     * @return
+     */
+    @Override
+    public void addUrl(Menu menu) {
+        menuDao.addUrl(menu);
     }
 }

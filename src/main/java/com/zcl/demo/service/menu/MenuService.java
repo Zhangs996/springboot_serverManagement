@@ -15,6 +15,23 @@ import java.util.List;
 
  **/
 public interface MenuService {
-
+    /**
+     * 展现树形结构
+     * @return
+     */
     List<MenuVo> queryTreeAll();
+
+    /**
+     * 根据id返回中文描述
+     * @param treeId
+     * @return
+     */
+    String queryNodeNameById(String treeId);
+
+    /**
+     * 添加url
+     * @param menu
+     * @return
+     */
+    void addUrl(Menu menu);
 }
