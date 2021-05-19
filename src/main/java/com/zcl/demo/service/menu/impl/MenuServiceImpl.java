@@ -62,4 +62,13 @@ public class MenuServiceImpl implements MenuService {
     public void addUrl(Menu menu) {
         menuDao.addUrl(menu);
     }
+
+    /**
+     * 菜单删除
+     * @param mId
+     */
+    @Override
+    public void removeUrl(String mId) {
+        menuDao.removeUrl(mId);
+    }
 }

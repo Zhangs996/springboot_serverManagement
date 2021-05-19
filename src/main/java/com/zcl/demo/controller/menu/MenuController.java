@@ -5,6 +5,8 @@ import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
+import com.zcl.demo.util.DateInFo;
+import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.menu.MenuVo;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -63,22 +65,41 @@ public class MenuController {
      *
      * @return
      */
-    @RequestMapping(value = "/addpage.html",method = RequestMethod.GET)
+    @RequestMapping(value = "/addpage.html", method = RequestMethod.GET)
     public String showAddPage(Model model, String treeId) {
         //根据id返回中文描述
         String nodeName = menuService.queryNodeNameById(treeId);
-        model.addAttribute("String", nodeName);
+        model.addAttribute("nodeName", nodeName);
+        model.addAttribute("treeId", treeId);
         return prief + "/add";
     }
 
     /**
      * 添加url
+     *
      * @param menu
      * @return
      */
-    @RequestMapping(value = "/addUrl.json",method = RequestMethod.POST)
-    public Map addUrl(Menu menu){
-         menuService.addUrl(menu);
+    @RequestMapping(value = "/addUrl.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map addUrl(Menu menu) {
+        String userName = (String) SessionUtil.getSessionAttribute("userName");
+        menu.setCreateTime(DateInFo.dateFomart());
+        menu.setCreateUser(userName);
+        menuService.addUrl(menu);
         return CommonResponse.setResponseData(null);
     }
+
+    /**
+     * 菜单删除
+     * @param mId
+     * @return
+     */
+    @RequestMapping(value = "/removeUrl.json", method = RequestMethod.GET)
+    @ResponseBody
+    public Map removeUrl(String mId) {
+        menuService.removeUrl(mId);
+        return CommonResponse.setResponseData(null);
+    }
+
 }

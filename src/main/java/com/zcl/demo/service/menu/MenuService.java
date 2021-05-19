@@ -34,4 +34,6 @@ public interface MenuService {
      * @return
      */
     void addUrl(Menu menu);
+
+    void removeUrl(String mId);
 }

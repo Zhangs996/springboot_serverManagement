@@ -49,33 +49,23 @@ $(function () {
         /*删除事件*/
         function beforeRemove(treeId, treeNode) {
             className = (className === "dark" ? "" : "dark");
-            //showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.selectNode(treeNode);
-
-            // layer.confirm('确定删除吗?', {icon: 3, title: '提示'},
-            //     function (index) {
-            //         var mask = layer.load();
-            //         $.ajax({
-            //             url: "/userController/deleteById.json",
-            //             type: "POST",
-            //             contentType: "application/json;charset=UTF-8",
-            //             dataType: "json",
-            //             data: JSON.stringify(userArr),
-            //             success: function (res) {
-            //                 if (res.status) {
-            //                     layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
-            //                         location.reload();
-            //                     })
-            //                 } else {
-            //                     layui.layer.msg(res.msg, {icon: 2, time: 1500})
-            //                 }
-            //                 layer.close(mask);
-            //             }
-            //         })
-            //         layer.close(index);
-            //     });
-            //  return confirm("Confirm delete node '" + treeNode.name + "' it?");
+            var url = "/menuController/removeUrl.json"
+            layer.confirm('确定删除该菜单吗?', {icon: 3, title: '提示'},
+                function (index) {
+                    console.log(treeNode.id);
+                    var mask = layer.load();
+                    sendAjax.sendGetAjax(url,  $.param({mId:treeNode.id}) , function (res) {
+                        if (res.status) {
+                            console.log(res.data);
+                            zNodes = res.data;
+                            layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
+                                location.reload();
+                            })
+                        }
+                    })
+                });
         }
 
 
@@ -97,13 +87,13 @@ $(function () {
             showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
         }
 
-        // function showRemoveBtn(treeId, treeNode) {
-        //     return !treeNode.isFirstNode;
-        // }
-        //
-        // function showRenameBtn(treeId, treeNode) {
-        //     return !treeNode.isLastNode;
-        // }
+        function showRemoveBtn(treeId, treeNode) {
+            return !treeNode.isFirstNode;
+        }
+
+        function showRenameBtn(treeId, treeNode) {
+            return !treeNode.isLastNode;
+        }
 
         function showLog(str) {
             if (!log) log = $("#log");
@@ -134,11 +124,6 @@ $(function () {
             //添加点击事件
             if (btn) btn.bind("click", function () {
                 addTreeNode(treeNode.id);
-                // alert("添加事件触发");
-                // var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                // zTree.addNodes(treeNode, {id: (100 + newCount), pId: treeNode.id, name: "new node" + (newCount++)});
-                // return false;
-
             });
         };
 

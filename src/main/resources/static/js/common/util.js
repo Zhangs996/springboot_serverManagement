@@ -13,7 +13,7 @@ function sendGetAjax(url, data, successfn) {
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
         async:false,
-        data: JSON.stringify(data),
+        data: data,
         success: function (res) {
             successfn(res);
         },

@@ -12,8 +12,16 @@
     </select>
 
     <insert id="addUrl" parameterType="com.zcl.demo.model.menu.Menu">
-
+        <selectKey keyProperty="mId" resultType="java.lang.String" order="BEFORE">
+            select REPLACE(UUID(),'-','')
+        </selectKey>
+        insert into t_menu values (#{mId},#{mName},#{pMenu},#{isNavigtion},#{mUrl},
+        #{mIcon},#{mSort},#{mDesc},#{createUser},#{createTime},#{updateUser},#{updateTime})
     </insert>
+
+    <delete id="removeUrl" parameterType="java.lang.String">
+        delete from t_menu where m_id = #{mId}
+    </delete>
     <!--    <insert id="addUser"  parameterType="com.zcl.demo.model.user.User" >-->
     <!--      <selectKey keyProperty="uId" resultType="java.lang.String" order="BEFORE">-->
     <!--        select REPLACE(UUID(),'-','')-->
