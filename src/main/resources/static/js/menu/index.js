@@ -56,15 +56,18 @@ $(function () {
                 function (index) {
                     console.log(treeNode.id);
                     var mask = layer.load();
-                    sendAjax.sendGetAjax(url,  $.param({mId:treeNode.id}) , function (res) {
+                    sendAjax.sendGetAjax(url, $.param({mId: treeNode.id}), function (res) {
                         if (res.status) {
-                            console.log(res.data);
-                            zNodes = res.data;
                             layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
-                                location.reload();
                             })
+                        } else {
+                            layui.layer.msg(res.msg, {icon: 2, time: 1500})
                         }
+                        layer.close(mask);
                     })
+                },
+                function (){
+                    location.reload();
                 });
         }
 

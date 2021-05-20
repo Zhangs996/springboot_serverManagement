@@ -3,7 +3,7 @@
 <mapper namespace="com.zcl.demo.dao.menu.MenuDao">
     <select id="queryAll" resultType="com.zcl.demo.model.menu.Menu">
         SELECT *
-        FROM t_menu
+        FROM t_menu order by m_sort,m_name
     </select>
     <select id="queryNodeNameById" resultType="java.lang.String">
         select m_name
