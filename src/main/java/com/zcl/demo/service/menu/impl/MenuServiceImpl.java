@@ -1,6 +1,7 @@
 package com.zcl.demo.service.menu.impl;
 
 import com.zcl.demo.dao.menu.MenuDao;
+import com.zcl.demo.enums.menu.MenuIconEnum;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
 import com.zcl.demo.util.DateInFo;
@@ -35,9 +36,36 @@ public class MenuServiceImpl implements MenuService {
                 .field("mId", "id")
                 .field("pMenu", "pId")
                 .field("mName", "name")
+                .field("mIcon", "icon")
                 .byDefault().register();
         List<MenuVo> menuVos = mapperFactory.getMapperFacade().mapAsList(menus, MenuVo.class);
+        //转换成treenodes格式
         menuVos.stream().forEach(menuVo -> {
+            //转换icon成相对路径
+            MenuIconEnum menuIconEnum = MenuIconEnum.getEnumByType(menuVo.getIcon());
+            switch (menuIconEnum) {
+                case HOME_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case ANTH_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case BASICS_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case LOG_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case MENU_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case ROLE_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+                case USER_ICON:
+                    menuVo.setIcon(menuIconEnum.getPath());
+                    break;
+            }
             if ("0".equals(menuVo.getpId()) || "0".equals(menuVo.getId())) {
                 menuVo.setOpen(true);
             }

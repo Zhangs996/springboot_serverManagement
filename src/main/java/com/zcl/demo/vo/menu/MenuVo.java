@@ -30,6 +30,12 @@ public class MenuVo {
      */
     private boolean open;
 
+    /**
+     * icon图标
+     * @return
+     */
+    private String icon;
+
     public String getId() {
         return id;
     }
@@ -56,6 +62,14 @@ public class MenuVo {
 
     public boolean isOpen() {
         return open;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public void setOpen(boolean open) {

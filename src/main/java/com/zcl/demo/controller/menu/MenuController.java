@@ -128,4 +128,19 @@ public class MenuController {
         return map;
     }
 
+    /**
+     * 单个节点点击展示详情界面
+     *
+     * @param model
+     * @param mId
+     * @return
+     */
+    @RequestMapping(value = "showSignleNode.html", method = RequestMethod.GET)
+    public String showSignleNode(Model model, String mId) {
+        Menu menu = menuService.selectMenuByMid(mId);
+        Menu p_menu = menuService.selectMenuByMid(menu.getpMenu());
+        model.addAttribute("menuDao", menu);
+        model.addAttribute("p_menu", p_menu.getmName());
+        return prief+"/detail";
+    }
 }

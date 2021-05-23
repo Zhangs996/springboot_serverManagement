@@ -23,6 +23,7 @@ $(function () {
                 beforeDrag: beforeDrag,
                 beforeEditName: beforeEditName,
                 beforeRemove: beforeRemove,
+                beforeClick: beforeClick,//节点点击事件
                 // beforeRename: beforeRename,
                 // onRename: onRename
             }
@@ -31,6 +32,15 @@ $(function () {
         getTree();
         var log, className = "dark";
 
+
+        //节点点击事件
+        function beforeClick(treeId, treeNode) {
+            //根节点不触发、一级菜单不触发
+            if (treeNode.id == '0' || treeNode.pId == '0') {
+                return false;
+            }
+            $(".showTreeiframe").attr('src', "/menuController/showSignleNode.html?" + $.param({mId: treeNode.id}));
+        }
 
         //拖拽之前
         function beforeDrag(treeId, treeNodes) {
@@ -102,7 +112,7 @@ $(function () {
             var btn = $("#addBtn_" + treeNode.tId);
             //添加点击事件
             if (btn) btn.bind("click", function () {
-                addTreeNode(treeNode.id);
+                addTreeNode(treeId, treeNode);
             });
         };
 
@@ -147,7 +157,14 @@ $(function () {
 })
 
 //菜单树添加按钮点击事件
-function addTreeNode(treeId) {
-    $(".showTreeiframe").attr('src', "/menuController/addpage.html?" + $.param({treeId: treeId}));
+function addTreeNode(treeId, treeNode) {
+    //如果父节点不是根节点，且没有子节点的节点就是二级菜单 不让他继续添加节点。机智如我！
+    if (treeNode.pId != '0' && treeNode.check_Child_State == -1) {
+        layui.layer.msg("二级菜单不能添加节点！", {icon: 2, time: 1500}, function () {
+            return false;
+            })
+    }
+    console.log(treeNode)
+    $(".showTreeiframe").attr('src', "/menuController/addpage.html?" + $.param({treeId: treeNode.id}));
 }
 

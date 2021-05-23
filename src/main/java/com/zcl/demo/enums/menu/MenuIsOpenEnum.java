@@ -1,4 +1,4 @@
-package com.zcl.demo.enums;
+package com.zcl.demo.enums.menu;
 
 /**
  * @author zcl
