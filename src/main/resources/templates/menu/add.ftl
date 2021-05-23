@@ -18,6 +18,11 @@
 </head>
 <body>
 <div id="app">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;font-style: inherit;font-weight: 900;">
+        <legend>
+            <i class="layui-icon">&#xe654;</i>
+            新增</legend>
+    </fieldset>
     <form class="layui-form add-form" method="post" action="${request.contextPath}/menuController/addUrl.json">
 
         <div class="layui-row">

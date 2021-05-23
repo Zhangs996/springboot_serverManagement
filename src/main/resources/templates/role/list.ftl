@@ -48,10 +48,21 @@
 <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add.html">新增</button>
-        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">修改</button>
-        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">详情</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add.html">
+            <i class="layui-icon">&#xe654;</i>
+            新增</button>
+        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">
+            <i class="layui-icon">&#xe642;</i>
+            修改</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">
+            <i class="layui-icon">&#xe60f;</i>
+            详情</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">
+            <i class="layui-icon">&#xe640;</i>
+            删除</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="bindmenu.json">
+            <i class="layui-icon">&#xe656;</i>
+            绑定菜单</button>
     </div>
 </script>
 

@@ -20,6 +20,7 @@ $(function () {
                 }
             },
             callback: {
+                beforeDrag: beforeDrag,
                 beforeEditName: beforeEditName,
                 beforeRemove: beforeRemove,
                 // beforeRename: beforeRename,
@@ -31,10 +32,20 @@ $(function () {
         var log, className = "dark";
 
 
+        //拖拽之前
+        function beforeDrag(treeId, treeNodes) {
+            //禁止所有拖拽操作
+            return false
+        }
+
+        //拖拽之后
+        // function beforeDrop(treeId, treeNodes, targetNode, moveType) {
+        //     console.log(treeId)
+        // }
 
         //菜单编辑
         function beforeEditName(treeId, treeNode) {
-            className = (className === "dark" ? "":"dark");
+            className = (className === "dark" ? "" : "dark");
             // showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.selectNode(treeNode);
@@ -72,7 +83,6 @@ $(function () {
         }
 
 
-
         function getTime() {
             var now = new Date(),
                 h = now.getHours(),
@@ -100,13 +110,15 @@ $(function () {
         function removeHoverDom(treeId, treeNode) {
             $("#addBtn_" + treeNode.tId).unbind().remove();
         };
+
         //如果为根节点 不展示按钮
         function showRemoveBtn(treeId, treeNode) {
             console.log(treeNode)
-            return treeNode.id=="0"?false:true;
+            return treeNode.id == "0" ? false : true;
         }
+
         function showRenameBtn(treeId, treeNode) {
-            return treeNode.id=="0"?false:true;
+            return treeNode.id == "0" ? false : true;
         }
 
         function selectAll() {

@@ -1,0 +1,14 @@
+html,body{
+    height: 100%;
+    margin: 0px;
+}
+div.content_wrap {
+    width: 600px;
+    height: 100%;
+    margin-top: -10px;
+}
+div.zTreeDemoBackground {
+    width: 250px;
+    height: 100%;
+    text-align: left;
+}
