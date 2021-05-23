@@ -35,5 +35,22 @@ public interface MenuService {
      */
     void addUrl(Menu menu);
 
+    /**
+     * 根据mid删除
+     * @param mId
+     */
     void removeUrl(String mId);
+
+    /**
+     * 根据mid查询menu
+     * @param mId
+     */
+    Menu selectMenuByMid(String mId);
+
+    /**
+     * 根据mid修改菜单
+     * @param menu
+     * @return
+     */
+    void updateUrl(Menu menu);
 }

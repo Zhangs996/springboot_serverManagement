@@ -1,19 +1,13 @@
 package com.zcl.demo.controller.menu;
 
-import com.alibaba.fastjson.JSON;
 import com.zcl.demo.common.response.CommonResponse;
-import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
 import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.menu.MenuVo;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -92,6 +86,7 @@ public class MenuController {
 
     /**
      * 菜单删除
+     *
      * @param mId
      * @return
      */
@@ -102,5 +97,35 @@ public class MenuController {
         return CommonResponse.setResponseData(null);
     }
 
+    /**
+     * 修改菜单页面跳转
+     *
+     * @param model
+     * @param mId
+     * @return
+     */
+    @RequestMapping(value = "/updatemnupage.html", method = RequestMethod.GET)
+    public String updateMenuPage(Model model, String mId) {
+        Menu menu = menuService.selectMenuByMid(mId);
+        //根据id查找上级菜单名称
+        Menu p_menu = menuService.selectMenuByMid(menu.getpMenu());
+        model.addAttribute("menuDao", menu);
+        model.addAttribute("p_menu", p_menu);
+        return prief + "/update";
+    }
+
+    /**
+     * 根据mid编辑菜单
+     *
+     * @param menu
+     * @return
+     */
+    @RequestMapping(value = "/updateUrl.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map updateUrl(Menu menu) {
+        menuService.updateUrl(menu);
+        Map map = CommonResponse.setResponseData(null);
+        return map;
+    }
 
 }

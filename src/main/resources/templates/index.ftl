@@ -55,7 +55,7 @@
                     <a href="javascript:;">权限管理</a>
                     <dl class="layui-nav-child">
                         <dd><a id="menuContrl" url="/menuController/showindex.html" onclick="tabshow(this)">菜单管理</a></dd>
-                        <dd><a id="rolepartimContrl">角色成员管理</a></dd>
+<#--                        <dd><a id="rolepartimContrl" url="/">角色权限管理</a></dd>-->
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="">云市场</a></li>

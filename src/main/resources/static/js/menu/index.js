@@ -11,8 +11,8 @@ $(function () {
             edit: {
                 enable: true,
                 editNameSelectAll: true,
-                showRemoveBtn: true,
-                showRenameBtn: true
+                showRemoveBtn: showRemoveBtn,
+                showRenameBtn: showRenameBtn
             },
             data: {
                 simpleData: {
@@ -22,8 +22,8 @@ $(function () {
             callback: {
                 beforeEditName: beforeEditName,
                 beforeRemove: beforeRemove,
-                beforeRename: beforeRename,
-                onRename: onRename
+                // beforeRename: beforeRename,
+                // onRename: onRename
             }
         };
         var zNodes = [];
@@ -31,23 +31,23 @@ $(function () {
         var log, className = "dark";
 
 
+
+        //菜单编辑
         function beforeEditName(treeId, treeNode) {
-            className = (className === "dark" ? "" : "dark");
-            showLog("[ " + getTime() + " beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+            className = (className === "dark" ? "":"dark");
+            // showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.selectNode(treeNode);
-            setTimeout(function () {
-                if (confirm("Start node '" + treeNode.name + "' editorial status?")) {
-                    setTimeout(function () {
-                        zTree.editName(treeNode);
-                    }, 0);
-                }
-            }, 0);
+            var url = "/menuController/updatemnupage.html"
+            $(".showTreeiframe").attr('src', url + "?" + $.param({mId: treeNode.id}));
             return false;
         }
 
         /*删除事件*/
         function beforeRemove(treeId, treeNode) {
+            if (treeNode.id == "0") {
+                return
+            }
             className = (className === "dark" ? "" : "dark");
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
             zTree.selectNode(treeNode);
@@ -66,45 +66,12 @@ $(function () {
                         layer.close(mask);
                     })
                 },
-                function (){
+                function () {
                     location.reload();
                 });
         }
 
 
-        function beforeRename(treeId, treeNode, newName, isCancel) {
-            className = (className === "dark" ? "" : "dark");
-            showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
-            if (newName.length == 0) {
-                setTimeout(function () {
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    zTree.cancelEditName();
-                    alert("Node name can not be empty.");
-                }, 0);
-                return false;
-            }
-            return true;
-        }
-
-        function onRename(e, treeId, treeNode, isCancel) {
-            showLog((isCancel ? "<span style='color:red'>" : "") + "[ " + getTime() + " onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>" : ""));
-        }
-
-        function showRemoveBtn(treeId, treeNode) {
-            return !treeNode.isFirstNode;
-        }
-
-        function showRenameBtn(treeId, treeNode) {
-            return !treeNode.isLastNode;
-        }
-
-        function showLog(str) {
-            if (!log) log = $("#log");
-            log.append("<li class='" + className + "'>" + str + "</li>");
-            if (log.children("li").length > 8) {
-                log.get(0).removeChild(log.children("li")[0]);
-            }
-        }
 
         function getTime() {
             var now = new Date(),
@@ -115,7 +82,6 @@ $(function () {
             return (h + ":" + m + ":" + s + " " + ms);
         }
 
-        var newCount = 1;
 
         function addHoverDom(treeId, treeNode) {
             var sObj = $("#" + treeNode.tId + "_span");
@@ -130,9 +96,18 @@ $(function () {
             });
         };
 
+        //移除工具栏按钮
         function removeHoverDom(treeId, treeNode) {
             $("#addBtn_" + treeNode.tId).unbind().remove();
         };
+        //如果为根节点 不展示按钮
+        function showRemoveBtn(treeId, treeNode) {
+            console.log(treeNode)
+            return treeNode.id=="0"?false:true;
+        }
+        function showRenameBtn(treeId, treeNode) {
+            return treeNode.id=="0"?false:true;
+        }
 
         function selectAll() {
             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -163,3 +138,4 @@ $(function () {
 function addTreeNode(treeId) {
     $(".showTreeiframe").attr('src', "/menuController/addpage.html?" + $.param({treeId: treeId}));
 }
+

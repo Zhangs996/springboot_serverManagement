@@ -3,7 +3,8 @@
 <mapper namespace="com.zcl.demo.dao.menu.MenuDao">
     <select id="queryAll" resultType="com.zcl.demo.model.menu.Menu">
         SELECT *
-        FROM t_menu order by m_sort,m_name
+        FROM t_menu
+        order by m_sort, m_name
     </select>
     <select id="queryNodeNameById" resultType="java.lang.String">
         select m_name
@@ -20,15 +21,23 @@
     </insert>
 
     <delete id="removeUrl" parameterType="java.lang.String">
-        delete from t_menu where m_id = #{mId}
+        delete
+        from t_menu
+        where m_id = #{mId}
     </delete>
-    <!--    <insert id="addUser"  parameterType="com.zcl.demo.model.user.User" >-->
-    <!--      <selectKey keyProperty="uId" resultType="java.lang.String" order="BEFORE">-->
-    <!--        select REPLACE(UUID(),'-','')-->
-    <!--      </selectKey>-->
-    <!--    INSERT INTO t_user VALUES (#{uId},#{uName},#{password},#{rId},#{createTime},#{updateTime},-->
-    <!--      #{sex},#{phone},#{email},#{status})-->
-    <!--    </insert>-->
+
+    <select id="selectMenuByMid" resultType="com.zcl.demo.model.menu.Menu">
+        SELECT *
+        FROM t_menu
+        where m_id = #{mId}
+    </select>
+
+    <update id="updateUrl" parameterType="com.zcl.demo.model.menu.Menu">
+        update t_menu set  m_name=#{mName} ,m_url=#{mUrl} ,m_icon=#{mIcon} ,m_sort=#{mSort} ,
+                          m_desc=#{mDesc} ,is_navigtion=#{isNavigtion},
+                          update_user=#{updateUser},update_time=#{updateTime}
+        where m_id=#{mId}
+    </update>
 
 
 </mapper>

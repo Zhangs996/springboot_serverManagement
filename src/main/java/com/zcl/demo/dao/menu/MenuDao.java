@@ -39,4 +39,8 @@ public interface MenuDao {
      * @param mId
      */
     void removeUrl(String mId);
+
+    Menu selectMenuByMid(String mId);
+
+    void updateUrl(Menu menu);
 }

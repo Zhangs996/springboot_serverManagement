@@ -18,16 +18,16 @@
 </head>
 <body>
 <div id="app">
-    <form class="layui-form add-form" method="post" action="${request.contextPath}/menuController/addUrl.json">
+    <form class="layui-form add-form" method="post" action="${request.contextPath}/menuController/updateUrl.json">
 
         <div class="layui-row">
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
                     <label class="layui-form-label">父级菜单<span style="color:red;">*</span>：</label>
-                    <input type="hidden" name="pMenu" value=${treeId}>
+                    <input type="hidden" name="pMenu" value=${p_menu.mId}>
                     <div class="layui-input-block">
                         <input type="text" maxlength="30" name="pMenuName" lay-verify="required" disabled
-                               class="layui-input layui-input-sm layui-disabled" value=${nodeName}>
+                               class="layui-input layui-input-sm layui-disabled" value=${p_menu.mName}>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,10 @@
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称<span style="color:red;">*</span>：</label>
+                    <input type="hidden" name="mId" value=${menuDao.mId}>
                     <div class="layui-input-block">
-                        <input type="text" maxlength="30" name="mName" lay-verify="required" placeholder="请输入菜单名称"
-                               class="layui-input layui-input-sm ">
+                        <input type="text" maxlength="30" name="mName" lay-verify="required"
+                               class="layui-input layui-input-sm " value=${menuDao.mName}>
                     </div>
                 </div>
             </div>
@@ -51,7 +52,7 @@
                     <label class="layui-form-label">菜单URL<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
                         <input type="text" maxlength="30" name="mUrl" lay-verify="required" placeholder="请输入菜单URL"
-                               class="layui-input layui-input-sm ">
+                               class="layui-input layui-input-sm " value=${menuDao.mUrl}>
                     </div>
                 </div>
             </div>
@@ -64,9 +65,19 @@
                     <div class="layui-input-block">
                         <select name="mIcon" lay-verify="required">
                             <option value=""></option>
-                            <option value="0">=</option>
-                            <option value="1">-</option>
-                            <option value="2">*</option>
+                            <#if menuDao.mIcon="0">
+                                <option value="0" selected>=</option>
+                                <option value="1">-</option>
+                                <option value="2">*</option>
+                            <#elseif menuDao.mIcon="1">
+                                <option value="0">=</option>
+                                <option value="1" selected>-</option>
+                                <option value="2">*</option>
+                            <#else>
+                                <option value="0">=</option>
+                                <option value="1">-</option>
+                                <option value="2" selected>*</option>
+                            </#if>
                         </select>
                     </div>
                 </div>
@@ -80,7 +91,7 @@
                     <label class="layui-form-label">排序号<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
                         <input type="number" name="mSort" lay-verify="required|num" placeholder="请输入排序号"
-                               class="layui-input layui-input-sm ">
+                               class="layui-input layui-input-sm " value=${menuDao.mSort!}>
                     </div>
                 </div>
             </div>
@@ -92,7 +103,7 @@
                     <label class="layui-form-label">菜单描述<span style="color:red;"></span>：</label>
                     <div class="layui-input-block">
                         <input type="text" maxlength="30" name="mDesc" placeholder="请输入菜单描述"
-                               class="layui-input layui-input-sm ">
+                               class="layui-input layui-input-sm " value=${menuDao.mDesc!}>
                     </div>
                 </div>
             </div>
@@ -101,8 +112,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">是否用于导航<span style="color:red;">*</span>：</label>
             <div class="layui-input-block">
-                <input type="radio" name="isNavigtion" value="0" title="是" checked="">
-                <input type="radio" name="isNavigtion" value="1" title="否">
+                <#if menuDao.isNavigtion="0">
+                    <input type="radio" name="isNavigtion" value="0" title="是" checked="">
+                    <input type="radio" name="isNavigtion" value="1" title="否">
+                <#else>
+                    <input type="radio" name="isNavigtion" value="0" title="是">
+                    <input type="radio" name="isNavigtion" value="1" title="否" checked="">
+                </#if>
             </div>
         </div>
 

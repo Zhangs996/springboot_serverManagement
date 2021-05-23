@@ -3,10 +3,13 @@ package com.zcl.demo.service.menu.impl;
 import com.zcl.demo.dao.menu.MenuDao;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
+import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.MapperFactoryUtil;
+import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.menu.MenuVo;
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +58,7 @@ public class MenuServiceImpl implements MenuService {
 
     /**
      * 添加url
+     *
      * @param menu
      * @return
      */
@@ -65,10 +69,37 @@ public class MenuServiceImpl implements MenuService {
 
     /**
      * 菜单删除
+     *
      * @param mId
      */
     @Override
     public void removeUrl(String mId) {
         menuDao.removeUrl(mId);
+    }
+
+    /**
+     * 根据mid查找menu
+     *
+     * @param mId
+     * @return
+     */
+    @Override
+    public Menu selectMenuByMid(String mId) {
+        Menu menu = menuDao.selectMenuByMid(mId);
+        return menu;
+    }
+
+    /**
+     * 根据mid修改菜单
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public void updateUrl(Menu menu) {
+        String userName = (String) SessionUtil.getSessionAttribute("userName");
+        menu.setUpdateTime(DateInFo.dateFomart());
+        menu.setUpdateUser(userName);
+        menuDao.updateUrl(menu);
     }
 }
