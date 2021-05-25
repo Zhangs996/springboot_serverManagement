@@ -9,15 +9,11 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <link rel="stylesheet" href="../../static/css/user/user.css">
-    <link rel="stylesheet" type="text/css" href="../../static/frame/esdropdown/css/dd.css" />
-    <link rel="stylesheet" type="text/css" href="../../static/frame/esdropdown/css/abb.css" />
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script src="../../static/js/common/info.js" charset="utf-8"></script>
     <script src="../../static/js/menu/add.js" charset="utf-8"></script>
-    <script src="../../static/frame/esdropdown/js/jquery-1.3.2.min.js" type="text/javascript"></script>
-    <script src="../../static/frame/esdropdown/js/jquery.dd.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -71,21 +67,11 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-<#--                        <select name="mIcon" lay-verify="required">-->
-<#--                            <option value=""></option>-->
-<#--                            <option value="0">=</option>-->
-<#--                            <option value="1">-</option>-->
-<#--                            <option value="2">*</option>-->
-<#--                        </select>-->
-
-                        <select name="mIcon" id="webmenu" lay-verify="required" style="width: 200px;">
+                        <select name="mIcon" lay-verify="required">
                             <option value=""></option>
-                            <option value="1" title="./img/baomi.png"></option>
-                            <option value="2" title="./img/baomi.png"></option>
-                            <option value="3" title="icons/icon_cd.gif"></option>
-                            <option value="4" selected="selected" title="icons/icon_email.gif"></option>
-                            <option value="5" title="icons/icon_faq.gif"></option>
-                            <option value="6" title="icons/icon_games.gif"></option>
+                            <option value="0">=</option>
+                            <option value="1">-</option>
+                            <option value="2">*</option>
                         </select>
                     </div>
                 </div>
@@ -139,15 +125,5 @@
         </div>
     </form>
 </div>
-
-<script language="javascript">
-    $(document).ready(function(e) {
-        try {
-            $("body select").msDropDown();
-        } catch (e) {
-            alert(e.message);
-        }
-    });
-</script>
 </body>
 </html>
