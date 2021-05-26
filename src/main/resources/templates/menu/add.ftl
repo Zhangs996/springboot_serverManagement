@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <link rel="stylesheet" href="../../static/css/user/user.css">
+    <link rel="stylesheet" href="../../static/css/menu/menu.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/common/util.js"></script>
@@ -67,11 +68,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <select name="mIcon" lay-verify="required">
-                            <option value=""></option>
-                            <option value="0">=</option>
-                            <option value="1">-</option>
-                            <option value="2">*</option>
+                        <select id="selectIcon" name="mIcon" lay-verify="required">
+                            <option value="">请选择</option>
+                            <option value="0"></option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            <option value="4"></option>
+                            <option value="5"></option>
+                            <option value="6"></option>
                         </select>
                     </div>
                 </div>

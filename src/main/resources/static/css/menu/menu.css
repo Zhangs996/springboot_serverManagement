@@ -1,14 +1,45 @@
-html,body{
+html, body {
     height: 100%;
     margin: 0px;
 }
+
 div.content_wrap {
     width: 600px;
     height: 100%;
     margin-top: -10px;
 }
+
 div.zTreeDemoBackground {
     width: 250px;
     height: 100%;
     text-align: left;
 }
+
+select ~ div dd[lay-value="0"]:before {
+    content: url("../../img/home.png");
+}
+
+select ~ div dd[lay-value="1"]:before {
+    content: url("../../img/anthority.png");
+}
+
+select ~ div dd[lay-value="2"]:before {
+    content: url("../../img/basics.png");
+}
+
+select ~ div dd[lay-value="3"]:before {
+    content: url("../../img/log.png");
+}
+
+select ~ div dd[lay-value="4"]:before {
+    content: url("../../img/menu.png");
+}
+
+select ~ div dd[lay-value="5"]:before {
+    content: url("../../img/role.png");
+}
+
+select ~ div dd[lay-value="6"]:before {
+    content: url("../../img/user.png");
+}
+
