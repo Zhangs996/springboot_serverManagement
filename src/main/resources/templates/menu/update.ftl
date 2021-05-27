@@ -69,65 +69,10 @@
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
+                    <input type="hidden" name="hidden-icon" id="hidden-icon" value=${menuDao.mIcon}>
                     <div class="layui-input-block">
-                        <select name="selectIcon" lay-verify="required"  lay-filter="selectIcon">
-                            <#if menuDao.mIcon="0">
-                                <option value="0" selected></option>
-                                <option value="1"></option>
-                                <option value="2"></option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
-                            <#elseif menuDao.mIcon="1">
-                                <option value="0"></option>
-                                <option value="1" selected></option>
-                                <option value="2"></option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
-                            <#elseif menuDao.mIcon="2">
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2" selected></option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
-                            <#elseif menuDao.mIcon="3">
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2" ></option>
-                                <option value="3" selected></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
-                            <#elseif menuDao.mIcon="4">
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2" ></option>
-                                <option value="3"></option>
-                                <option value="4" selected></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
-                            <#elseif menuDao.mIcon="5">
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2" ></option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5" selected></option>
-                                <option value="6"></option>
-                            <#else >
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2" ></option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6" selected></option>
-                            </#if>
+                        <select id="selectIcon" name="selectIcon" lay-verify="required" lay-filter="selectIcon">
+                            <option value="" selected>请选择</option>
                         </select>
                     </div>
                 </div>
