@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <link rel="stylesheet" href="../../static/css/user/user.css">
+    <link rel="stylesheet" href="../../static/css/menu/menu.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script src="../../static/js/common/info.js" charset="utf-8"></script>
     <script src="../../static/js/menu/add.js" charset="utf-8"></script>
+    <script src="../../static/js/menu/update.js" charset="utf-8"></script>
 
 </head>
 <body>
@@ -68,20 +70,63 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <select name="mIcon" lay-verify="required">
-                            <option value=""></option>
+                        <select name="selectIcon" lay-verify="required"  lay-filter="selectIcon">
                             <#if menuDao.mIcon="0">
-                                <option value="0" selected>=</option>
-                                <option value="1">-</option>
-                                <option value="2">*</option>
+                                <option value="0" selected></option>
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
                             <#elseif menuDao.mIcon="1">
-                                <option value="0">=</option>
-                                <option value="1" selected>-</option>
-                                <option value="2">*</option>
-                            <#else>
-                                <option value="0">=</option>
-                                <option value="1">-</option>
-                                <option value="2" selected>*</option>
+                                <option value="0"></option>
+                                <option value="1" selected></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
+                            <#elseif menuDao.mIcon="2">
+                                <option value="0"></option>
+                                <option value="1"></option>
+                                <option value="2" selected></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
+                            <#elseif menuDao.mIcon="3">
+                                <option value="0"></option>
+                                <option value="1"></option>
+                                <option value="2" ></option>
+                                <option value="3" selected></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
+                            <#elseif menuDao.mIcon="4">
+                                <option value="0"></option>
+                                <option value="1"></option>
+                                <option value="2" ></option>
+                                <option value="3"></option>
+                                <option value="4" selected></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
+                            <#elseif menuDao.mIcon="5">
+                                <option value="0"></option>
+                                <option value="1"></option>
+                                <option value="2" ></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5" selected></option>
+                                <option value="6"></option>
+                            <#else >
+                                <option value="0"></option>
+                                <option value="1"></option>
+                                <option value="2" ></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6" selected></option>
                             </#if>
                         </select>
                     </div>

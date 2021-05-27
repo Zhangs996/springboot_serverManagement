@@ -68,7 +68,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <select id="selectIcon" name="mIcon" lay-verify="required">
+                        <select name="mIcon" lay-verify="required"  lay-filter="selectIcon">
                             <option value="">请选择</option>
                             <option value="0"></option>
                             <option value="1"></option>
