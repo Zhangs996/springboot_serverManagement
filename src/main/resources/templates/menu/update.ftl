@@ -72,7 +72,7 @@
                     <input type="hidden" name="hidden-icon" id="hidden-icon" value=${menuDao.mIcon}>
                     <div class="layui-input-block">
                         <select id="selectIcon" name="selectIcon" lay-verify="required" lay-filter="selectIcon">
-                            <option value="" selected>请选择</option>
+                            <option value="" >请选择</option>
                         </select>
                     </div>
                 </div>
