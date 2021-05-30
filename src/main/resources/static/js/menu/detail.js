@@ -22,7 +22,7 @@ $(function () {
 function showDefalut(iconValue) {
     iconValue = $("#hidden-icon").val();
     getIconsUrl(iconValue);//渲染select页面
-     updateForm();
+    updateForm();
     changeBackGroud(iconValue);//主动触发背景切换
 }
 
@@ -33,7 +33,7 @@ function getIconsUrl(iconValue) {
     for (let i = 0; i <templateSelect.length ; i++) {
         if(templateSelect[i].value == iconValue)
             templateSelect[i].selected = true;
-        }
+    }
 }
 
 //根据select value切换input icon事件

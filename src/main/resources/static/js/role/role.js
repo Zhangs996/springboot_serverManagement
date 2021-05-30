@@ -94,6 +94,9 @@ $(function () {
                 case 'delete.json':
                     info_delete(data);
                     break;
+                case 'bindmenu.html':
+                    info_bindmenu(data);
+                    break;
             }
         });
 
@@ -226,6 +229,24 @@ function info_delete(data) {
             layer.close(index);
         });
 
+}
+
+//展示菜单绑定界面
+function info_bindmenu(data) {
+    if (data.length != 1) {
+        layui.layer.msg('请选择一条记录', {icon: 2, time: 1500});
+        return;
+    }
+    var layIndex = layer.open({
+        type: 2,
+        title: ['绑定菜单', 'font-weight: bold;'],
+        shadeClose: false,
+        shade: 0.3,
+        anim: 1,
+        maxmin: true,
+        area: ['360px', '400px'],
+        content: [contextPath + '/RoleController/showBindMenuPage.html?'+$.param({rId: data[0]['rId']}), 'no'],
+    });
 }
 
 

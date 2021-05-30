@@ -60,7 +60,7 @@
         <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">
             <i class="layui-icon">&#xe640;</i>
             删除</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="bindmenu.json">
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="bindmenu.html">
             <i class="layui-icon">&#xe656;</i>
             绑定菜单</button>
     </div>

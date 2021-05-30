@@ -47,8 +47,6 @@ layui.use(['table', 'laydate', 'util', 'form'], function () {
                     background: "url('../static/img/user.png') no-repeat  center"
                 });
                 break;
-            default:
-                break;
         }
         input.attr("placeholder"," ");
     });

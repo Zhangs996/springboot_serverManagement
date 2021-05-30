@@ -1,6 +1,8 @@
 package com.zcl.demo.dao.menu;
 
 import com.zcl.demo.model.menu.Menu;
+import com.zcl.demo.vo.menu.MenuVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -43,4 +45,23 @@ public interface MenuDao {
     Menu selectMenuByMid(String mId);
 
     void updateUrl(Menu menu);
+
+    /**
+     * 根据rid查找角色绑定菜单
+     * @param rId
+     */
+    List<Menu> queryBindMenuByRid(String rId);
+
+    /**
+     * 根据rid删除绑定菜单
+     * @param rId
+     */
+    void deleteBindMenvosByRid(String rId);
+
+    /**
+     * 绑定菜单
+     * @param mId
+     * @param rId
+     */
+    void insertBindMenvo(@Param("mId") String mId,@Param("rId") String rId);
 }

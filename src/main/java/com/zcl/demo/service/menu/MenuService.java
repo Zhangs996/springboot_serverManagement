@@ -1,6 +1,7 @@
 package com.zcl.demo.service.menu;
 
 import com.zcl.demo.model.menu.Menu;
+import com.zcl.demo.vo.menu.MenuCheckVo;
 import com.zcl.demo.vo.menu.MenuVo;
 
 import java.util.List;
@@ -53,4 +54,23 @@ public interface MenuService {
      * @return
      */
     void updateUrl(Menu menu);
+
+    /**
+     * 根据rid查找角色绑定菜单
+     * @param rId
+     */
+    List<MenuCheckVo> queryBindMenuByRid(String rId);
+
+    /**
+     * 根据rid删除绑定菜单
+     * @param rId
+     */
+    void deleteBindMenvosByRid(String rId);
+
+    /**
+     * 批量绑定菜单
+     * @param menuVoList
+     * @param rId
+     */
+    void insertBindMenvos(String[] menuVoList, String rId);
 }

@@ -14,7 +14,6 @@
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script src="../../static/js/common/info.js" charset="utf-8"></script>
-    <script src="../../static/js/menu/add.js" charset="utf-8"></script>
     <script src="../../static/js/menu/update.js" charset="utf-8"></script>
 
 </head>
@@ -71,8 +70,15 @@
                     <label class="layui-form-label">菜单icon<span style="color:red;">*</span>：</label>
                     <input type="hidden" name="hidden-icon" id="hidden-icon" value=${menuDao.mIcon}>
                     <div class="layui-input-block">
-                        <select id="selectIcon" name="selectIcon" lay-verify="required" lay-filter="selectIcon">
+                        <select id="selectIcon" name="selectIcon2" lay-verify="required" lay-filter="selectIcon2">
                             <option value="" >请选择</option>
+                            <option value="0" ></option>
+                            <option value="1" ></option>
+                            <option value="2" ></option>
+                            <option value="3" ></option>
+                            <option value="4" ></option>
+                            <option value="5" ></option>
+                            <option value="6" ></option>
                         </select>
                     </div>
                 </div>

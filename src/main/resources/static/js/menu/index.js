@@ -123,7 +123,6 @@ $(function () {
 
         //如果为根节点 不展示按钮
         function showRemoveBtn(treeId, treeNode) {
-            console.log(treeNode)
             return treeNode.id == "0" ? false : true;
         }
 
@@ -141,7 +140,6 @@ $(function () {
             var url = "/menuController/queryTreeAll.json";
             sendAjax.sendGetAjax(url, null, function (res) {
                 if (res.status) {
-                    console.log(res.data);
                     zNodes = res.data;
                 }
             })
