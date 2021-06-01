@@ -46,15 +46,15 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">基础功能</a>
                     <dl class="layui-nav-child" >
-                        <dd ><a id="logContrl" url="/LogController/hello.html" onclick="tabshow(this)" >日志管理</a></dd>
-                        <dd><a id="userContrl" url="/userlist.html" onclick="tabshow(this)">用户管理</a></dd>
-                        <dd><a id="roleContrl" url="/RoleController/role_native.html" onclick="tabshow(this)">角色管理</a></dd>
+                        <dd ><a  url="/LogController/hello.html" onclick="tabshow(this)" >日志管理</a></dd>
+                        <dd><a  url="/userlist.html" onclick="tabshow(this)">用户管理</a></dd>
+                        <dd><a  url="/RoleController/role_native.html" onclick="tabshow(this)">角色管理</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">权限管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a id="menuContrl" url="/menuController/showindex.html" onclick="tabshow(this)">菜单管理</a></dd>
+                        <dd><a  url="/menuController/showindex.html" onclick="tabshow(this)">菜单管理</a></dd>
 <#--                        <dd><a id="rolepartimContrl" url="/">角色权限管理</a></dd>-->
                     </dl>
                 </li>

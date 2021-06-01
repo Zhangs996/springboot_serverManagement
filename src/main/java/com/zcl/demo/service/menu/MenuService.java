@@ -73,4 +73,11 @@ public interface MenuService {
      * @param rId
      */
     void insertBindMenvos(String[] menuVoList, String rId);
+
+    /**
+     * 根据rid获取展示菜单
+     * @param rId
+     * @return
+     */
+    String listMenuByRid(String rId);
 }

@@ -5,6 +5,8 @@ import com.zcl.demo.common.status.LogStatus;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.log.LogService;
+import com.zcl.demo.service.menu.MenuService;
+import com.zcl.demo.service.role.RoleService;
 import com.zcl.demo.service.user.UserService;
 import com.zcl.demo.util.MD5Util;
 import org.apache.shiro.SecurityUtils;
@@ -30,7 +32,8 @@ public class LoginController {
     private UserService userService;
     @Autowired
     private LogService logService;
-
+    @Autowired
+    private MenuService menuService;
     private String url = "/login";
 
     /**
@@ -63,7 +66,10 @@ public class LoginController {
             token = new UsernamePasswordToken(user.getuName(), MD5Util.EncoderByMd5(user.getPassword()));
             model.addAttribute("userDao", user);
             subject.login(token);
-            //设置session 存用户当前的登录状态
+            User u = userService.queryUserByAllName(user.getuName());
+            menuService.listMenuByRid(u.getrId());
+            //设置session 存用户当前的登录状态以及角色id
+            httpSession.setAttribute("roleId", u.getuId());
             httpSession.setAttribute("userName", user.getuName());
             httpSession.setAttribute("status", LogStatus.LOG_IN.getName());
             return "/index";
