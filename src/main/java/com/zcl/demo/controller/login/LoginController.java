@@ -67,7 +67,9 @@ public class LoginController {
             model.addAttribute("userDao", user);
             subject.login(token);
             User u = userService.queryUserByAllName(user.getuName());
-            menuService.listMenuByRid(u.getrId());
+            //展示角色拥有菜单
+            String showMenus = menuService.listMenuByRid(u.getrId());
+            model.addAttribute("roleMenus",showMenus);
             //设置session 存用户当前的登录状态以及角色id
             httpSession.setAttribute("roleId", u.getuId());
             httpSession.setAttribute("userName", user.getuName());

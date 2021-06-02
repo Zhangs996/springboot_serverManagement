@@ -64,4 +64,6 @@ public interface MenuDao {
      * @param rId
      */
     void insertBindMenvo(@Param("mId") String mId,@Param("rId") String rId);
+
+
 }

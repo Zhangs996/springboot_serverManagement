@@ -30,6 +30,7 @@
         SELECT *
         FROM t_menu
         where m_id = #{mId}
+        order by m_sort, m_name
     </select>
 
     <update id="updateUrl" parameterType="com.zcl.demo.model.menu.Menu">
@@ -53,8 +54,8 @@
                  join t_menu m
                       on ur.m_id = m.m_id
         where r.r_id = #{rId}
+        order by m.m_sort, m.m_name
     </select>
-
     <delete id="deleteBindMenvosByRid" parameterType="java.lang.String">
         delete
         from t_user_role

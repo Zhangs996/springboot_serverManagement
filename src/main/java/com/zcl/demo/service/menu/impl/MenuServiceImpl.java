@@ -13,6 +13,7 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -96,7 +97,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     /**
-     * 根据rid查找角色绑定菜单
+     * 根据rid查找角色绑定菜单,添加checked属性
      *
      * @param rId
      * @return
@@ -144,7 +145,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     /**
-     * 根据rid获取展示菜单
+     * 返回拼接出的html（根据rid获取展示菜单）
      *
      * @param rId
      * @return
@@ -153,30 +154,45 @@ public class MenuServiceImpl implements MenuService {
     public String listMenuByRid(String rId) {
         //返回的html
         StringBuilder sb = new StringBuilder();
-        //根据rid获取所有菜单
-        List<MenuCheckVo> menuCheckVos = queryBindMenuByRid(rId);
+        //根据rid获取所有菜单model
+        List<Menu> menus = queryMenuByRid(rId);
+        if(menus.size()==0){
+        return "";
+        }
         //遍历出二级菜单，如果有二级菜单 就在menuCheckVos中遍历出它所有的子节点，渲染在二级菜单中
-        List<MenuCheckVo> menulist = menuCheckVos.stream().filter(menu -> "0".equals(menu.getpId())).collect(Collectors.toList());
+        List<Menu> menulist = menus.stream().filter(menu -> "0".equals(menu.getpMenu())).collect(Collectors.toList());
         if (menulist.size() > 0) {
-            for (MenuCheckVo m :
+            for (Menu m :
                     menulist) {
                 sb.append("<li class=\"layui-nav-item layui-nav-itemed\">");
-                sb.append("<a class=\"\" href=\"javascript:;\">" + m.getName() + "</a>");
+                sb.append("<a class=\"\" href=\"javascript:;\">" + m.getmName() + "</a>");
                 //获取该二级菜单下的所有子节点，menuCheckVos是排过序的
-                getSendNodeChilds(m.getId(), menuCheckVos);
+                String sendNodeChilds = getSendNodeChilds(m.getmId(), menus);
+                sb.append(sendNodeChilds);
+                sb.append("</li>");
             }
         }
-        return null;
+        return sb.toString().trim();
+    }
+
+    /**
+     * 根据rId获取所有的menu实体
+     *
+     * @param rId
+     * @return
+     */
+    public List<Menu> queryMenuByRid(String rId) {
+        return menuDao.queryBindMenuByRid(rId);
     }
 
     //获取该二级菜单下的所有子节点
-    private String getSendNodeChilds(String mId, List<MenuCheckVo> menuCheckVos) {
+    private String getSendNodeChilds(String mId, List<Menu> menus) {
         StringBuilder sb = new StringBuilder();
-        List<MenuCheckVo> menuList = menuCheckVos.stream().filter(m -> mId.equals(m.getpId())).collect(Collectors.toList());
+        List<Menu> menuList = menus.stream().filter(m -> mId.equals(m.getpMenu())).collect(Collectors.toList());
         sb.append("<dl class=\"layui-nav-child\" >");
-        for (MenuCheckVo m :
+        for (Menu m :
                 menuList) {
-//            sb.append("<dd ><a  url=\""+m.get+"\" onclick=\"tabshow(this)\" >日志管理</a></dd>\n");
+            sb.append("<dd ><a  url=\"" + m.getmUrl() + "\" onclick=\"tabshow(this)\" >" + m.getmName() + "</a></dd>\n");
         }
         sb.append("</dl>");
         return sb.toString().trim();

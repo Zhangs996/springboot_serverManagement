@@ -43,22 +43,23 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">基础功能</a>
-                    <dl class="layui-nav-child" >
-                        <dd ><a  url="/LogController/hello.html" onclick="tabshow(this)" >日志管理</a></dd>
-                        <dd><a  url="/userlist.html" onclick="tabshow(this)">用户管理</a></dd>
-                        <dd><a  url="/RoleController/role_native.html" onclick="tabshow(this)">角色管理</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">权限管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a  url="/menuController/showindex.html" onclick="tabshow(this)">菜单管理</a></dd>
-<#--                        <dd><a id="rolepartimContrl" url="/">角色权限管理</a></dd>-->
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                ${roleMenus}
+<#--                <li class="layui-nav-item layui-nav-itemed">-->
+<#--                    <a class="" href="javascript:;">基础功能</a>-->
+<#--                    <dl class="layui-nav-child" >-->
+<#--                        <dd ><a  url="/LogController/hello.html" onclick="tabshow(this)" >日志管理</a></dd>-->
+<#--                        <dd><a  url="/userlist.html" onclick="tabshow(this)">用户管理</a></dd>-->
+<#--                        <dd><a  url="/RoleController/role_native.html" onclick="tabshow(this)">角色管理</a></dd>-->
+<#--                    </dl>-->
+<#--                </li>-->
+<#--                <li class="layui-nav-item">-->
+<#--                    <a href="javascript:;">权限管理</a>-->
+<#--                    <dl class="layui-nav-child">-->
+<#--                        <dd><a  url="/menuController/showindex.html" onclick="tabshow(this)">菜单管理</a></dd>-->
+<#--&lt;#&ndash;                        <dd><a id="rolepartimContrl" url="/">角色权限管理</a></dd>&ndash;&gt;-->
+<#--                    </dl>-->
+<#--                </li>-->
+<#--                <li class="layui-nav-item"><a href="">发布商品</a></li>-->
             </ul>
         </div>
     </div>
@@ -77,22 +78,6 @@
     <script src="../static/frame/jquery-v3.5.1/jquery-3.5.1.js"></script>
     <script src="../static/frame/layui-v2.5.6/layui/layui.js"></script>
     <script src="../static/js/system.js"></script>
-<#--<script src="../src/layui.js"></script>-->>
 
-    <#--<script>-->
-        <#--//JavaScript代码区域-->
-        <#--layui.use(['element','jquery'], function(){-->
-            <#--var $=layui.jquery;-->
-            <#--var element = layui.element;-->
-            <#--$(document).ready(function(){-->
-                <#--$("dd>a").click(function (e) {-->
-                    <#--e.preventDefault();//取消事件的默认动作。-->
-                    <#--$("#main").attr("src",$(this).attr("href"));-->
-                <#--});-->
-            <#--});-->
-            <#--// $("#cloud").click(function(){$("#main").html("jaosgoaighowg");});-->
-        <#--});-->
-
-    <#--</script>-->
 </body>
 </html>
