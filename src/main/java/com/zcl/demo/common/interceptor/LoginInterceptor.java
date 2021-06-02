@@ -20,13 +20,17 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if(StringUtils.isEmpty(request)){
+            response.sendRedirect(request.getContextPath() + "/login.html");
+            return false;
+        }
         // 获取当前session
         HttpSession session = request.getSession();
         // 根据session获取登录用户
         String userName = (String) SessionUtil.getSessionAttribute("userName");
         // 没登录，重定向到登录页面
         if (StringUtils.isEmpty(userName)) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/login.html");
             return false;
         }
         // 已经登录

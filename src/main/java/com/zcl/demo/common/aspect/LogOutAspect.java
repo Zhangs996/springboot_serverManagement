@@ -55,8 +55,8 @@ public class LogOutAspect {
         System.out.println("环绕通知：---------------------");
         //获得方法执行后的返回值
         Object proceed = pjp.proceed();
-
-        if (status.equals("登录")) {
+        //记录日志
+        if (("登录").equals(status)) {
             //获取当前时间
             String date = DateInFo.dateFomart();
             Log log = new Log();
@@ -65,7 +65,7 @@ public class LogOutAspect {
             log.setAction(LogStatus.LOG_OUT.getName());
             logService.addLog(log);
         }
-        httpSession.setMaxInactiveInterval(1000);
+            httpSession.setMaxInactiveInterval(1);
         return proceed;
     }
 }

@@ -42,7 +42,7 @@ public class LogServiceImpl implements LogService {
     public int logout(HttpSession httpSession) {
         String status = (String) httpSession.getAttribute("status");
         if ("登录".equals(status)) {//退出成功
-            httpSession.invalidate();
+           // httpSession.invalidate();
             return 0;//
         } else {//退出失败
             return 1;

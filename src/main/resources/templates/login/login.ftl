@@ -47,5 +47,10 @@
 </form>
 <script src="../../static/frame/layui-v2.5.6/layui/layui.js"></script>
 <script src="../../static/js/login/login.js"></script>
+<#--session过期父页面重定向-->
+<script language="JavaScript">
+    if (window != top)
+        top.location.href = location.href;
+</script>
 </body>
 </html>
