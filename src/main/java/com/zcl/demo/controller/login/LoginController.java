@@ -74,6 +74,7 @@ public class LoginController {
             httpSession.setAttribute("roleId", u.getuId());
             httpSession.setAttribute("userName", user.getuName());
             httpSession.setAttribute("status", LogStatus.LOG_IN.getName());
+            httpSession.setMaxInactiveInterval(60);//超过
             return "/index";
         }catch(UnknownAccountException e){
               model.addAttribute("msg", "用户不存在");
