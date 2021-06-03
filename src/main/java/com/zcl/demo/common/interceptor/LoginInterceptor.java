@@ -20,7 +20,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(StringUtils.isEmpty(request)){
+        String uri=request.getRequestURI();
+        if("/logout.html".equals(uri)){
             response.sendRedirect(request.getContextPath() + "/login.html");
             return false;
         }
@@ -33,7 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect(request.getContextPath() + "/login.html");
             return false;
         }
-        // 已经登录
+        // 已经登录,放行
         return true;
     }
 }
