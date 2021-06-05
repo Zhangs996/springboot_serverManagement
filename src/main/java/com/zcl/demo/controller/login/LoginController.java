@@ -73,6 +73,7 @@ public class LoginController {
             //设置session 存用户当前的登录状态以及角色id
             httpSession.setAttribute("roleId", u.getuId());
             httpSession.setAttribute("userName", user.getuName());
+            httpSession.setAttribute("userId", u.getuId());
             httpSession.setAttribute("status", LogStatus.LOG_IN.getName());
             httpSession.setMaxInactiveInterval(30*60);//超过30分钟
             return "/index";

@@ -19,4 +19,6 @@ public interface UserService {
     User queryUserById(String id);
     //根据全匹配姓名查找用户
     User queryUserByAllName(String name);
+    //重置密码
+    void reloadPw(String userId);
 }

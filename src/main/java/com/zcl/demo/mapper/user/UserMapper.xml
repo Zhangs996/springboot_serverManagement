@@ -41,6 +41,9 @@ SELECT * FROM t_user WHERE u_name =#{uName}
     </foreach>
   </delete>
 
+  <update id="reloadPw" parameterType="java.lang.String">
+    update t_user set password='lueSGJZetyySpUndWjMBEg==' where u_id=#{uId}
+  </update>
 
 
 </mapper>

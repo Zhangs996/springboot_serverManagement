@@ -24,4 +24,6 @@ public interface UserDao {
     User queryUserById(String id);
     //根据姓名全匹配查找用户
     User queryUserByAllName(String name);
+    //重置密码
+    void reloadPw(String uId);
 }

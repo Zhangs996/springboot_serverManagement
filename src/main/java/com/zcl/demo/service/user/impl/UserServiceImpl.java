@@ -81,4 +81,9 @@ public class UserServiceImpl implements UserService {
         User users = userDao.queryUserByAllName(name);
         return users;
     }
+
+    @Override
+    public void reloadPw(String userId) {
+    userDao.reloadPw(userId);
+    }
 }

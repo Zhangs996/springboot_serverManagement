@@ -11,6 +11,7 @@ import com.zcl.demo.service.role.RoleService;
 import com.zcl.demo.service.user.UserService;
 import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.MD5Util;
+import com.zcl.demo.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -150,6 +151,8 @@ public class UserController {
      */
     @RequestMapping(value = "/userController/detail.html", method = RequestMethod.GET)
     public String detailHtml(Model model, String uId) {
+        uId = (String) SessionUtil.getSessionAttribute("userId");
+        Assert.hasLength(uId, "未传递uId！");
         User userById = userService.queryUserById(uId);
         List<Role> roles = roleService.queryAllRole();
         Role now_role = roleService.queryRoleByUid(uId);
@@ -169,5 +172,24 @@ public class UserController {
         userService.deleteUserById(ids);
         Map map = CommonResponse.setResponseData(null);
         return map;
+    }
+
+
+    /**
+     * 重置密码
+     * @return
+     */
+    @RequestMapping(value = "/userController/reloadPw.json",method = RequestMethod.GET)
+    @ResponseBody
+    public Map reloadPw(){
+        String userId = (String) SessionUtil.getSessionAttribute("userId");
+        try {
+            userService.reloadPw(userId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return   CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "重置失败！", false);
+
+        }
+        return CommonResponse.setResponseData(null);
     }
 }
