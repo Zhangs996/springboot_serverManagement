@@ -22,18 +22,26 @@ $(function () {
 function showDefalut(iconValue) {
     iconValue = $("#hidden-icon").val();
     getIconsUrl(iconValue);//渲染select页面
-     updateForm();
+  //  updateForm();
     changeBackGroud(iconValue);//主动触发背景切换
 }
 
 //获取全部icon url 事件
 function getIconsUrl(iconValue) {
-    var templateSelect = $("select[name='selectIcon2']");
-    var l=templateSelect.length;
-    for (let i = 0; i <templateSelect.length ; i++) {
-        if(templateSelect[i].value == iconValue)
-            templateSelect[i].selected = true;
+    var templateSelect = $("select[name='mIcon']");
+    var arr = new Array();//定义数组
+    $("#selectIcon2 option").each(function () {
+        //遍历所有option
+        var txt = $(this).val(); //获取option值
+        if (txt != '') {
+            //添加到数组中
+            arr.push(txt);
         }
+    })
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].value == iconValue)
+            templateSelect[i].selected = true;
+    }
 }
 
 //根据select value切换input icon事件

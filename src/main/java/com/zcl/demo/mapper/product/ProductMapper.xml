@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.zcl.demo.dao.product.ProductDao">
+    <select id="queryAll" resultType="com.zcl.demo.model.product.Product">
+        select *
+        from t_product
+        order by p_id, p_name
+    </select>
+    <select id="queryProductByName" resultType="com.zcl.demo.model.product.Product">
+        select *
+        from t_product
+        where p_name like "%"#{pName}"%"
+        order by p_id, p_name
+    </select>
+</mapper>

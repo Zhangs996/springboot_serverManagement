@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
-    <script src="../../static/js/user/user.js" charset="utf-8"></script>
+    <script src="../../static/js/product/product.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -18,9 +18,9 @@
 <form id="search_form" class="_search">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">用户名称：</label>
+            <label class="layui-form-label">商品名称：</label>
             <div class="layui-input-inline">
-                <input type="text" id="uName" name="uName" class="layui-input search-input layui-input-sm">
+                <input type="text" id="pName" name="pName" class="layui-input search-input layui-input-sm">
             </div>
         </div>
 

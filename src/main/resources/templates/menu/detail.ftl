@@ -55,7 +55,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单URL<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <input type="text" maxlength="30" name="mUrl"  disabled lay-verify="required" placeholder="请输入菜单URL"
+                        <input type="text" maxlength="50" name="mUrl"  disabled lay-verify="required" placeholder="请输入菜单URL"
                                class="layui-input layui-input-sm layui-disabled" value=${menuDao.mUrl}>
                     </div>
                 </div>

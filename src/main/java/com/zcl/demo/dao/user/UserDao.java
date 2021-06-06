@@ -18,7 +18,7 @@ public interface UserDao {
     void addUser(User user);
     //根据id更新用户
     void updateById(User user);
-    //根据id删除用户
+    //根据id删除用户(软删除)
     void deleteUserById(@Param("ids") String[] ids);
     //根据id查找用户
     User queryUserById(String id);

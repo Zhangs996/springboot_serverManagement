@@ -68,6 +68,8 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void removeUrl(String mId) {
         menuDao.removeUrl(mId);
+        //还需要删除中间表
+        menuDao.removeBindUrl(mId);
     }
 
     /**

@@ -8,7 +8,8 @@ $(function () {
             , url: '/userlist.json'
             , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
-                {type: 'checkbox'}
+                {type: 'checkbox'},
+                { type: 'numbers', title: '序号', width: 40  }
                 , {field:'uId',hide:true}
                 , {field: 'uName', title: '用户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                 , {field: 'createTime', title: '创建时间', sort: true}

@@ -10,6 +10,8 @@
         select m_name
         from t_menu
         where m_id = #{treeId}
+          and is_navigtion = '0'
+
     </select>
 
     <insert id="addUrl" parameterType="com.zcl.demo.model.menu.Menu">
@@ -20,16 +22,19 @@
         #{mIcon},#{mSort},#{mDesc},#{createUser},#{createTime},#{updateUser},#{updateTime})
     </insert>
 
-    <delete id="removeUrl" parameterType="java.lang.String">
-        delete
-        from t_menu
+    <update id="removeUrl" parameterType="java.lang.String">
+        update
+            t_menu
+        set is_navigtion ='1'
         where m_id = #{mId}
-    </delete>
+    </update>
 
     <select id="selectMenuByMid" resultType="com.zcl.demo.model.menu.Menu">
         SELECT *
         FROM t_menu
         where m_id = #{mId}
+
+
         order by m_sort, m_name
     </select>
 
@@ -54,6 +59,7 @@
                  join t_menu m
                       on ur.m_id = m.m_id
         where r.r_id = #{rId}
+          and is_navigtion = '0'
         order by m.m_sort, m.m_name
     </select>
     <delete id="deleteBindMenvosByRid" parameterType="java.lang.String">
@@ -70,4 +76,9 @@
         VALUES (#{rmId}, #{rId}, #{mId});
     </insert>
 
+    <delete id="removeBindUrl" parameterType="java.lang.String">
+        delete
+        from t_user_role
+        where m_id = #{mId}
+    </delete>
 </mapper>

@@ -65,5 +65,9 @@ public interface MenuDao {
      */
     void insertBindMenvo(@Param("mId") String mId,@Param("rId") String rId);
 
-
+    /**
+     * 删除绑定菜单根据mid
+     * @param mId
+     */
+    void removeBindUrl(String mId);
 }
