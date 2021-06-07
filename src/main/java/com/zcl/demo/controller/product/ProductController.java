@@ -5,12 +5,15 @@ import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.product.Product;
 import com.zcl.demo.service.product.ProductService;
+import com.zcl.demo.vo.product.EcharsVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +65,14 @@ public class ProductController {
      * @param pId
      * @return
      */
-//    public EcharsVo initPrdSalePrcChars(String pId){
-//
-//    }
+    public Map initPrdSalePrcChars(String pId){
+        Map<String,Object> map = new HashMap<>();
+        if(StringUtils.isEmpty(pId)){
+            map = CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "查询内容不能让为空！", false);
+            return map;
+        }
+        //查询销售量、生产量
+        EcharsVo echarsVo = productService.queryPrdSalePrcByPid(pId);
+        return map;
+    }
 }

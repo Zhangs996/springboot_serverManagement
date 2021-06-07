@@ -5,6 +5,7 @@ import com.zcl.demo.dao.product.ProductDao;
 import com.zcl.demo.model.product.Product;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.product.ProductService;
+import com.zcl.demo.vo.product.EcharsVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -40,5 +41,15 @@ public class ProductServiceImpl implements ProductService {
             products = productDao.queryProductByName(pName);
         }
         return products;
+    }
+
+    /**
+     * 查询销售量、生产量
+     * @param pId
+     * @return
+     */
+    @Override
+    public EcharsVo queryPrdSalePrcByPid(String pId) {
+        return null;
     }
 }

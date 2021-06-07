@@ -1,8 +1,10 @@
 package com.zcl.demo.vo.product;
 
+import com.zcl.demo.po.Series;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author zcl
@@ -11,8 +13,8 @@ import java.io.Serializable;
  **/
 @Data
 public class EcharsVo implements Serializable {
-    private String name;
-    private String type;
-    private String[] data;
-
+    //x轴
+    private String[] xAxisData;
+    //前台对象数组接收
+    private List<Series> seriesList;
 }
