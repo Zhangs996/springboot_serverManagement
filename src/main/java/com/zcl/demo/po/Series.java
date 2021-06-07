@@ -6,5 +6,6 @@ package com.zcl.demo.po;
  * @desc SeriesPO类
  **/
 public class Series {
-
+    private String name;
+    private String[] data;
 }

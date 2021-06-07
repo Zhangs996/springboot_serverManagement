@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.product.Product;
+import com.zcl.demo.po.Series;
 import com.zcl.demo.service.product.ProductService;
 import com.zcl.demo.vo.product.EcharsVo;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/productController")
 public class ProductController {
+    private final static String[] MOTHS = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
     private ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -35,6 +37,7 @@ public class ProductController {
 
     /**
      * 跳转商品页
+     *
      * @return
      */
     @RequestMapping(value = "/showlist.html", method = RequestMethod.GET)
@@ -44,6 +47,7 @@ public class ProductController {
 
     /**
      * 动态查询
+     *
      * @param page
      * @param limit
      * @param pName
@@ -62,17 +66,22 @@ public class ProductController {
 
     /**
      * 根据商品id展示商品销售产量关系图
+     *
      * @param pId
      * @return
      */
-    public Map initPrdSalePrcChars(String pId){
-        Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isEmpty(pId)){
+    public Map initPrdSalePrcChars(String pId) {
+        Map<String, Object> map = new HashMap<>();
+        EcharsVo echarsVo = new EcharsVo();
+        Series series = new Series();
+        if (StringUtils.isEmpty(pId)) {
             map = CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "查询内容不能让为空！", false);
             return map;
         }
-        //查询销售量、生产量
-        EcharsVo echarsVo = productService.queryPrdSalePrcByPid(pId);
+        //查询销售量
+        series = productService.querySalePrcByPid(pId);
+        echarsVo.setXAxisData(MOTHS);
+        echarsVo.setSeriesList();
         return map;
     }
 }

@@ -1,6 +1,7 @@
 package com.zcl.demo.service.product;
 
 import com.zcl.demo.model.product.Product;
+import com.zcl.demo.po.Series;
 import com.zcl.demo.vo.product.EcharsVo;
 
 import java.util.List;
@@ -17,6 +18,6 @@ import java.util.List;
 public interface ProductService {
     //动态展示商品
     List<Product> list(int page, int limit, String pName);
-    //查询销售量、生产量
-    EcharsVo queryPrdSalePrcByPid(String pId);
+    //查询销售量
+    Series querySalePrcByPid(String pId);
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.zcl.demo.dao.product.ProductDao;
 import com.zcl.demo.model.product.Product;
 import com.zcl.demo.model.user.User;
+import com.zcl.demo.po.Series;
 import com.zcl.demo.service.product.ProductService;
 import com.zcl.demo.vo.product.EcharsVo;
 import org.springframework.stereotype.Service;
@@ -44,12 +45,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 查询销售量、生产量
+     * 查询销售量
      * @param pId
      * @return
      */
     @Override
-    public EcharsVo queryPrdSalePrcByPid(String pId) {
+    public Series querySalePrcByPid(String pId) {
+        productDao.querySalePrcByPid(pId);
         return null;
     }
 }
