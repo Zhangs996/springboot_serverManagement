@@ -4,6 +4,7 @@
     <select id="queryAll" resultType="com.zcl.demo.model.menu.Menu">
         SELECT *
         FROM t_menu
+        where is_navigtion = '0'
         order by m_sort, m_name
     </select>
     <select id="queryNodeNameById" resultType="java.lang.String">

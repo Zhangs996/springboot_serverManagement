@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.product.Product;
+import com.zcl.demo.po.ProducePo;
+import com.zcl.demo.po.SalePo;
 import com.zcl.demo.po.Series;
 import com.zcl.demo.service.product.ProductService;
 import com.zcl.demo.vo.product.EcharsVo;
@@ -14,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * @author zcl
@@ -26,7 +27,6 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/productController")
 public class ProductController {
-    private final static String[] MOTHS = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
     private ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -70,18 +70,19 @@ public class ProductController {
      * @param pId
      * @return
      */
+    @RequestMapping(value = "/initPrdSalePrcChars.json", method = RequestMethod.GET)
+    @ResponseBody
     public Map initPrdSalePrcChars(String pId) {
         Map<String, Object> map = new HashMap<>();
-        EcharsVo echarsVo = new EcharsVo();
-        Series series = new Series();
         if (StringUtils.isEmpty(pId)) {
-            map = CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "查询内容不能让为空！", false);
+            map = CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "查询内容不能为空！", false);
             return map;
         }
-        //查询销售量
-        series = productService.querySalePrcByPid(pId);
-        echarsVo.setXAxisData(MOTHS);
-        echarsVo.setSeriesList();
+        EcharsVo echarsVo=productService.initPrdSalePrcChars(pId);
+        map = CommonResponse.setResponseData(echarsVo, StatusCode.SUCCESS.getCode(), "加载成功", true);
         return map;
     }
+
+
+
 }

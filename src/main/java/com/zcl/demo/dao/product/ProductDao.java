@@ -1,6 +1,9 @@
 package com.zcl.demo.dao.product;
 
 import com.zcl.demo.model.product.Product;
+import com.zcl.demo.po.ProducePo;
+import com.zcl.demo.po.SalePo;
+import org.assertj.core.error.ShouldHaveAtLeastOneElementOfType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,4 +27,17 @@ public interface ProductDao {
      * @return
      */
     List<Product> queryProductByName(String pName);
+
+    /**
+     * 查询销售量
+     * @param pId
+     * @return
+     */
+    SalePo querySalePrcByPid(String pId);
+
+    /**
+     * 查询产量
+     * @param pId
+     */
+    ProducePo queryPrdNumByPid(String pId);
 }
