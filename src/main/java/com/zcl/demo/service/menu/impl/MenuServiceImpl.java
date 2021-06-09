@@ -158,16 +158,44 @@ public class MenuServiceImpl implements MenuService {
         StringBuilder sb = new StringBuilder();
         //根据rid获取所有菜单model
         List<Menu> menus = queryMenuByRid(rId);
-        if(menus.size()==0){
-        return "";
+        if (menus.size() == 0) {
+            return "";
         }
+        //转换成菜单本地url格式
+        menus.stream().forEach(menu -> {
+            //转换icon成相对路径
+            MenuIconEnum menuIconEnum = MenuIconEnum.getEnumByType(menu.getmIcon());
+            switch (menuIconEnum) {
+                case HOME_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case ANTH_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case BASICS_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case LOG_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case MENU_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case ROLE_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+                case USER_ICON:
+                    menu.setmIcon(menuIconEnum.getPath());
+                    break;
+            }
+        });
         //遍历出二级菜单，如果有二级菜单 就在menuCheckVos中遍历出它所有的子节点，渲染在二级菜单中
         List<Menu> menulist = menus.stream().filter(menu -> "0".equals(menu.getpMenu())).collect(Collectors.toList());
         if (menulist.size() > 0) {
             for (Menu m :
                     menulist) {
                 sb.append("<li class=\"layui-nav-item layui-nav-itemed\">");
-                sb.append("<a class=\"\" href=\"javascript:;\">" + m.getmName() + "</a>");
+                sb.append("<a class=\"\" href=\"javascript:;\"> <img src=" + m.getmIcon() + " style=\"width: 16px;height: 16px;margin-right:8px\">" + m.getmName() + "</a>");
                 //获取该二级菜单下的所有子节点，menuCheckVos是排过序的
                 String sendNodeChilds = getSendNodeChilds(m.getmId(), menus);
                 sb.append(sendNodeChilds);
@@ -194,7 +222,7 @@ public class MenuServiceImpl implements MenuService {
         sb.append("<dl class=\"layui-nav-child\" >");
         for (Menu m :
                 menuList) {
-            sb.append("<dd ><a  url=\"" + m.getmUrl() + "\" onclick=\"tabshow(this)\" >" + m.getmName() + "</a></dd>\n");
+            sb.append("<dd ><a  url=\"" + m.getmUrl() + "\" onclick=\"tabshow(this)\" >  <img src=" + m.getmIcon() + " style=\"width: 16px;height: 16px\">" + m.getmName() + "</a></dd>\n");
         }
         sb.append("</dl>");
         return sb.toString().trim();

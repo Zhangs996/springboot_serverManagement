@@ -43,3 +43,7 @@ select ~ div dd[lay-value="6"]:before {
     content: url("../../img/user.png");
 }
 
+.ico_docu{
+    background-size: 16px 16px;
+}
+

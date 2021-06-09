@@ -14,14 +14,72 @@
     <script src="../../static/frame/echars/echarts.min.js"></script>
 </head>
 <body>
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width: 1600px;height:400px;"></div>
-<div id="raids" style="width: 400px;height:400px;"></div>
+<div class="row">
+    <div id="line" style="width: 100%;height:400px; margin-top: 30px"></div>
+    <div class="col-md-6" style="float:left;">
+        <div id="main" style="width: 600px;height:400px; margin-top: 30px;margin-left: 30px"></div>
+    </div>
+    <div class="col-md-6" style="float:right;">
+        <div id="raids" style="width: 600px;height:400px; margin-top: 30px;margin-right: 30px"></div>
+    </div>
+</div>
+
+<#--&lt;#&ndash;折线图&ndash;&gt;-->
+<#--<div id="line" style="width: 100%;height:400px;"></div>-->
+<#--<!-- 为ECharts准备一个具备大小（宽高）的Dom &ndash;&gt;-->
+<#--<div id="main" style="width: 50%;height:400px;"></div>-->
+<#--<div id="raids" style="width: 40%;height:400px;"></div>-->
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
+    var lineChart = echarts.init(document.getElementById('line'));
     var myChart = echarts.init(document.getElementById('main'));
     var myradisChart = echarts.init(document.getElementById('raids'));
+    //折线图
+    lineChart.setOption({
+        title: {
+            text: '商品销量产量关系折线图'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['销售量(件)', '生产量(件)']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '销售量(件)',
+                type: 'line',
+                stack: '总量',
+                data: []
+            },
+            {
+                name: '生产量(件)',
+                type: 'line',
+                stack: '总量',
+                data: []
+            }
+        ]
 
+    })
 
     // 指定图表的配置项和数据
     //柱状图
@@ -128,6 +186,29 @@
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
+                    }
+                ]
+            })
+            var saleRes = new Array();
+            var prdRes = new Array();
+            for (let i = 0; i < seriesList[0].data.length; i++) {
+                saleRes.push(seriesList[0].data[i]);
+                prdRes.push(seriesList[1].data[i]);
+            }
+            //填入折线图数据
+            lineChart.setOption({
+                series: [
+                    {
+                        name: '销售量(件)',
+                        type: 'line',
+                        stack: '总量',
+                        data: saleRes
+                    },
+                    {
+                        name: '生产量(件)',
+                        type: 'line',
+                        stack: '总量',
+                        data: prdRes
                     }
                 ]
             })

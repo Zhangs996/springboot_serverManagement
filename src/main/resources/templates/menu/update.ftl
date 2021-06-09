@@ -45,7 +45,7 @@
                     <label class="layui-form-label">菜单名称<span style="color:red;">*</span>：</label>
                     <input type="hidden" name="mId" value=${menuDao.mId}>
                     <div class="layui-input-block">
-                        <input type="text" maxlength="50" name="mName" lay-verify="required"
+                        <input type="text" maxlength="70" name="mName" lay-verify="required"
                                class="layui-input layui-input-sm " value=${menuDao.mName}>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单URL<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <input type="text" maxlength="30" name="mUrl" lay-verify="required" placeholder="请输入菜单URL"
+                        <input type="text" maxlength="70" name="mUrl" lay-verify="required" placeholder="请输入菜单URL"
                                class="layui-input layui-input-sm " value=${menuDao.mUrl}>
                     </div>
                 </div>

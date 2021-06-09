@@ -3,14 +3,10 @@ package com.zcl.demo.controller.user;
 import com.github.pagehelper.PageInfo;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
-import com.zcl.demo.dao.user.UserDao;
-import com.zcl.demo.model.log.Log;
 import com.zcl.demo.model.role.Role;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.role.RoleService;
 import com.zcl.demo.service.user.UserService;
-import com.zcl.demo.util.DateInFo;
-import com.zcl.demo.util.MD5Util;
 import com.zcl.demo.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,9 +46,19 @@ public class UserController {
      *
      * @return
      */
+    @RequestMapping(value = "/showChars.html", method = RequestMethod.GET)
+    public String showChars() {
+        return "chars";
+    }
+
+    /**
+     * 默认展示界面
+     *
+     * @return
+     */
     @RequestMapping(value = "/showDeafult.html", method = RequestMethod.GET)
     public String showDeafult() {
-        return "/showIndex";
+        return "showdefault";
     }
 
     /**
@@ -177,17 +177,18 @@ public class UserController {
 
     /**
      * 重置密码
+     *
      * @return
      */
-    @RequestMapping(value = "/userController/reloadPw.json",method = RequestMethod.GET)
+    @RequestMapping(value = "/userController/reloadPw.json", method = RequestMethod.GET)
     @ResponseBody
-    public Map reloadPw(){
+    public Map reloadPw() {
         String userId = (String) SessionUtil.getSessionAttribute("userId");
         try {
             userService.reloadPw(userId);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return   CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "重置失败！", false);
+            return CommonResponse.setResponseData(null, StatusCode.FAIL.getCode(), "重置失败！", false);
 
         }
         return CommonResponse.setResponseData(null);
