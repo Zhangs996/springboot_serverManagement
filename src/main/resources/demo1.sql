@@ -1,32 +1,30 @@
 /*
- Navicat Premium Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : local
- Source Server Type    : MySQL
- Source Server Version : 50725
- Source Host           : localhost:3306
- Source Schema         : demo1
+Source Server         : zf_lx
+Source Server Version : 50731
+Source Host           : localhost:3306
+Source Database       : demo1
 
- Target Server Type    : MySQL
- Target Server Version : 50725
- File Encoding         : 65001
+Target Server Type    : MYSQL
+Target Server Version : 50731
+File Encoding         : 65001
 
- Date: 03/06/2021 15:48:28
+Date: 2021-06-09 23:16:58
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for log_info
 -- ----------------------------
 DROP TABLE IF EXISTS `log_info`;
-CREATE TABLE `log_info`  (
-  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_time` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `action` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `log_info` (
+  `id` varchar(32) NOT NULL,
+  `create_time` varchar(20) DEFAULT NULL,
+  `user_name` varchar(20) DEFAULT NULL,
+  `action` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of log_info
@@ -1094,19 +1092,65 @@ INSERT INTO `log_info` VALUES ('a2439f44c43211eba662c85b76b7b678', '20210603 14:
 INSERT INTO `log_info` VALUES ('a321cf9dc43211eba662c85b76b7b678', '20210603 14:12:13', '曾成龙', '注销');
 INSERT INTO `log_info` VALUES ('a6da3634c43211eba662c85b76b7b678', '20210603 14:12:20', '曾成龙', '登录');
 INSERT INTO `log_info` VALUES ('a7a05ef2c43211eba662c85b76b7b678', '20210603 14:12:21', '曾成龙', '注销');
+INSERT INTO `log_info` VALUES ('ac97e976c92111eba9ff144f8a625b6e', '20210609 20:52:47', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('a74c3f79c92211eba9ff144f8a625b6e', '20210609 20:59:47', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('faaaf00dc92211eba9ff144f8a625b6e', '20210609 21:02:07', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('0fe5c3d5c92311eba9ff144f8a625b6e', '20210609 21:02:43', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('25b73210c92311eba9ff144f8a625b6e', '20210609 21:03:19', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('4ef617dbc92311eba9ff144f8a625b6e', '20210609 21:04:29', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('8005f1cbc92311eba9ff144f8a625b6e', '20210609 21:05:51', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('ad1f47eac92311eba9ff144f8a625b6e', '20210609 21:07:07', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('28d40b8dc92411eba9ff144f8a625b6e', '20210609 21:10:34', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('455570e5c92411eba9ff144f8a625b6e', '20210609 21:11:22', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('abb3a899c92411eba9ff144f8a625b6e', '20210609 21:14:14', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('5cc2cf6ac92511eba9ff144f8a625b6e', '20210609 21:19:11', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('6aa1faafc92511eba9ff144f8a625b6e', '20210609 21:19:34', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('a84e228fc92511eba9ff144f8a625b6e', '20210609 21:21:17', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('cbcab21bc92511eba9ff144f8a625b6e', '20210609 21:22:17', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('d2b2f6d6c92511eba9ff144f8a625b6e', '20210609 21:22:29', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('75519d75c92611eba9ff144f8a625b6e', '20210609 21:27:01', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('881e76edc92611eba9ff144f8a625b6e', '20210609 21:27:33', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('97b9c29ec92611eba9ff144f8a625b6e', '20210609 21:27:59', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('b6c0654dc92611eba9ff144f8a625b6e', '20210609 21:28:51', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('c3e9ca5ac92611eba9ff144f8a625b6e', '20210609 21:29:13', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('d9bc4898c92611eba9ff144f8a625b6e', '20210609 21:29:50', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('413b8d26c92711eba9ff144f8a625b6e', '20210609 21:32:44', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('78ee4374c92711eba9ff144f8a625b6e', '20210609 21:34:17', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('f39962ebc92711eba9ff144f8a625b6e', '20210609 21:37:43', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('6bd91500c92811eba9ff144f8a625b6e', '20210609 21:41:05', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('aaed49e5c92811eba9ff144f8a625b6e', '20210609 21:42:50', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('30889496c92a11eba9ff144f8a625b6e', '20210609 21:53:44', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('3063defbc92b11eba9ff144f8a625b6e', '20210609 22:00:53', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('93d8da33c92b11eba9ff144f8a625b6e', '20210609 22:03:40', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('cee4684ec92b11eba9ff144f8a625b6e', '20210609 22:05:19', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('1c86e9d3c92f11eba9ff144f8a625b6e', '20210609 22:28:58', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('9c9093bdc93111eba9ff144f8a625b6e', '20210609 22:46:52', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('f0bdd388c93111eba9ff144f8a625b6e', '20210609 22:49:13', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('1160281fc93211eba9ff144f8a625b6e', '20210609 22:50:08', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('1d33a657c93211eba9ff144f8a625b6e', '20210609 22:50:28', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('84696577c93211eba9ff144f8a625b6e', '20210609 22:53:21', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('8bea563dc93211eba9ff144f8a625b6e', '20210609 22:53:33', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('bfb66897c93211eba9ff144f8a625b6e', '20210609 22:55:00', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('181476f2c93311eba9ff144f8a625b6e', '20210609 22:57:28', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('1a20d048c93411eba9ff144f8a625b6e', '20210609 23:04:41', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('2e10e541c93411eba9ff144f8a625b6e', '20210609 23:05:15', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('416852ebc93411eba9ff144f8a625b6e', '20210609 23:05:47', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('c5a5431fc93411eba9ff144f8a625b6e', '20210609 23:09:29', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('58b697c5c93511eba9ff144f8a625b6e', '20210609 23:13:36', '曾成龙', '登录');
+INSERT INTO `log_info` VALUES ('b820648fc93511eba9ff144f8a625b6e', '20210609 23:16:16', '曾成龙', '登录');
 
 -- ----------------------------
 -- Table structure for t_email
 -- ----------------------------
 DROP TABLE IF EXISTS `t_email`;
-CREATE TABLE `t_email`  (
-  `e_id` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `e_topic` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '标题',
-  `e_content` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '内容',
-  `create_user` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '创建人',
-  `create_time` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '创建时间',
+CREATE TABLE `t_email` (
+  `e_id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `e_topic` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '标题',
+  `e_content` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '内容',
+  `create_user` varchar(40) COLLATE utf8_bin NOT NULL COMMENT '创建人',
+  `create_time` varchar(40) COLLATE utf8_bin NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`e_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_email
@@ -1116,107 +1160,183 @@ CREATE TABLE `t_email`  (
 -- Table structure for t_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `t_menu`;
-CREATE TABLE `t_menu`  (
-  `m_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单id',
-  `m_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单功能名',
-  `p_menu` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '上级功能编号',
-  `is_navigtion` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否用于导航（0：是 1：否）',
-  `m_url` varchar(52) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单URL',
-  `m_icon` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-  `m_sort` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单顺序',
-  `m_desc` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单描述',
-  `create_user` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建时间',
-  `update_user` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改时间',
+CREATE TABLE `t_menu` (
+  `m_id` varchar(32) NOT NULL COMMENT '菜单id',
+  `m_name` varchar(30) DEFAULT NULL COMMENT '菜单功能名',
+  `p_menu` varchar(32) DEFAULT NULL COMMENT '上级功能编号',
+  `is_navigtion` varchar(1) DEFAULT NULL COMMENT '是否用于导航（0：是 1：否）',
+  `m_url` varchar(100) DEFAULT NULL COMMENT '菜单URL',
+  `m_icon` varchar(30) DEFAULT NULL COMMENT '菜单图标',
+  `m_sort` varchar(30) DEFAULT NULL COMMENT '菜单顺序',
+  `m_desc` varchar(30) DEFAULT NULL COMMENT '菜单描述',
+  `create_user` varchar(30) DEFAULT NULL COMMENT '创建人',
+  `create_time` varchar(30) DEFAULT NULL COMMENT '创建时间',
+  `update_user` varchar(30) DEFAULT NULL COMMENT '修改人',
+  `update_time` varchar(30) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`m_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_menu
 -- ----------------------------
-INSERT INTO `t_menu` VALUES ('0', '根节点', NULL, '0', '', '0', '1', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `t_menu` VALUES ('0', '根节点', null, '0', '', '0', '1', null, null, null, null, null);
+INSERT INTO `t_menu` VALUES ('04f5cbbec92711eba9ff144f8a625b6e', '商品管理', '0', '0', '1', '2', '33', '', '曾成龙', '20210609 21:31:02', null, null);
 INSERT INTO `t_menu` VALUES ('1', '基础功能', '0', '0', '', '2', '2', '1', '1', '1', '曾成龙', '20210526 21:03:00');
 INSERT INTO `t_menu` VALUES ('2ca02705bb0911eb8357144f8a625b6e', '日志管理', '1', '0', '/LogController/hello.html', '3', '1', '日志管理', '曾成龙', '20210522 22:22:43', '曾成龙', '20210526 21:03:11');
-INSERT INTO `t_menu` VALUES ('4', '角色管理', '1', '0', '/RoleController/role_native.html', '5', '3', '', NULL, NULL, '曾成龙', '20210526 21:03:27');
-INSERT INTO `t_menu` VALUES ('5', '权限管理', '0', '0', '1', '1', '3', '', NULL, NULL, '曾成龙', '20210526 21:03:45');
-INSERT INTO `t_menu` VALUES ('6', '菜单管理', '5', '0', '/menuController/showindex.html', '4', '5', '', NULL, NULL, '曾成龙', '20210526 21:02:35');
+INSERT INTO `t_menu` VALUES ('4', '角色管理', '1', '0', '/RoleController/role_native.html', '5', '3', '', null, null, '曾成龙', '20210526 21:03:27');
+INSERT INTO `t_menu` VALUES ('5', '权限管理', '0', '0', '1', '1', '3', '', null, null, '曾成龙', '20210526 21:03:45');
+INSERT INTO `t_menu` VALUES ('6', '菜单管理', '5', '0', '/menuController/showindex.html', '4', '5', '', null, null, '曾成龙', '20210526 21:02:35');
+INSERT INTO `t_menu` VALUES ('70bb1d88c92711eba9ff144f8a625b6e', '商品列表', '04f5cbbec92711eba9ff144f8a625b6e', '0', '/productController/showlist.html', '4', '1', '', '曾成龙', '20210609 21:34:03', null, null);
+INSERT INTO `t_menu` VALUES ('9f4e519dc92811eba9ff144f8a625b6e', '商品分析图', '04f5cbbec92711eba9ff144f8a625b6e', '0', '/showChars.html', '4', '2', '', '曾成龙', '20210609 21:42:31', '曾成龙', '20210609 22:28:53');
 INSERT INTO `t_menu` VALUES ('cb91070fbb0a11eb8357144f8a625b6e', '用户管理', '1', '0', '/userlist.html', '6', '999', '', '曾成龙', '20210522 22:34:19', '曾成龙', '20210526 21:03:35');
 
 -- ----------------------------
 -- Table structure for t_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `t_notice`;
-CREATE TABLE `t_notice`  (
-  `n_id` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `send_man` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '发送人id',
-  `recive_man` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '收件人id',
-  `e_id` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '信件id',
-  `is_readed` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '是否已读（0未读，1已读）',
+CREATE TABLE `t_notice` (
+  `n_id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `send_man` varchar(40) COLLATE utf8_bin NOT NULL COMMENT '发送人id',
+  `recive_man` varchar(40) COLLATE utf8_bin NOT NULL COMMENT '收件人id',
+  `e_id` varchar(40) COLLATE utf8_bin NOT NULL COMMENT '信件id',
+  `is_readed` varchar(1) COLLATE utf8_bin NOT NULL COMMENT '是否已读（0未读，1已读）',
   PRIMARY KEY (`n_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_notice
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for t_produce_num
+-- ----------------------------
+DROP TABLE IF EXISTS `t_produce_num`;
+CREATE TABLE `t_produce_num` (
+  `pn_id` varchar(40) NOT NULL,
+  `jan_prd_num` varchar(40) DEFAULT NULL,
+  `feb_prd_num` varchar(40) DEFAULT NULL,
+  `mar_prd_num` varchar(40) DEFAULT NULL,
+  `apr_prd_num` varchar(40) DEFAULT NULL,
+  `may_prd_num` varchar(40) DEFAULT NULL,
+  `jun_prd_num` varchar(40) DEFAULT NULL,
+  `jul_prd_num` varchar(40) DEFAULT NULL,
+  `aug_prd_num` varchar(40) DEFAULT NULL,
+  `sep_prd_num` varchar(40) DEFAULT NULL,
+  `oct_prd_num` varchar(40) DEFAULT NULL,
+  `nov_prd_num` varchar(40) DEFAULT NULL,
+  `dec_prd_num` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`pn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_produce_num
+-- ----------------------------
+INSERT INTO `t_produce_num` VALUES ('1', '22390', '11220', '21389', '14644', '15200', '14745', '17131', '34573', '19312', '20212', '12214', '22111');
+INSERT INTO `t_produce_num` VALUES ('2', '13390', '14220', '12389', '12464', '12520', '47450', '17132', '34574', '19313', '20213', '12211', '12111');
+
+-- ----------------------------
+-- Table structure for t_product
+-- ----------------------------
+DROP TABLE IF EXISTS `t_product`;
+CREATE TABLE `t_product` (
+  `p_id` varchar(40) NOT NULL,
+  `p_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `p_money` decimal(18,2) NOT NULL COMMENT '商品价格',
+  `s_id` varchar(40) DEFAULT '' COMMENT '销量id',
+  `pn_id` varchar(40) DEFAULT NULL COMMENT '产量id',
+  PRIMARY KEY (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_product
+-- ----------------------------
+INSERT INTO `t_product` VALUES ('1', '麻黄碱', '12.00', '1', '1');
+INSERT INTO `t_product` VALUES ('2', '氯化钠注射液', '11.00', '2', '2');
+
+-- ----------------------------
 -- Table structure for t_role
 -- ----------------------------
 DROP TABLE IF EXISTS `t_role`;
-CREATE TABLE `t_role`  (
-  `r_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `r_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `r_desc` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `update_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_user` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+CREATE TABLE `t_role` (
+  `r_id` varchar(32) NOT NULL,
+  `r_name` varchar(30) DEFAULT NULL,
+  `r_desc` varchar(30) DEFAULT NULL,
+  `create_time` varchar(30) NOT NULL,
+  `update_time` varchar(30) DEFAULT NULL,
+  `create_user` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`r_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_role
 -- ----------------------------
-INSERT INTO `t_role` VALUES ('62f55eb97f2211eb973d6100d940b6cf', '游客2', '1', '20210307 16:51:23', NULL, '楼乐妍');
-INSERT INTO `t_role` VALUES ('64720b5d7f2011eb973d6100d940b6cf', '超级管理员', '最大权限用户', '20210307 16:37:07', NULL, '曾成龙');
-INSERT INTO `t_role` VALUES ('8f5efb837f2011eb973d6100d940b6cf', '游客', '无系统性菜单权限', '20210307 16:38:19', NULL, '曾成龙');
-INSERT INTO `t_role` VALUES ('90861c3fc14111eba9ff144f8a625b6e', '数据管理员', '数据管理员', '20210530 20:21:11', NULL, '曾成龙');
+INSERT INTO `t_role` VALUES ('62f55eb97f2211eb973d6100d940b6cf', '游客2', '1', '20210307 16:51:23', null, '楼乐妍');
+INSERT INTO `t_role` VALUES ('64720b5d7f2011eb973d6100d940b6cf', '超级管理员', '最大权限用户', '20210307 16:37:07', null, '曾成龙');
+INSERT INTO `t_role` VALUES ('8f5efb837f2011eb973d6100d940b6cf', '游客', '无系统性菜单权限', '20210307 16:38:19', null, '曾成龙');
+INSERT INTO `t_role` VALUES ('90861c3fc14111eba9ff144f8a625b6e', '数据管理员', '数据管理员', '20210530 20:21:11', null, '曾成龙');
+
+-- ----------------------------
+-- Table structure for t_sale
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sale`;
+CREATE TABLE `t_sale` (
+  `s_id` varchar(40) NOT NULL,
+  `jan_sale_num` varchar(40) DEFAULT NULL,
+  `feb_sale_num` varchar(40) DEFAULT NULL,
+  `mar_sale_num` varchar(40) DEFAULT NULL,
+  `apr_sale_num` varchar(40) DEFAULT NULL,
+  `may_sale_num` varchar(40) DEFAULT NULL,
+  `jun_sale_num` varchar(40) DEFAULT NULL,
+  `jul_sale_num` varchar(40) DEFAULT NULL,
+  `aug_sale_num` varchar(40) DEFAULT NULL,
+  `sep_sale_num` varchar(40) DEFAULT NULL,
+  `oct_sale_num` varchar(40) DEFAULT NULL,
+  `nov_sale_num` varchar(40) DEFAULT NULL,
+  `dec_sale_num` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sale
+-- ----------------------------
+INSERT INTO `t_sale` VALUES ('1', '29803', '39803', '29873', '67905', '69823', '99803', '29803', '29803', '29803', '29803', '1', '29803');
+INSERT INTO `t_sale` VALUES ('2', '32158', '39803', '29873', '67905', '69823', '99803', '29803', '29803', '29803', '29803', '1', '29803');
 
 -- ----------------------------
 -- Table structure for t_user
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user`  (
-  `u_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `u_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `r_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '0:正常 1:注销',
-  `update_time` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sex` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+CREATE TABLE `t_user` (
+  `u_id` varchar(32) NOT NULL,
+  `u_name` varchar(20) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `r_id` varchar(32) NOT NULL,
+  `create_time` varchar(30) NOT NULL COMMENT '0:正常 1:注销',
+  `update_time` varchar(30) DEFAULT NULL,
+  `sex` varchar(1) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`u_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1de072b1c35c11ebbd12c85b76b7b678', 'admin', 'lueSGJZetyySpUndWjMBEg==', '8f5efb837f2011eb973d6100d940b6cf', '20210602 12:36:18', NULL, '1', '', '', '0');
+INSERT INTO `t_user` VALUES ('1de072b1c35c11ebbd12c85b76b7b678', 'admin', 'lueSGJZetyySpUndWjMBEg==', '8f5efb837f2011eb973d6100d940b6cf', '20210602 12:36:18', null, '1', '', '', '0');
 INSERT INTO `t_user` VALUES ('4b6cce897f2211eb973d6100d940b6cf', '楼乐妍', 'lueSGJZetyySpUndWjMBEg==', '64720b5d7f2011eb973d6100d940b6cf', '20210307 16:50:44', '20210602 12:35:58', '0', '', '', '0');
-INSERT INTO `t_user` VALUES ('798fddc17f2211eb973d6100d940b6cf', '曾成龙', 'lueSGJZetyySpUndWjMBEg==', '64720b5d7f2011eb973d6100d940b6cf', '20210307 16:52:01', NULL, '1', '', '', '0');
+INSERT INTO `t_user` VALUES ('798fddc17f2211eb973d6100d940b6cf', '曾成龙', 'lueSGJZetyySpUndWjMBEg==', '64720b5d7f2011eb973d6100d940b6cf', '20210307 16:52:01', null, '1', '', '', '0');
 
 -- ----------------------------
 -- Table structure for t_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user_role`;
-CREATE TABLE `t_user_role`  (
-  `rm_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `r_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `m_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+CREATE TABLE `t_user_role` (
+  `rm_id` varchar(32) NOT NULL,
+  `r_id` varchar(32) DEFAULT NULL,
+  `m_id` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`rm_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_user_role
@@ -1230,15 +1350,16 @@ INSERT INTO `t_user_role` VALUES ('611c9fd3c14011eba9ff144f8a625b6e', '62f55eb97
 INSERT INTO `t_user_role` VALUES ('9f2b47f2c14111eba9ff144f8a625b6e', '90861c3fc14111eba9ff144f8a625b6e', '0');
 INSERT INTO `t_user_role` VALUES ('9f2bc5e3c14111eba9ff144f8a625b6e', '90861c3fc14111eba9ff144f8a625b6e', '1');
 INSERT INTO `t_user_role` VALUES ('9f2c402ec14111eba9ff144f8a625b6e', '90861c3fc14111eba9ff144f8a625b6e', '2ca02705bb0911eb8357144f8a625b6e');
-INSERT INTO `t_user_role` VALUES ('b79cde44c14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '0');
-INSERT INTO `t_user_role` VALUES ('b79d6acac14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '5');
-INSERT INTO `t_user_role` VALUES ('b79ddf9fc14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '6');
-INSERT INTO `t_user_role` VALUES ('b79e6732c14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '1');
-INSERT INTO `t_user_role` VALUES ('b79edf6cc14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '2ca02705bb0911eb8357144f8a625b6e');
-INSERT INTO `t_user_role` VALUES ('b79f7141c14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '4');
-INSERT INTO `t_user_role` VALUES ('b79fe289c14111eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', 'cb91070fbb0a11eb8357144f8a625b6e');
+INSERT INTO `t_user_role` VALUES ('a93d8dd7c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '0');
+INSERT INTO `t_user_role` VALUES ('a93f492cc92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '1');
+INSERT INTO `t_user_role` VALUES ('a93fb6d3c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '2ca02705bb0911eb8357144f8a625b6e');
+INSERT INTO `t_user_role` VALUES ('a940132fc92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '4');
+INSERT INTO `t_user_role` VALUES ('a940a604c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', 'cb91070fbb0a11eb8357144f8a625b6e');
+INSERT INTO `t_user_role` VALUES ('a94111d1c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '5');
+INSERT INTO `t_user_role` VALUES ('a9416b2bc92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '6');
+INSERT INTO `t_user_role` VALUES ('a941d048c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '04f5cbbec92711eba9ff144f8a625b6e');
+INSERT INTO `t_user_role` VALUES ('a9421500c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '70bb1d88c92711eba9ff144f8a625b6e');
+INSERT INTO `t_user_role` VALUES ('a9425826c92811eba9ff144f8a625b6e', '64720b5d7f2011eb973d6100d940b6cf', '9f4e519dc92811eba9ff144f8a625b6e');
 INSERT INTO `t_user_role` VALUES ('effae473c35b11ebbd12c85b76b7b678', '8f5efb837f2011eb973d6100d940b6cf', '0');
 INSERT INTO `t_user_role` VALUES ('f0026058c35b11ebbd12c85b76b7b678', '8f5efb837f2011eb973d6100d940b6cf', '1');
 INSERT INTO `t_user_role` VALUES ('f00a2d8cc35b11ebbd12c85b76b7b678', '8f5efb837f2011eb973d6100d940b6cf', '2ca02705bb0911eb8357144f8a625b6e');
-
-SET FOREIGN_KEY_CHECKS = 1;
