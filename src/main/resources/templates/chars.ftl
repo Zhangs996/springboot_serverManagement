@@ -9,26 +9,43 @@
     <#--<link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">-->
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
+    <script src="../../static/frame/layui-v2.5.6/layui/layui.js"></script>
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script src="../../static/frame/echars/echarts.min.js"></script>
 </head>
 <body>
-<div class="row">
-    <div id="line" style="width: 100%;height:400px; margin-top: 30px"></div>
-    <div class="col-md-6" style="float:left;">
-        <div id="main" style="width: 600px;height:400px; margin-top: 30px;margin-left: 30px"></div>
+<form id="search_form" class="_search">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">商品编号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pId" name="pId" class="layui-input search-input layui-input-sm">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <button id="search_btn" type="button" class="layui-btn btn-success layui-btn-sm"><i
+                        class="fa fa-fw fa-search"></i>&#8197;搜&#8197;索
+            </button>
+            <button id="reset_btn" type="reset" class="layui-btn btn-dark layui-btn-sm"><i
+                        class="fa fa-fw fa-refresh"></i>&#8197;重&#8197;置
+            </button>
+        </div>
     </div>
-    <div class="col-md-6" style="float:right;">
-        <div id="raids" style="width: 600px;height:400px; margin-top: 30px;margin-right: 30px"></div>
-    </div>
+</form>
+
+<div id="line" style="width: 100%;height:400px; margin-top: 30px"></div>
+
+<div class="col-md-6" style="float:left;">
+    <div id="main" style="width: 600px;height:400px; margin-top: 30px;margin-left: 30px"></div>
 </div>
 
-<#--&lt;#&ndash;折线图&ndash;&gt;-->
-<#--<div id="line" style="width: 100%;height:400px;"></div>-->
-<#--<!-- 为ECharts准备一个具备大小（宽高）的Dom &ndash;&gt;-->
-<#--<div id="main" style="width: 50%;height:400px;"></div>-->
-<#--<div id="raids" style="width: 40%;height:400px;"></div>-->
+<div class="col-md-6" style="float:right;">
+    <div id="raids" style="width: 600px;height:400px; margin-top: 30px;margin-right: 30px"></div>
+</div>
+
+
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var lineChart = echarts.init(document.getElementById('line'));
@@ -37,7 +54,7 @@
     //折线图
     lineChart.setOption({
         title: {
-            text: '商品销量产量关系折线图'
+            text: '销量产量关系折线图'
         },
         tooltip: {
             trigger: 'axis'
@@ -89,6 +106,9 @@
         },
         tooltip: {},
         legend: {
+            x: 'right', // 'center' | 'left' | {number},
+            y: 'top', // 'center' | 'bottom' | {number}
+            padding:[0,50,0,0],   //可设定图例[距上方距离，距右方距离，距下方距离，距左方距离]
             data: ['销售量(件)', '生产量(件)']
         },
         xAxis: {
@@ -100,7 +120,7 @@
     //饼图
     myradisChart.setOption({
         title: {
-            text: '产品销售量饼图分布图',
+            text: '产品销售量饼装分布图',
             subtext: '纯属虚构',
             left: 'center'
         },
@@ -117,6 +137,7 @@
                 type: 'pie',
                 radius: '50%',
                 data: [],
+                roseType:'radius',
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -124,139 +145,127 @@
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     },
                 }
+
             }
         ]
     })
 
     var url = "/productController/initPrdSalePrcChars.json";
+    var pId = 'p10284';
+    init(pId);
     // 异步加载数据
-    sendAjax.sendGetAjax(url, $.param({pId: 1}), function (res) {
-        // myChart.hideLoading();  // 隐藏 loading 效果
-        if (res.status) {
-            var xAxisData = res.data.xaxisData;
-            var seriesList = res.data.seriesList;
-            // 填入柱状图数据
-            myChart.setOption({
-                xAxis: {
-                    data: xAxisData
-                },
-                series: [
-                    {
-                        name: seriesList[0].name,
-                        type: 'bar',
-                        data: seriesList[0].data
-                    }, {
-                        name: seriesList[1].name,
-                        type: 'bar',
-                        data: seriesList[1].data,
-                        itemStyle: {
-                            normal: { //柱子颜色
-                                color: 'blue'
-                            }
-                        },
+    function init(pId) {
+        sendAjax.sendGetAjax(url, $.param({pId:pId}), function (res) {
+            // myChart.hideLoading();  // 隐藏 loading 效果
+            if (res.status) {
+                var xAxisData = res.data.xaxisData;
+                var seriesList = res.data.seriesList;
+                var pName = res.data.pname;
+                // 填入柱状图数据
+                myChart.setOption({
+                    title: {
+                        text: pName + '销售产量关系图'
                     },
-                ]
-            });
-
-            //填入饼图数据
-            myradisChart.setOption({
-                series: [
-                    {
-                        name: '销售量饼图',
-                        type: 'pie',
-                        radius: '50%',
-                        data: [
-                            {value: seriesList[0].data[0], name: xAxisData[0]},
-                            {value: seriesList[0].data[1], name: xAxisData[1]},
-                            {value: seriesList[0].data[2], name: xAxisData[2]},
-                            {value: seriesList[0].data[3], name: xAxisData[3]},
-                            {value: seriesList[0].data[4], name: xAxisData[4]},
-                            {value: seriesList[0].data[5], name: xAxisData[5]},
-                            {value: seriesList[0].data[6], name: xAxisData[6]},
-                            {value: seriesList[0].data[7], name: xAxisData[7]},
-                            {value: seriesList[0].data[8], name: xAxisData[8]},
-                            {value: seriesList[0].data[9], name: xAxisData[9]},
-                            {value: seriesList[0].data[10], name: xAxisData[10]},
-                            {value: seriesList[0].data[11], name: xAxisData[11]}
-                        ],
-                        emphasis: {
+                    xAxis: {
+                        data: xAxisData
+                    },
+                    series: [
+                        {
+                            name: seriesList[0].name,
+                            type: 'bar',
+                            data: seriesList[0].data
+                        }, {
+                            name: seriesList[1].name,
+                            type: 'bar',
+                            data: seriesList[1].data,
                             itemStyle: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                normal: { //柱子颜色
+                                    color: 'blue'
+                                }
+                            },
+                        },
+                    ]
+                });
+
+                //填入饼图数据
+                myradisChart.setOption({
+                    title: {
+                        text: pName + '销售量饼装分布图'
+                    },
+                    series: [
+                        {
+                            name: '销售量饼图',
+                            type: 'pie',
+                            radius: '50%',
+                            data: [
+                                {value: seriesList[0].data[0], name: xAxisData[0]},
+                                {value: seriesList[0].data[1], name: xAxisData[1]},
+                                {value: seriesList[0].data[2], name: xAxisData[2]},
+                                {value: seriesList[0].data[3], name: xAxisData[3]},
+                                {value: seriesList[0].data[4], name: xAxisData[4]},
+                                {value: seriesList[0].data[5], name: xAxisData[5]},
+                                {value: seriesList[0].data[6], name: xAxisData[6]},
+                                {value: seriesList[0].data[7], name: xAxisData[7]},
+                                {value: seriesList[0].data[8], name: xAxisData[8]},
+                                {value: seriesList[0].data[9], name: xAxisData[9]},
+                                {value: seriesList[0].data[10], name: xAxisData[10]},
+                                {value: seriesList[0].data[11], name: xAxisData[11]}
+                            ],
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
                             }
                         }
-                    }
-                ]
-            })
-            var saleRes = new Array();
-            var prdRes = new Array();
-            for (let i = 0; i < seriesList[0].data.length; i++) {
-                saleRes.push(seriesList[0].data[i]);
-                prdRes.push(seriesList[1].data[i]);
-            }
-            //填入折线图数据
-            lineChart.setOption({
-                series: [
-                    {
-                        name: '销售量(件)',
-                        type: 'line',
-                        stack: '总量',
-                        data: saleRes
+                    ]
+                })
+                var saleRes = new Array();
+                var prdRes = new Array();
+                for (let i = 0; i < seriesList[0].data.length; i++) {
+                    saleRes.push(seriesList[0].data[i]);
+                    prdRes.push(seriesList[1].data[i]);
+                }
+                //填入折线图数据
+                lineChart.setOption({
+                    title: {
+                        text: pName + '销量产量关系折线图'
                     },
-                    {
-                        name: '生产量(件)',
-                        type: 'line',
-                        stack: '总量',
-                        data: prdRes
-                    }
-                ]
-            })
-        } else {
-            layer.msg(res.msg, {icon: 2, time: 1500});
-        }
+                    series: [
+                        {
+                            name: '销售量(件)',
+                            type: 'line',
+                            stack: '总量',
+                            data: saleRes
+                        },
+                        {
+                            name: '生产量(件)',
+                            type: 'line',
+                            stack: '总量',
+                            data: prdRes
+                        }
+                    ]
+                })
+                layui.use('layer', function(){ //独立版的layer无需执行这一句
+                    layui.layer.msg(res.msg, {icon: 1, time: 1500});
+                });
+
+            } else {
+                layui.use('layer', function(){ //独立版的layer无需执行这一句
+                layui.layer.msg(res.msg, {icon: 2, time: 1500});
+                });
+            }
+        })
+    }
+
+    //搜索按钮事件
+    $("#search_btn").on('click', function () {
+        let pId = $('#pId').val();
+        console.log(pId)
+        init(pId)
     })
 
-
-    // //饼图
-    // option = {
-    //     title: {
-    //         text: '某站点用户访问来源',
-    //         subtext: '纯属虚构',
-    //         left: 'center'
-    //     },
-    //     tooltip: {
-    //         trigger: 'item'
-    //     },
-    //     legend: {
-    //         orient: 'vertical',
-    //         left: 'right',
-    //     },
-    //     series: [
-    //         {
-    //             name: '访问来源',
-    //             type: 'pie',
-    //             radius: '50%',
-    //             data: [
-    //                 {value: 1048, name: '搜索引擎'},
-    //                 {value: 735, name: '直接访问'},
-    //                 {value: 580, name: '邮件营销'},
-    //                 {value: 484, name: '联盟广告'},
-    //                 {value: 300, name: '视频广告'}
-    //             ],
-    //             emphasis: {
-    //                 itemStyle: {
-    //                     shadowBlur: 10,
-    //                     shadowOffsetX: 0,
-    //                     shadowColor: 'rgba(0, 0, 0, 0.5)'
-    //                 }
-    //             }
-    //         }
-    //     ]
-    // };
-
-    // // 使用刚指定的配置项和数据显示图表。
-    // myradisChart.setOption(option);
 </script>
 
 

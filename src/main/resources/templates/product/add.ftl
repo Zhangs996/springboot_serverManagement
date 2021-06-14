@@ -13,18 +13,29 @@
     <script src="../../static/js/user/user.js" charset="utf-8"></script>
     <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
     <script src="../../static/js/common/info.js" charset="utf-8"></script>
-    <script src="../../static/js/user/add.js" charset="utf-8"></script>
+    <script src="../../static/js/product/product.js" charset="utf-8"></script>
 </head>
 <body>
 <div id="app">
-    <form class="layui-form add-form" method="post" action="${request.contextPath}/userController/save.form">
+    <form class="layui-form add-form" method="post" action="${request.contextPath}/productController/addProduct.json">
 
         <div class="layui-row">
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">用户名<span style="color:red;">*</span>：</label>
+                    <label class="layui-form-label">商品编号<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <input type="text" maxlength="12" name="uName" lay-verify="required" placeholder="请输入用户名"
+                        <input type="text" maxlength="20" name="pId" lay-verify="required" placeholder="请输入商品编号"
+                               class="layui-input layui-input-sm ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-xs12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品名称<span style="color:red;">*</span>：</label>
+                    <div class="layui-input-block">
+                        <input type="text" maxlength="20" name="pName" lay-verify="required" placeholder="请输入商品名称"
                                class="layui-input layui-input-sm ">
                     </div>
                 </div>
@@ -34,80 +45,15 @@
         <div class="layui-row">
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">密码 <span style="color:#ff4053;">*</span>：</label>
+                    <label class="layui-form-label">商品金额(元)<span style="color:red;">*</span>：</label>
                     <div class="layui-input-block">
-                        <input type="password" id="pw_" name="password" lay-verify="required||password"
-                               placeholder="请输入密码"
+                        <input type="number"  name="pMoney" lay-verify="required||money" placeholder="请输入商品金额"
                                class="layui-input layui-input-sm ">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="layui-row">
-            <div class="layui-col-xs12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">请确认密码 <span style="color:#ff4053;">*</span>：</label>
-                    <div class="layui-input-block">
-                        <input type="password" name="checkpassword" lay-verify="required||recheck" placeholder="请输入密码"
-                               class="layui-input layui-input-sm ">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-row">
-            <div class="layui-col-xs12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">角色<span style="color:red;">*</span>：</label>
-                    <div class="layui-input-inline">
-                        <select name="rId" lay-verify="required" lay-search="">
-                            <option value="">直接选择或搜索选择</option>
-                        <#list roledao as role>
-                            <option value=${role.rId}>${role.rName}</option>
-                        </#list>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-row">
-            <div class="layui-col-xs12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">性别：</label>
-                    <div class="layui-input-inline">
-                        <select name="sex" lay-search="">
-                            <option value="">直接选择或搜索选择</option>
-                            <option value="1">男</option>
-                            <option value="0">女</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-row">
-            <div class="layui-col-xs12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">手机号：</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="phone" lay-verify="phone" placeholder="请输入手机号"
-                               class="layui-input layui-input-sm ">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-row">
-            <div class="layui-col-xs12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">邮箱：</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="email"  lay-verify="email" placeholder="请输入邮箱"
-                               class="layui-input layui-input-sm ">
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="layui-row">
             <div class="layui-col-xs12">

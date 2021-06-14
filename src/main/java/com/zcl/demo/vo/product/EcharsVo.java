@@ -13,6 +13,8 @@ import java.util.List;
  **/
 @Data
 public class EcharsVo implements Serializable {
+    //pName
+    private String pName;
     //x轴
     private String[] xAxisData;
     //前台对象数组接收

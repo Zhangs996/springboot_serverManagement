@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
-    <script src="../../static/js/product/product.js" charset="utf-8"></script>
+    <script src="../../static/js/product/sale/sale.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -18,25 +18,11 @@
 <form id="search_form" class="_search">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">商品编号：</label>
-            <div class="layui-input-inline">
-                <input type="text" id="pId" name="pId" class="layui-input search-input layui-input-sm">
-            </div>
-        </div>
-
-        <div class="layui-inline">
             <label class="layui-form-label">商品名称：</label>
             <div class="layui-input-inline">
                 <input type="text" id="pName" name="pName" class="layui-input search-input layui-input-sm">
             </div>
         </div>
-
-<#--        <div class="layui-inline">-->
-<#--            <label class="layui-form-label">商品金额(元)：</label>-->
-<#--            <div class="layui-input-inline">-->
-<#--                <input type="text" id="pMoney" name="pMoney" class="layui-input search-input layui-input-sm">-->
-<#--            </div>-->
-<#--        </div>-->
 
         <div class="layui-inline">
             <button id="search_btn" type="button" class="layui-btn btn-success layui-btn-sm"><i
@@ -52,22 +38,6 @@
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
 <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
-<script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add.html">
-            <i class="layui-icon">&#xe654;</i>
-            新增</button>
-<#--        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">-->
-<#--            <i class="layui-icon">&#xe642;</i>-->
-<#--            修改</button>-->
-<#--        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">-->
-<#--            <i class="layui-icon">&#xe60f;</i>-->
-<#--            详情</button>-->
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">
-            <i class="layui-icon">&#xe640;</i>
-            删除</button>
-    </div>
-</script>
 
 
 </body>

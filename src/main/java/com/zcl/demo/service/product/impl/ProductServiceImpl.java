@@ -9,6 +9,8 @@ import com.zcl.demo.po.SalePo;
 import com.zcl.demo.po.Series;
 import com.zcl.demo.service.product.ProductService;
 import com.zcl.demo.vo.product.EcharsVo;
+import com.zcl.demo.vo.product.ProduceVO;
+import com.zcl.demo.vo.product.SaleVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -43,13 +45,17 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<Product> list(int page, int limit, String pName) {
+    public List<Product> list(int page, int limit, String pId, String pName) {
         List<Product> products = null;
         PageHelper.startPage(page, limit);
-        if (StringUtils.isEmpty(pName)) {
+        if (StringUtils.isEmpty(pId) && StringUtils.isEmpty(pName)) {
             products = productDao.queryAll();
-        } else {
+        } else if (StringUtils.isEmpty(pId) && !StringUtils.isEmpty(pName)) {
             products = productDao.queryProductByName(pName);
+        } else if (!StringUtils.isEmpty(pId) && StringUtils.isEmpty(pName)) {
+            products = productDao.queryProductByPid(pId);
+        } else {
+            products = productDao.queryProByNameAndId(pId,pName);
         }
         return products;
     }
@@ -79,8 +85,14 @@ public class ProductServiceImpl implements ProductService {
         return producePo;
     }
 
+    /**
+     * 初始化char
+     *
+     * @param pId
+     * @return
+     */
     @Override
-    public EcharsVo initPrdSalePrcChars(String pId) {
+    public EcharsVo initPrdSalePrcChars(String pId, String pName) {
         EcharsVo echarsVo = new EcharsVo();
         //查询销售量
         SalePo salePo = productDao.querySalePrcByPid(pId);
@@ -95,7 +107,85 @@ public class ProductServiceImpl implements ProductService {
         echarsVo.setXAxisData(MOTHS);
         //放销量和产量
         echarsVo.setSeriesList(seriesList);
+        //商品名称
+        echarsVo.setPName(pName);
         return echarsVo;
+    }
+
+    /**
+     * 动态展示商品销量
+     *
+     * @param page
+     * @param limit
+     * @param pName
+     * @return
+     */
+    @Override
+    public List<SaleVo> listSale(int page, int limit, String pName) {
+        List<SaleVo> saleVos = null;
+        PageHelper.startPage(page, limit);
+        if (StringUtils.isEmpty(pName)) {
+            saleVos = productDao.queryAllSale();
+        } else {
+            saleVos = productDao.querySaleByName(pName);
+        }
+        return saleVos;
+    }
+
+    /**
+     * 动态展示商品产量
+     *
+     * @param page
+     * @param limit
+     * @param pName
+     * @return
+     */
+    @Override
+    public List<ProduceVO> listProduce(int page, int limit, String pName) {
+        List<ProduceVO> produceVOS = null;
+        PageHelper.startPage(page, limit);
+        if (StringUtils.isEmpty(pName)) {
+            produceVOS = productDao.queryAllProduce();
+        } else {
+            produceVOS = productDao.queryPrdNumByName(pName);
+        }
+        return produceVOS;
+    }
+
+    /**
+     * 根据id查询商品名称
+     *
+     * @param pId
+     * @return
+     */
+    @Override
+    public String queryPnameByPid(String pId) {
+        return productDao.queryPnameByPid(pId);
+    }
+
+    /**
+     * 新增商品
+     * @param product
+     */
+    @Override
+    public boolean addProduct(Product product) {
+        String s = productDao.queryPnameByPid(product.getpId());
+        List<ProduceVO> produceVOS = productDao.queryAllProduce();
+        List<ProduceVO> collect = produceVOS.stream().filter(produceVO -> produceVO.getPName().equals(product.getpName())).collect(Collectors.toList());
+        if(!StringUtils.isEmpty(s)||!collect.isEmpty()){
+                 return false;
+        }
+        productDao.addProduct(product);
+        return true;
+    }
+
+    /**
+     * 删除商品
+     * @param pIds
+     */
+    @Override
+    public void deleteProductById(String[] pIds) {
+        productDao.deleteProductById(pIds);
     }
 
 
