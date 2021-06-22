@@ -7,6 +7,7 @@ import com.zcl.demo.dao.user.UserDao;
 import com.zcl.demo.model.log.Log;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.log.LogService;
+import com.zcl.demo.util.DateInFo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -63,6 +64,14 @@ public class LogServiceImpl implements LogService {
             list = logDao.queryAll();
         }
         return list;
+    }
+
+    @Override
+    public String statisNowDayPnum() {
+        String s = DateInFo.dateFomart();
+        String nowDate = s.substring(0, 8);
+        String num = logDao.statisNowDayPnum(nowDate);
+        return num;
     }
 
 

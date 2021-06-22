@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -103,4 +104,14 @@ public class LoginController {
         }
     }
 
+    /**
+     * 统计今日访问次数
+     * @return
+     */
+    @RequestMapping(value = "/statisNowDayPnum.json",method = RequestMethod.GET)
+    @ResponseBody
+    public Map statisNowDayPnum(){
+        String s = logService.statisNowDayPnum();
+        return CommonResponse.setResponseData(s);
+    }
 }

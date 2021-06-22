@@ -33,4 +33,9 @@ public interface LogService {
      * 查询框查询
      */
     List<Log> query(int page,int limit,String name,String date);
+
+    /**
+     * 统计今日访问次数
+     */
+    String statisNowDayPnum();
 }

@@ -3,8 +3,10 @@
 <mapper namespace="com.zcl.demo.dao.log.LogDao">
 
     <select id="queryAll" resultType="com.zcl.demo.model.log.Log">
-select create_time,user_name,action from log_info order by create_time desc
-  </select>
+        select create_time, user_name, action
+        from log_info
+        order by create_time desc
+    </select>
 
     <insert id="addLog" parameterType="com.zcl.demo.model.log.Log">
         <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
@@ -14,12 +16,29 @@ select create_time,user_name,action from log_info order by create_time desc
     </insert>
 
     <select id="queryByName" resultType="com.zcl.demo.model.log.Log">
-select create_time,user_name,action from log_info where user_name like "%"#{userName}"%"  order by create_time desc
-  </select>
+        select create_time, user_name, action
+        from log_info
+        where user_name like "%"#{userName}"%"
+        order by create_time desc
+    </select>
     <select id="queryByDate" resultType="com.zcl.demo.model.log.Log">
-select create_time,user_name,action from log_info where create_time like "%"#{createTime}"%" order by create_time desc
-  </select>
+        select create_time, user_name, action
+        from log_info
+        where create_time like "%"#{createTime}"%"
+        order by create_time desc
+    </select>
     <select id="queryByNameAndDate" resultType="com.zcl.demo.model.log.Log">
-select create_time,user_name,action from log_info where user_name like "%"#{userName}"%" and create_time like "%"#{createTime}"%" order by create_time desc
-  </select>
+        select create_time, user_name, action
+        from log_info
+        where user_name like "%"#{userName}"%"
+          and create_time like "%"#{createTime}"%"
+        order by create_time desc
+    </select>
+
+    <select id="statisNowDayPnum" resultType="java.lang.String">
+        SELECT count(1)
+        FROM log_info
+        where action = '登录'
+          and substring(create_time,1,8)=#{nowDate}
+    </select>
 </mapper>

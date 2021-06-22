@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/login/login.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="../../static/js/common/util.js"></script>
 </head>
 <body class="layui-layout-body">
 <#--<form class="layui-form" action="${request.contextPath}/login.form" method="post">-->
@@ -42,6 +43,9 @@
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit type="submit" lay-filter="sblogin">登陆</button>
             </div>
+        </div>
+        <div class="layui-form-item" id="showPnum">
+            今日访问次数为：<span id="num"></span>
         </div>
     </div>
 </form>

@@ -18,4 +18,6 @@ public interface LogDao {
    List<Log> queryByDate(String createTime);
    //根据名称、日期模糊查询
    List<Log> queryByNameAndDate(@Param("userName")String userName,@Param("createTime") String createTime);
+   //统计今日系统访问次数
+   String statisNowDayPnum(String nowDate);
 }
