@@ -66,3 +66,8 @@ a:hover{
 #showPnum{
     text-align: center;
 }
+
+#num{
+    color: #FFB800;
+    font-size:24px;
+}
