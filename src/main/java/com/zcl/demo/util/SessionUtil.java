@@ -26,8 +26,9 @@ public class SessionUtil {
 
     /**
      * 获取Session
+     * @param userName
      */
-    public static HttpSession getSession() {
+    public static HttpSession getSession(String userName) {
         return getRequest().getSession() == null ? null : getRequest().getSession();
     }
 

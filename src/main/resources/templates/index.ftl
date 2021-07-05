@@ -25,6 +25,9 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
+                <a href="">消息通知<span class="layui-badge">${noticeNum}</span></a>
+            </li>
+            <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
                 ${userDao.uName}

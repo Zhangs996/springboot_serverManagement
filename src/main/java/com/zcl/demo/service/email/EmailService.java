@@ -1,0 +1,24 @@
+package com.zcl.demo.service.email;
+
+import com.zcl.demo.model.email.Email;
+import com.zcl.demo.vo.email.EmailSerchVo;
+
+import java.util.List;
+
+/**
+
+ * @author  zcl
+
+ * @create  2021/7/3 21:53
+
+ * @desc 信件service层
+
+ **/
+public interface EmailService {
+    //保存
+    void save(Email email);
+    //根据uid查找邮件
+    List<Email> queryAllEmailByUid();
+    //动态查询邮件
+    List<Email> list(int page, int limit, EmailSerchVo emailSerchVo);
+}

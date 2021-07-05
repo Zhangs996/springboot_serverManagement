@@ -6,6 +6,7 @@ import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.log.LogService;
 import com.zcl.demo.service.menu.MenuService;
+import com.zcl.demo.service.notice.NoticeService;
 import com.zcl.demo.service.role.RoleService;
 import com.zcl.demo.service.user.UserService;
 import com.zcl.demo.util.MD5Util;
@@ -35,6 +36,8 @@ public class LoginController {
     private LogService logService;
     @Autowired
     private MenuService menuService;
+    @Autowired
+    private NoticeService noticeService;
     private String url = "/login";
 
     /**
@@ -71,6 +74,9 @@ public class LoginController {
             //展示角色拥有菜单
             String showMenus = menuService.listMenuByRid(u.getrId());
             model.addAttribute("roleMenus",showMenus);
+            //设置消息通知
+            Integer noticeNum=noticeService.queryNoticeNumByUid(u.getuId());
+            model.addAttribute("noticeNum",noticeNum);
             //设置session 存用户当前的登录状态以及角色id
             httpSession.setAttribute("roleId", u.getuId());
             httpSession.setAttribute("userName", user.getuName());

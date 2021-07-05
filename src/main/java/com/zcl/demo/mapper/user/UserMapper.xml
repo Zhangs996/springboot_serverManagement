@@ -69,5 +69,8 @@
         where u_id = #{uId}
     </update>
 
+    <select id="queryAllUser" resultType="com.zcl.demo.model.user.User">
+        select * from t_user
+    </select>
 
 </mapper>

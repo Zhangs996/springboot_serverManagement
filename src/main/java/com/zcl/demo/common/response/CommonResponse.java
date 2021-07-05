@@ -45,4 +45,7 @@ public class CommonResponse {
     public static Map setResponseData(Object data) {
         return setResponseData(data, StatusCode.SUCCESS.getCode(), "操作成功", true);
     }
+    public static Map setResponseMsg(String msg) {
+        return setResponseData(null, StatusCode.SUCCESS.getCode(), msg, true);
+    }
 }

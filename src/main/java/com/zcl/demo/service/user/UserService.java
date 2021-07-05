@@ -21,4 +21,6 @@ public interface UserService {
     User queryUserByAllName(String name);
     //重置密码
     void reloadPw(String userId);
+    //查询所有用户
+    List<User> queryAllUser();
 }
