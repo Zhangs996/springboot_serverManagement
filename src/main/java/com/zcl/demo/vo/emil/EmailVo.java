@@ -13,6 +13,8 @@ import lombok.Data;
  **/
 @Data
 public class EmailVo {
+    //发件人
+    private String userId;
     //收件人
     private String reciveMan;
     //信件标题

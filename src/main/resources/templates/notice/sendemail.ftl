@@ -21,6 +21,7 @@
         <div class="layui-row">
             <div class="layui-col-xs12">
                 <div class="layui-form-item">
+                    <input name="userId" hidden value="${userId}"></input>
                     <label class="layui-form-label">收件人<span style="color:red;">*</span>：</label>
                         <div class="layui-input-inline">
                             <select name="reciveMan" lay-verify="required" lay-search="">

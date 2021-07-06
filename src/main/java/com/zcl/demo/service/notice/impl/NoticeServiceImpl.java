@@ -45,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
         String eTopic = emailVo.getETopic();
         String reciveMan = emailVo.getReciveMan();
         String eContent = emailVo.getEContent();
-        String userId = (String) SessionUtil.getSessionAttribute("userId");
+        String userId = emailVo.getUserId();
         //生成信件uuid
         String eId= UUID.randomUUID().toString().replace("-","");
         String nowTime = DateInFo.dateFomart();

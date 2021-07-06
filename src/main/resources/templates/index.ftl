@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>曾小白系统</title>
     <link rel="stylesheet" type="text/css" href="../static/frame/layui-v2.5.6/layui/css/layui.css">
+    <script type="text/javascript" src="../../static/js/common/util.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -25,7 +26,9 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="">消息通知<span class="layui-badge">${noticeNum}</span></a>
+                <a href="">消息通知
+                    <span id="noticeNum" class="layui-badge">${noticeNum}</span>
+                </a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">

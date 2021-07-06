@@ -53,3 +53,17 @@ function tabshow(e) {
     console.log(url);
     $(".showiframe").attr('src', url);
 }
+
+//定时监听消息改变 2分钟改变一次
+self.setInterval("emailListener()",1000*60*2)
+
+function emailListener(){
+    // console.log("监听！");
+    //消息通知数量
+    var url = "/NoticeController/getNoticeNum.json";
+    sendAjax.sendGetAjax(url, null, function (res) {
+        if (res.status) {
+            $("#noticeNum").html(res.data);
+        }
+    })
+}

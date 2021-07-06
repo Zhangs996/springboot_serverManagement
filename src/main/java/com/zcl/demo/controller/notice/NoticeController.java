@@ -10,6 +10,7 @@ import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.email.EmailService;
 import com.zcl.demo.service.notice.NoticeService;
 import com.zcl.demo.service.user.UserService;
+import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.email.ShowEmailVo;
 import com.zcl.demo.vo.emil.EmailVo;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -65,8 +66,10 @@ public class NoticeController {
      */
     @RequestMapping(value = "/showSendEmail.html", method = RequestMethod.GET)
     public String showSendEmail(Model model) {
+        String userId = (String) SessionUtil.getSessionAttribute("userId");
         List<User> users = userService.queryAllUser();
         model.addAttribute("users", users);
+        model.addAttribute("userId", userId);
         return URL + "/sendemail";
     }
 
@@ -93,11 +96,12 @@ public class NoticeController {
     @RequestMapping(value = "/EmailConsumer.json", method = RequestMethod.POST)
     @RabbitListener(queues = "email.k1")
     @ResponseBody
-    public Map saveEmail(String msg) {
+    public void saveEmail(String msg) {
         EmailVo emailVo = JSONArray.parseObject(msg, EmailVo.class);
         noticeService.saveNoticeAndEmail(emailVo);
-        return CommonResponse.setResponseMsg("发送成功");
     }
+
+
 
     /**
      * 根据uid查询信件
@@ -106,7 +110,6 @@ public class NoticeController {
      * @return
      */
     @RequestMapping(value = "/emailList.json", method = RequestMethod.POST)
-    @RabbitListener(queues = "email.k1")
     @ResponseBody
     public Map queryAllEmailByUid(@RequestParam(required = false, defaultValue = "1") int page,
                                   @RequestParam(required = false) int limit, String isReaded, String sendMan, String reviceTime) {
@@ -115,6 +118,17 @@ public class NoticeController {
         PageInfo<ShowEmailVo> emails = new PageInfo<>(list);
         Map map = CommonResponse.setPageResponse(emails.getList(), emails.getTotal(), StatusCode.SUCCESS.getName(), "成功", true);
         return map;
+    }
+
+    /**
+     * 查询邮件数量
+     */
+    @RequestMapping(value = "/getNoticeNum.json",method = RequestMethod.GET)
+    @ResponseBody
+    public Map getNoticeNum(){
+        String userId = (String) SessionUtil.getSessionAttribute("userId");
+        Integer noticeNum=noticeService.queryNoticeNumByUid(userId);
+        return CommonResponse.setResponseData(noticeNum);
     }
 
 }
