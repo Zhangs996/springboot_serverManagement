@@ -2,6 +2,8 @@ package com.zcl.demo.dao.email;
 
 import com.zcl.demo.model.email.Email;
 import com.zcl.demo.vo.email.EmailSerchVo;
+import com.zcl.demo.vo.email.ShowEmailVo;
+import com.zcl.demo.vo.emil.EmailVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +32,11 @@ public interface EmailDao {
     /**
      * 动态查询邮件
      * @param userId
-     * @param emailSerchVo
+     * @param isReaded
+     * @param sendMan
+     * @param reviceTime
      * @return
      */
-    List<Email> queryDysnEmailByVo(@Param("userId") String userId,@Param("emailSerchVo")  EmailSerchVo emailSerchVo);
+    List<ShowEmailVo> queryDysnEmailByVo(@Param("userId") String userId, @Param("isReaded") String isReaded,
+                                         @Param("sendMan") String sendMan, @Param("reviceTime") String reviceTime);
 }

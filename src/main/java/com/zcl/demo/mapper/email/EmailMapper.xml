@@ -6,16 +6,19 @@
         values (#{eId}, #{eTopic}, #{eUrl}, #{eContent}, #{createUser}, #{createTime})
     </insert>
 
-    <select id="queryAllEmailByUid" resultType="com.zcl.demo.model.email.Email">
-        select t1.e_id, t1.e_topic, t1.create_time, t1.create_user
+    <select id="queryAllEmailByUid" resultType="com.zcl.demo.vo.email.ShowEmailVo">
+        select t3.u_name,t1.e_id, t1.e_topic, t1.create_time, t1.create_user,t2.is_readed
         from t_email t1
                  join t_notice t2
                       on t1.e_id = t2.e_id
+                 join t_user t3
+                      on t1.create_user = t3.u_id
         where t2.recive_man = #{userId}
+order by t1.create_time desc,t3.u_name
     </select>
 
-    <select id="queryDysnEmailByVo" resultType="com.zcl.demo.model.email.Email">
-        select  t3.u_name,t1.e_id,t1.e_topic, t1.create_time, t1.create_user
+    <select id="queryDysnEmailByVo" resultType="com.zcl.demo.vo.email.ShowEmailVo">
+        select t3.u_name,t1.e_id,t1.e_topic, t1.create_time, t1.create_user,t2.is_readed
         from t_email t1
         join t_notice t2
         on t1.e_id = t2.e_id
@@ -23,16 +26,17 @@
         on t1.create_user=t3.u_id
         <where>
             t2.recive_man = #{userId}
-            <if test="emailSerchVo.isReaded=null and emailSerchVo.isReaded=''">
-                and t2.is_readed=#{emailSerchVo.isReaded}
+            <if test="isReaded!=null and isReaded!=''">
+                and t2.is_readed=#{isReaded}
             </if>
-            <if test="emailSerchVo.sendMan=null and emailSerchVo.sendMan=''">
-                and t3.u_name like concat('%',#{SerchVo.sendMan},'%')
+            <if test="sendMan!=null and sendMan!=''">
+                and t3.u_name like concat('%',#{sendMan},'%')
             </if>
-            <if test="emailSerchVo.reviceTime=null and emailSerchVo.reviceTime=''">
-                and substring(t2.create_time,1,8)=#{SerchVo.reviceTime}
+            <if test="reviceTime!=null and reviceTime!=''">
+                and substring(t2.create_time,1,8)=#{reviceTime}
             </if>
         </where>
+        order by t1.create_time desc,t3.u_name
     </select>
 
 </mapper>

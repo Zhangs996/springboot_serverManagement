@@ -18,9 +18,9 @@
     <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label">发件时间：</label>
+            <label class="layui-form-label">收件时间：</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="test13" name="getTime" placeholder="yyyyMMdd">
+                <input type="text" class="layui-input" id="test13" name="reviceTime" placeholder="yyyyMMdd">
             </div>
         </div>
 
@@ -39,7 +39,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">发件人：</label>
             <div class="layui-input-inline">
-                <input type="text" id="createUser" name="createUser" class="layui-input search-input layui-input-sm">
+                <input type="text" id="createUser" name="sendMan" class="layui-input search-input layui-input-sm">
             </div>
         </div>
 
@@ -60,18 +60,15 @@
 <script src="../../static/frame/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add.html">
+        <button class="layui-btn layui-btn-sm" lay-event="sendEmail.html">
             <i class="layui-icon">&#xe654;</i>
-            新增</button>
-        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">
-            <i class="layui-icon">&#xe642;</i>
-            修改</button>
+            写信</button>
         <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">
             <i class="layui-icon">&#xe60f;</i>
-            详情</button>
+            查看</button>
         <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">
             <i class="layui-icon">&#xe640;</i>
-            删除</button>
+            全部已读</button>
     </div>
 </script>
 

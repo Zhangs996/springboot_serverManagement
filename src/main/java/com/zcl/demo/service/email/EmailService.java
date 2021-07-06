@@ -2,6 +2,8 @@ package com.zcl.demo.service.email;
 
 import com.zcl.demo.model.email.Email;
 import com.zcl.demo.vo.email.EmailSerchVo;
+import com.zcl.demo.vo.email.ShowEmailVo;
+import com.zcl.demo.vo.emil.EmailVo;
 
 import java.util.List;
 
@@ -20,5 +22,5 @@ public interface EmailService {
     //根据uid查找邮件
     List<Email> queryAllEmailByUid();
     //动态查询邮件
-    List<Email> list(int page, int limit, EmailSerchVo emailSerchVo);
+    List<ShowEmailVo> list(int page, int limit, String isReaded, String sendMan, String reviceTime);
 }

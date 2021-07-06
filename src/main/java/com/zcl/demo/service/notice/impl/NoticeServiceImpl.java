@@ -9,6 +9,7 @@ import com.zcl.demo.service.notice.NoticeService;
 import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.emil.EmailVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class NoticeServiceImpl implements NoticeService {
     private NoticeDao noticeDao;
     private EmailDao emailDao;
@@ -32,6 +34,8 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void saveNoticeAndEmail(EmailVo emailVo) {
+        try{
+
         if(StringUtils.isEmpty(emailVo.getETopic())){
             throw new ZfException("标题不能为空");
         }
@@ -61,6 +65,9 @@ public class NoticeServiceImpl implements NoticeService {
         email.setETopic(eTopic);
         email.setCreateUser(userId);
         emailDao.save(email);
+        }catch (Exception e){
+            log.error("监听异常，{}",e);
+        }
     }
 
     @Override

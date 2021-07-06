@@ -16,13 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;font-style: inherit;font-weight: 900;">
-        <legend>
-            <i class="layui-icon">&#xe609;</i>
-            内部信
-        </legend>
-    </fieldset>
-    <form class="layui-form add-form" method="post" action="${request.contextPath}/NoticeController/saveEmail.json">
+    <form class="layui-form add-form" method="post" action="${request.contextPath}/NoticeController/saveEmailProducer.json">
 
         <div class="layui-row">
             <div class="layui-col-xs12">

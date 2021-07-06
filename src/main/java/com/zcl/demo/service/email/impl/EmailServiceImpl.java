@@ -2,11 +2,14 @@ package com.zcl.demo.service.email.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.zcl.demo.dao.email.EmailDao;
+import com.zcl.demo.enums.notice.NoticeReadEnum;
 import com.zcl.demo.model.email.Email;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.email.EmailService;
 import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.email.EmailSerchVo;
+import com.zcl.demo.vo.email.ShowEmailVo;
+import com.zcl.demo.vo.emil.EmailVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -33,18 +36,21 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public List<Email> list(int page, int limit, EmailSerchVo emailSerchVo) {
-        String isReaded = emailSerchVo.getIsReaded();
-        String sendMan = emailSerchVo.getSendMan();
-        String reviceTime = emailSerchVo.getReviceTime();
+    public List<ShowEmailVo> list(int page, int limit, String isReaded, String sendMan, String reviceTime) {
         String userId = (String) SessionUtil.getSessionAttribute("userId");
-        List<Email> emails = null;
+        List<ShowEmailVo> emails = null;
         PageHelper.startPage(page, limit);
-        if (StringUtils.isEmpty(isReaded) && StringUtils.isEmpty(sendMan) && StringUtils.isEmpty(reviceTime)) {
-            emails = emailDao.queryAllEmailByUid(userId);
-        }else{//动态查询
-            emails=emailDao.queryDysnEmailByVo(userId,emailSerchVo);
-        }
+        //动态查询
+        emails = emailDao.queryDysnEmailByVo(userId, isReaded, sendMan, reviceTime);
+        //转换是否已读为中文
+        emails.stream().forEach(e -> {
+            String readed = e.getIsReaded();
+            if ("0".equals(readed)) {//未读
+                e.setIsReaded(NoticeReadEnum.NO_READ.getDesc());
+            } else {//已读
+                e.setIsReaded(NoticeReadEnum.READ.getDesc());
+            }
+        });
         return emails;
     }
 }

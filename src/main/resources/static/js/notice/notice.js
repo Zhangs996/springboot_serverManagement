@@ -12,8 +12,9 @@ $(function () {
                 { type: 'numbers', title: '序号', width: 40  }
                 , {field: 'etopic', title: '主题'}
                 , {field: 'eid', hide: true}
-                , {field: 'createUser', title: '发件人'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                , {field: 'uname', title: '发件人'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                 , {field: 'createTime', title: '创建时间', sort: true}
+                , {field: 'isReaded', title: '是否已读', sort: true}
             ]]
             , text: {
                 none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
@@ -73,7 +74,7 @@ $(function () {
             var checkStatus = table.checkStatus(obj.config.id);
             var data = checkStatus.data;
             switch (obj.event) {
-                case 'add.html':
+                case 'sendEmail.html':
                     info_add();
                     break;
                 case 'update.html':
@@ -139,13 +140,13 @@ var contextPath = "";
 function info_add() {
     var layIndex = layer.open({
         type: 2,
-        title: ['新增', 'font-weight: bold;'],
+        title: ['发送邮件', 'font-weight: bold;'],
         shadeClose: false,
         shade: 0.3,
         anim: 1,
         maxmin: true,
         area: ['700px', '600px'],
-        content: [contextPath + '/userController/add.html', 'no'],
+        content: [contextPath + '/NoticeController/showSendEmail.html', 'no'],
     });
 }
 

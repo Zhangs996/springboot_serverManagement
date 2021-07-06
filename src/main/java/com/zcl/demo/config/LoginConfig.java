@@ -23,6 +23,8 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/login.form",            //登录事件
                 "/logout.html",            //登出
                 "/statisNowDayPnum.json",//统计访问量
+                "/NoticeController/EmailConsumer.json",
+                "/NoticeController/saveEmailProducer.json",
                 "/**/*.js",              //js静态资源
                 "/**/*.css",             //css静态资源
                 "/**/*.png"             //css静态资源
