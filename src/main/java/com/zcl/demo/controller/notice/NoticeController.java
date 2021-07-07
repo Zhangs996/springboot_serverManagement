@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.zcl.demo.common.exception.ZfException;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
+import com.zcl.demo.model.email.Email;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.email.EmailService;
 import com.zcl.demo.service.notice.NoticeService;
@@ -17,6 +19,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,7 +105,6 @@ public class NoticeController {
     }
 
 
-
     /**
      * 根据uid查询信件
      *
@@ -123,12 +125,30 @@ public class NoticeController {
     /**
      * 查询邮件数量
      */
-    @RequestMapping(value = "/getNoticeNum.json",method = RequestMethod.GET)
+    @RequestMapping(value = "/getNoticeNum.json", method = RequestMethod.GET)
     @ResponseBody
-    public Map getNoticeNum(){
+    public Map getNoticeNum() {
         String userId = (String) SessionUtil.getSessionAttribute("userId");
-        Integer noticeNum=noticeService.queryNoticeNumByUid(userId);
+        Integer noticeNum = noticeService.queryNoticeNumByUid(userId);
         return CommonResponse.setResponseData(noticeNum);
     }
 
+    /**
+     * 跳转消息详情界面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/emailDetailPage.html",method = RequestMethod.GET)
+    public String emailDetailPage(Model model,String eId) {
+        if(StringUtils.isEmpty(eId)){
+            throw new ZfException("信件id传输不能为空！");
+        }
+        //查出信件内容
+        Email email=emailService.queryEmailByEid(eId);
+        model.addAttribute("email",email);
+        //标志位已读
+        noticeService.updateNoticeReaded(eId);
+        return URL + "/emaildetail";
+    }
 }

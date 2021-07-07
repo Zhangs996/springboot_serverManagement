@@ -26,4 +26,9 @@ public interface NoticeService {
 
     Integer queryNoticeNumByUid(String getuId);
 
+    /**
+     * 更改消息为已读
+     * @param eId
+     */
+    void updateNoticeReaded(String eId);
 }

@@ -39,4 +39,13 @@ public interface EmailDao {
      */
     List<ShowEmailVo> queryDysnEmailByVo(@Param("userId") String userId, @Param("isReaded") String isReaded,
                                          @Param("sendMan") String sendMan, @Param("reviceTime") String reviceTime);
+
+    /**
+     * 根据eid查询右键
+     * @param eId
+     * @return
+     */
+    Email queryEmailByEid(String eId);
+
+
 }

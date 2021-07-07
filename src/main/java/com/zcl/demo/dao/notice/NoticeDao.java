@@ -18,4 +18,6 @@ public interface NoticeDao {
     void save(Notice notice);
 
     Integer queryNoticeNumByUid(String getuId);
+    //更改消息为已读
+    void updateNoticeReaded(String eId);
 }

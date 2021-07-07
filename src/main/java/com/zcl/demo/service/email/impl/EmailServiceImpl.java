@@ -53,4 +53,12 @@ public class EmailServiceImpl implements EmailService {
         });
         return emails;
     }
+
+    @Override
+    public Email queryEmailByEid(String eId) {
+        Email email=emailDao.queryEmailByEid(eId);
+        return email;
+    }
+
+
 }

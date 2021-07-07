@@ -13,4 +13,7 @@
         where recive_man = #{getuId}
           and is_readed = '0'
     </select>
+    <update id="updateNoticeReaded">
+        update t_notice set is_readed='1' where e_id=#{eId}
+    </update>
 </mapper>

@@ -80,14 +80,9 @@ $(function () {
                 case 'update.html':
                     info_modify(data);
                     break;
-                case 'sub.json':
-                    info_sub(data);
-                    break;
                 case 'detail.html':
+                    // location.reload();
                     info_view(data);
-                    break;
-                case 'cancel.json':
-                    info_cancel(data);
                     break;
                 case 'delete.json':
                     info_delete(data);
@@ -136,7 +131,7 @@ $(function () {
 
 var contextPath = "";
 
-//新增
+//发送信件
 function info_add() {
     var layIndex = layer.open({
         type: 2,
@@ -151,27 +146,9 @@ function info_add() {
 }
 
 
-//修改
-function info_modify(data) {
-    if (data.length != 1) {
-        layui.layer.msg('请选择一条记录', {icon: 2, time: 1500});
-        return;
-    }
-    console.log(data[0]['uId']);
-    console.log(data[0]['uName']);
-    var layIndex = layer.open({
-        type: 2,
-        title: ['修改', 'font-weight: bold;'],
-        shadeClose: false,
-        shade: 0.3,
-        anim: 1,
-        maxmin: true,
-        area: ['500px', '400px'],
-        content: [contextPath + '/userController/modify.html?' + $.param({id: data[0]['uId']})]
-    });
-}
 
-//详情
+
+//查看信件，点击查看应该先刷新表单再展示信件
 function info_view(data) {
     if (data.length != 1) {
         layui.layer.msg('请选择一条记录', {icon: 2, time: 1500});
@@ -186,7 +163,7 @@ function info_view(data) {
         anim: 1,
         maxmin: true,
         area: ['500px', '400px'],
-        content: [contextPath + '/userController/detail.html?' + $.param({uId: data[0]['uId']})]
+        content: [contextPath + '/NoticeController/emailDetailPage.html?' + $.param({eId: data[0]['eid']})]
     });
 }
 

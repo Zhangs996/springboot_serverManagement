@@ -39,4 +39,9 @@ order by t1.create_time desc,t3.u_name
         order by t1.create_time desc,t3.u_name
     </select>
 
+    <select id="queryEmailByEid" resultType="com.zcl.demo.model.email.Email">
+        select * from t_email where e_id=#{eId}
+    </select>
+
+
 </mapper>

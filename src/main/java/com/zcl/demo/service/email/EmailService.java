@@ -23,4 +23,7 @@ public interface EmailService {
     List<Email> queryAllEmailByUid();
     //动态查询邮件
     List<ShowEmailVo> list(int page, int limit, String isReaded, String sendMan, String reviceTime);
+    //根据eid查询邮件
+    Email queryEmailByEid(String eId);
+
 }

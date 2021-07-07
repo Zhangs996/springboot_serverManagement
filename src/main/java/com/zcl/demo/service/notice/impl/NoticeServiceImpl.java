@@ -59,10 +59,10 @@ public class NoticeServiceImpl implements NoticeService {
         noticeDao.save(notice);
         //存放信件内容表
         Email email = new Email();
-        email.setEId(eId);
+        email.seteId(eId);
         email.setCreateTime(nowTime);
-        email.setEContent(eContent);
-        email.setETopic(eTopic);
+        email.seteContent(eContent);
+        email.seteTopic(eTopic);
         email.setCreateUser(userId);
         emailDao.save(email);
         }catch (Exception e){
@@ -73,6 +73,11 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Integer queryNoticeNumByUid(String getuId) {
         return noticeDao.queryNoticeNumByUid(getuId);
+    }
+
+    @Override
+    public void updateNoticeReaded(String eId) {
+        noticeDao.updateNoticeReaded(eId);
     }
 
 
