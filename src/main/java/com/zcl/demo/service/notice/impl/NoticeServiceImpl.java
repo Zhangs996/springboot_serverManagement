@@ -80,5 +80,11 @@ public class NoticeServiceImpl implements NoticeService {
         noticeDao.updateNoticeReaded(eId);
     }
 
+    @Override
+    public void allEmailReaded() {
+        String userId = (String) SessionUtil.getSessionAttribute("userId");
+        noticeDao.allEmailReaded( userId);
+    }
+
 
 }

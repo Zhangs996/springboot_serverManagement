@@ -31,4 +31,9 @@ public interface NoticeService {
      * @param eId
      */
     void updateNoticeReaded(String eId);
+
+    /**
+     * 所有消息为已读
+     */
+    void allEmailReaded();
 }

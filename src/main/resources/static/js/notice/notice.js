@@ -1,7 +1,8 @@
+var init_table;
 $(function () {
     layui.use(['table', 'laydate', 'util', 'form'], function () {
         var table = layui.table;
-        var init_table = table.render({
+        init_table = table.render({
             elem: '#test'
             , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             , method: 'post'
@@ -9,7 +10,7 @@ $(function () {
             , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 {type: 'checkbox'},
-                { type: 'numbers', title: '序号', width: 40  }
+                {type: 'numbers', title: '序号', width: 40}
                 , {field: 'etopic', title: '主题'}
                 , {field: 'eid', hide: true}
                 , {field: 'uname', title: '发件人'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
@@ -77,16 +78,14 @@ $(function () {
                 case 'sendEmail.html':
                     info_add();
                     break;
-                case 'update.html':
-                    info_modify(data);
+                case 'allreaded.json':
+                    allreaded(data);
                     break;
                 case 'detail.html':
-                    // location.reload();
                     info_view(data);
+                    reload();
                     break;
-                case 'delete.json':
-                    info_delete(data);
-                    break;
+
             }
         });
 
@@ -106,6 +105,15 @@ $(function () {
         })
 
     });
+
+    function reload() {
+        document.getElementById("search_form").reset();
+        init_table.reload({
+            where: processSearchForm(), page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
 
     //遍历一遍表单的key value
     function processSearchForm() {
@@ -146,8 +154,6 @@ function info_add() {
 }
 
 
-
-
 //查看信件，点击查看应该先刷新表单再展示信件
 function info_view(data) {
     if (data.length != 1) {
@@ -165,46 +171,28 @@ function info_view(data) {
         area: ['500px', '400px'],
         content: [contextPath + '/NoticeController/emailDetailPage.html?' + $.param({eId: data[0]['eid']})]
     });
+
 }
 
+//全部已读
+function allreaded(data) {
 
-//删除
-function info_delete(data) {
-    var userArr = new Array();//要传输的对象数组
-    if (data.length === 0) {
-        layui.layer.msg('请至少选择一条记录', {icon: 2, time: 1500});
-        return;
-    }
-    for (var key in data) {
-        var obj = data[key]['uId'];
-        userArr.push(obj);
-    }
-    console.log(userArr);
-
-    layer.confirm('确定删除吗?', {icon: 3, title: '提示'},
+    var url = "/NoticeController/allEmailReaded.json";
+    layer.confirm('确定全部已读吗?', {icon: 3, title: '提示'},
         function (index) {
-            var mask = layer.load();
-            $.ajax({
-                url: "/userController/deleteById.json",
-                type: "POST",
-                contentType: "application/json;charset=UTF-8",
-                dataType: "json",
-                data: JSON.stringify(userArr),
-                success: function (res) {
-                    if (res.status) {
-                        layui.layer.msg(res.msg, {icon: 1, time: 1000}, function () {
-                            location.reload();
-                        })
-                    } else {
-                        layui.layer.msg(res.msg, {icon: 2, time: 1500})
-                    }
-                    layer.close(mask);
+            sendAjax.sendGetAjax(url, null, function (res) {
+                if (res.status) {
+                    layui.layer.msg(res.msg, {icon: 1, time: 1500});
+                    location.reload();
+                } else {
+                    layui.layer.msg(res.msg, {icon: 2, time: 1500});
                 }
             })
             layer.close(index);
-        });
-
+        })
 }
+
+
 
 
 

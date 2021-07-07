@@ -16,4 +16,7 @@
     <update id="updateNoticeReaded">
         update t_notice set is_readed='1' where e_id=#{eId}
     </update>
+    <update id="allEmailReaded">
+        update t_notice set is_readed='1' where recive_man=#{userId}
+    </update>
 </mapper>

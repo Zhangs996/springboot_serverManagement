@@ -20,4 +20,6 @@ public interface NoticeDao {
     Integer queryNoticeNumByUid(String getuId);
     //更改消息为已读
     void updateNoticeReaded(String eId);
+    //全部已读
+    void allEmailReaded(String userId);
 }

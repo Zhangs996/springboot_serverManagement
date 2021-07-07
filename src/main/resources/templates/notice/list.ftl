@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../static/frame/layui-v2.5.6/layui/css/layui.css">
     <link rel="stylesheet" href="../../static/css/log/log.css">
     <script src="../../static/frame/jquery-v3.5.1/jquery-3.5.1.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../static/js/common/util.js"></script>
     <script src="../../static/js/notice/notice.js"></script>
 </head>
 <body>
@@ -66,7 +67,7 @@
         <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">
             <i class="layui-icon">&#xe60f;</i>
             查看</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete.json">
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="allreaded.json">
             <i class="layui-icon">&#xe640;</i>
             全部已读</button>
     </div>

@@ -151,4 +151,16 @@ public class NoticeController {
         noticeService.updateNoticeReaded(eId);
         return URL + "/emaildetail";
     }
+
+    /**
+     * 全部已读
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/allEmailReaded.json",method =RequestMethod.GET)
+    @ResponseBody
+    public Map allEmailReaded(){
+    noticeService.allEmailReaded();
+    return CommonResponse.setResponseMsg("操作成功");
+    }
 }

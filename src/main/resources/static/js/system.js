@@ -54,8 +54,8 @@ function tabshow(e) {
     $(".showiframe").attr('src', url);
 }
 
-//定时监听消息改变 2分钟改变一次
-self.setInterval("emailListener()",1000*60*2)
+//定时监听消息改变 1分钟改变一次
+self.setInterval("emailListener()",1000*60*1)
 
 function emailListener(){
     // console.log("监听！");

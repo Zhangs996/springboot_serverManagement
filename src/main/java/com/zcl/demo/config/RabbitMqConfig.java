@@ -70,7 +70,7 @@ public class RabbitMqConfig {
                     log.info("确认confirm情况:{}，到达交换机成功", correlationData);
             }
         });
-
+        //交换机没有找到queue触发，默认是直接丢弃消息，我们在这里可以进行处理丢弃信息
         rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
             @Override
             public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
