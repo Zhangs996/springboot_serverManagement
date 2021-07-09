@@ -33,7 +33,7 @@ public class LogController {
     private LogService logService;
 
     /**
-     * 日志管理界面
+     * 登录日志管理界面
      *
      * @return
      */
@@ -43,7 +43,7 @@ public class LogController {
     }
 
     /**
-     * 日志查询
+     * 登录日志查询
      * @param userName
      * @param createTime
      * @return
@@ -57,6 +57,15 @@ public class LogController {
         PageInfo<Log> rolePageInfo = new PageInfo<>(list);//
         Map map = CommonResponse.setPageResponse(rolePageInfo.getList(), rolePageInfo.getTotal(), StatusCode.SUCCESS.getName(), "成功", true);
         return map;
+    }
+
+    /**
+     * 功能日志界面
+     * @return
+     */
+    @RequestMapping(value = "/functionLogPage",method = RequestMethod.GET)
+    public String functionLogPage(){
+        return "/log/funlog";
     }
 
 }

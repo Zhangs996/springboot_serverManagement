@@ -26,13 +26,13 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="">消息通知
+                <a url="/NoticeController/showIndex.html" onclick="tabshow(this)">消息通知
                     <span id="noticeNum" class="layui-badge">${noticeNum}</span>
                 </a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="layui-nav-img">
                 ${userDao.uName}
                 </a>
                 <dl class="layui-nav-child">
