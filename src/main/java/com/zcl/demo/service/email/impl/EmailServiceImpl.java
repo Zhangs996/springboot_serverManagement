@@ -1,7 +1,9 @@
 package com.zcl.demo.service.email.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.zcl.demo.common.exception.ZfException;
 import com.zcl.demo.dao.email.EmailDao;
+import com.zcl.demo.dao.notice.NoticeDao;
 import com.zcl.demo.enums.notice.NoticeReadEnum;
 import com.zcl.demo.model.email.Email;
 import com.zcl.demo.model.user.User;
@@ -18,9 +20,11 @@ import java.util.List;
 @Service
 public class EmailServiceImpl implements EmailService {
     private EmailDao emailDao;
+    private NoticeDao noticeDao;
 
-    public EmailServiceImpl(EmailDao emailDao) {
+    public EmailServiceImpl(EmailDao emailDao, NoticeDao noticeDao) {
         this.emailDao = emailDao;
+        this.noticeDao = noticeDao;
     }
 
     @Override
@@ -58,6 +62,17 @@ public class EmailServiceImpl implements EmailService {
     public Email queryEmailByEid(String eId) {
         Email email=emailDao.queryEmailByEid(eId);
         return email;
+    }
+
+    @Override
+    public void suchDelete(String[] eId) {
+        if(StringUtils.isEmpty(eId)){
+            throw new ZfException("通知选择不能为空");
+        }
+        //删除相关邮件
+        emailDao.suchDelete(eId);
+        //删除相关信息
+        noticeDao.suchDelete(eId);
     }
 
 

@@ -43,7 +43,7 @@ public class LogServiceImpl implements LogService {
     public int logout(HttpSession httpSession) {
         String status = (String) httpSession.getAttribute("status");
         if ("登录".equals(status)) {//退出成功
-           // httpSession.invalidate();
+            // httpSession.invalidate();
             return 0;//
         } else {//退出失败
             return 1;
@@ -51,12 +51,12 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public List<Log> query(int page,int limit,String name, String date) {
+    public List<Log> query(int page, int limit, String name, String date) {
         List<Log> list = new ArrayList<>();
         PageHelper.startPage(page, limit);
-        if (!StringUtils.isEmpty(name) &&!StringUtils.isEmpty(date) ) {
+        if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(date)) {
             list = logDao.queryByNameAndDate(name, date);
-        } else if (StringUtils.isEmpty(name)&&!StringUtils.isEmpty(date)) {
+        } else if (StringUtils.isEmpty(name) && !StringUtils.isEmpty(date)) {
             list = logDao.queryByDate(date);
         } else if (!StringUtils.isEmpty(name) && StringUtils.isEmpty(date)) {
             list = logDao.queryByName(name);
@@ -72,6 +72,13 @@ public class LogServiceImpl implements LogService {
         String nowDate = s.substring(0, 8);
         String num = logDao.statisNowDayPnum(nowDate);
         return num;
+    }
+
+    @Override
+    public List<Log> funLogQuery(int page, int limit, String userName, String createTime) {
+        PageHelper.startPage(page, limit);
+        List<Log> logs = logDao.funLogQuery(userName, createTime);
+        return logs;
     }
 
 

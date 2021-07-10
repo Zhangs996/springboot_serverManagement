@@ -47,5 +47,9 @@ public interface EmailDao {
      */
     Email queryEmailByEid(String eId);
 
-
+    /**
+     * 批量删除邮件
+     * @param eId
+     */
+    void suchDelete(@Param("eId") String[] eId);
 }

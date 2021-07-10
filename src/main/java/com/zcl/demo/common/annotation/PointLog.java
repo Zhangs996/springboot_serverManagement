@@ -20,5 +20,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented//表示是否将注解信息添加在java文档中
 public @interface PointLog {
+    //功能编号
+    String id() default "";
+    //描述
     String value() default "";
 }

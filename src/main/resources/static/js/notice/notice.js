@@ -81,6 +81,9 @@ $(function () {
                 case 'allreaded.json':
                     allreaded(data);
                     break;
+                case 'suchDelete.json':
+                    suchDelete(data);
+                    break;
                 case 'detail.html':
                     info_view(data);
                     reload();
@@ -160,7 +163,10 @@ function info_view(data) {
         layui.layer.msg('请选择一条记录', {icon: 2, time: 1500});
         return;
     }
-    console.log(data);
+    var num=$("#noticeNum", parent.document).parent().find('#noticeNum').text();
+    if(num!=0){
+        $("#noticeNum", parent.document).parent().find('#noticeNum').html(num-1);
+    }
     var layIndex = layer.open({
         type: 2,
         title: ['详情', 'font-weight: bold;'],
@@ -171,9 +177,49 @@ function info_view(data) {
         area: ['500px', '400px'],
         content: [contextPath + '/NoticeController/emailDetailPage.html?' + $.param({eId: data[0]['eid']})]
     });
-
 }
 
+//删除
+function suchDelete(data) {
+    var userArr = new Array();//要传输的对象数组
+    if (data.length === 0) {
+        layui.layer.msg('请至少选择一条记录', {icon: 2, time: 1500});
+        return;
+    }
+    for (var key in data) {
+        if(data[key]['isReaded']=="未读"){
+            layui.layer.msg('未读的信件不能删除', {icon: 2, time: 1500});
+            return;
+        }
+        var obj = data[key]['eid'];
+        userArr.push(obj);
+    }
+    console.log(userArr);
+
+    layer.confirm('确定删除吗?', {icon: 3, title: '提示'},
+        function (index) {
+            var mask = layer.load();
+            $.ajax({
+                url:"/NoticeController/suchDelete.json",
+                type:"POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType:"json",
+                data: JSON.stringify(userArr),
+                success:function(res){
+                    if(res.status){
+                        layui.layer.msg(res.msg,{icon:1,time:1000},function(){
+                            location.reload();
+                        })
+                    }else{
+                        layui.layer.msg(res.msg,{icon:2,time:1500})
+                    }
+                    layer.close(mask);
+                }
+            })
+            layer.close(index);
+        });
+
+}
 //全部已读
 function allreaded(data) {
 
@@ -183,6 +229,7 @@ function allreaded(data) {
             sendAjax.sendGetAjax(url, null, function (res) {
                 if (res.status) {
                     layui.layer.msg(res.msg, {icon: 1, time: 1500});
+                    changeNum();
                     location.reload();
                 } else {
                     layui.layer.msg(res.msg, {icon: 2, time: 1500});
@@ -192,7 +239,16 @@ function allreaded(data) {
         })
 }
 
-
+//更新数量
+function changeNum() {
+    var url = "/NoticeController/getNoticeNum.json";
+    sendAjax.sendGetAjax(url, null, function (res) {
+        if (res.status) {
+            console.log(res.data);
+            $("#noticeNum", parent.document).parent().find('#noticeNum').html(res.data);
+        }
+    })
+}
 
 
 

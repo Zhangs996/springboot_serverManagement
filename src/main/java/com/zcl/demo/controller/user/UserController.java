@@ -1,6 +1,7 @@
 package com.zcl.demo.controller.user;
 
 import com.github.pagehelper.PageInfo;
+import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.role.Role;
@@ -42,10 +43,11 @@ public class UserController {
     }
 
     /**
-     * 默认展示界面
+     * 默认展示界面（商品透视图）
      *
      * @return
      */
+    @PointLog(id = "8",value = "商品透视图")
     @RequestMapping(value = "/showChars.html", method = RequestMethod.GET)
     public String showChars() {
         return "chars";
@@ -66,6 +68,7 @@ public class UserController {
      *
      * @return
      */
+    @PointLog(id = "3",value = "用户管理")
     @RequestMapping(value = "/userlist.html", method = RequestMethod.GET)
     public String showUsers() {
         return url + "/list";

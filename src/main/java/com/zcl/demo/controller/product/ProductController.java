@@ -2,6 +2,7 @@ package com.zcl.demo.controller.product;
 
 import com.github.pagehelper.PageInfo;
 import com.sun.corba.se.spi.ior.ObjectKey;
+import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.product.Product;
@@ -42,6 +43,7 @@ public class ProductController {
      *
      * @return
      */
+    @PointLog(id = "7",value = "商品列表")
     @RequestMapping(value = "/showlist.html", method = RequestMethod.GET)
     public String showListPage() {
         return url + "/list";
@@ -96,6 +98,7 @@ public class ProductController {
      *
      * @return
      */
+    @PointLog(id = "9",value = "商品销售详情")
     @RequestMapping(value = "/showSalePage.html")
     public String showSalePage() {
         return url + "/sale/list";
@@ -106,6 +109,7 @@ public class ProductController {
      *
      * @return
      */
+    @PointLog(id = "10",value = "商品生产详情")
     @RequestMapping(value = "/showProPage.html")
     public String showProPage() {
         return url + "/produce/list";

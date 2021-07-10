@@ -2,8 +2,9 @@ package com.zcl.demo.controller.notice;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.rabbitmq.client.Channel;
+import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.exception.ZfException;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
@@ -15,16 +16,19 @@ import com.zcl.demo.service.user.UserService;
 import com.zcl.demo.util.SessionUtil;
 import com.zcl.demo.vo.email.ShowEmailVo;
 import com.zcl.demo.vo.emil.EmailVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.AmqpHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +39,7 @@ import java.util.Map;
  **/
 @Controller
 @RequestMapping(value = "/NoticeController")
+@Slf4j
 public class NoticeController {
 
     private UserService userService;
@@ -57,6 +62,7 @@ public class NoticeController {
      * @param
      * @return
      */
+    @PointLog(id = "4",value = "站内信")
     @RequestMapping(value = "/showIndex.html", method = RequestMethod.GET)
     public String showIndex() {
         return URL + "/list";
@@ -91,7 +97,7 @@ public class NoticeController {
     }
 
     /**
-     * 保存信件（消费者）
+     * 保存信件（消费者）手动确认
      *
      * @param
      * @return
@@ -99,11 +105,39 @@ public class NoticeController {
     @RequestMapping(value = "/EmailConsumer.json", method = RequestMethod.POST)
     @RabbitListener(queues = "email.k1")
     @ResponseBody
-    public void saveEmail(String msg) {
-        EmailVo emailVo = JSONArray.parseObject(msg, EmailVo.class);
-        noticeService.saveNoticeAndEmail(emailVo);
+    public void saveEmail(@Payload String message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
+        try{
+            EmailVo emailVo = JSONArray.parseObject(message, EmailVo.class);
+            noticeService.saveNoticeAndEmail(emailVo);
+            log.info("-----------------------------------手动确认完毕-----------------------");
+            channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
+        }catch (Exception e){//做失败处理，true为重回队列，false为丢弃
+            channel.basicNack(deliveryTag,true,true);
+        }
+
     }
 
+//    /**
+//     * 保存信件（消息补偿）手动确认
+//     * email.k2队列为延迟队列
+//     * @param
+//     * @return
+//     */
+//    @RequestMapping(value = "/EmailConsumer.json", method = RequestMethod.POST)
+//    @RabbitListener(queues = "email.k2")
+//    @ResponseBody
+//    public void saveEmailCompensation(@Payload String message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
+//        try{
+//            //判断通知备份表中
+//            EmailVo emailVo = JSONArray.parseObject(message, EmailVo.class);
+//            noticeService.saveNoticeAndEmail(emailVo);
+//            log.info("-----------------------------------手动确认完毕-----------------------");
+//            channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
+//        }catch (Exception e){//做失败处理，true为重回队列，false为丢弃
+//            channel.basicNack(deliveryTag,true,true);
+//        }
+//
+//    }
 
     /**
      * 根据uid查询信件
@@ -139,14 +173,14 @@ public class NoticeController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/emailDetailPage.html",method = RequestMethod.GET)
-    public String emailDetailPage(Model model,String eId) {
-        if(StringUtils.isEmpty(eId)){
+    @RequestMapping(value = "/emailDetailPage.html", method = RequestMethod.GET)
+    public String emailDetailPage(Model model, String eId) {
+        if (StringUtils.isEmpty(eId)) {
             throw new ZfException("信件id传输不能为空！");
         }
         //查出信件内容
-        Email email=emailService.queryEmailByEid(eId);
-        model.addAttribute("email",email);
+        Email email = emailService.queryEmailByEid(eId);
+        model.addAttribute("email", email);
         //标志位已读
         noticeService.updateNoticeReaded(eId);
         return URL + "/emaildetail";
@@ -154,13 +188,26 @@ public class NoticeController {
 
     /**
      * 全部已读
+     *
      * @param
      * @return
      */
-    @RequestMapping(value = "/allEmailReaded.json",method =RequestMethod.GET)
+    @RequestMapping(value = "/allEmailReaded.json", method = RequestMethod.GET)
     @ResponseBody
-    public Map allEmailReaded(){
-    noticeService.allEmailReaded();
-    return CommonResponse.setResponseMsg("操作成功");
+    public Map allEmailReaded() {
+        noticeService.allEmailReaded();
+        return CommonResponse.setResponseMsg("操作成功");
+    }
+
+    /**
+     * 批量删除邮件
+     * @param eId
+     * @return
+     */
+    @RequestMapping(value = "/suchDelete.json",method = RequestMethod.POST)
+    @ResponseBody
+    public Map suchDelete(@RequestBody String[] eId){
+        emailService.suchDelete(eId);
+        return CommonResponse.setResponseMsg("操作成功");
     }
 }

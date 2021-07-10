@@ -2,9 +2,12 @@ package com.zcl.demo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -65,9 +68,9 @@ public class RabbitMqConfig {
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
                 if (ack == false) {
-                    log.error("消息{}发送到交换机失败，报错:{}", correlationData, cause);
+                    log.error("---------------消息{}发送到交换机失败，报错:{}", correlationData, cause);
                 }
-                    log.info("确认confirm情况:{}，到达交换机成功", correlationData);
+                    log.info("------------------确认confirm情况:{}，到达交换机成功", correlationData);
             }
         });
         //交换机没有找到queue触发，默认是直接丢弃消息，我们在这里可以进行处理丢弃信息

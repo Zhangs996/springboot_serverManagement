@@ -38,4 +38,14 @@ public interface LogService {
      * 统计今日访问次数
      */
     String statisNowDayPnum();
+
+    /**
+     * 功能日志查询
+     * @param page
+     * @param limit
+     * @param userName
+     * @param createTime
+     * @return
+     */
+    List<Log> funLogQuery(int page, int limit, String userName, String createTime);
 }

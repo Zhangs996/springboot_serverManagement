@@ -2,6 +2,7 @@ package com.zcl.demo.controller.role;
 
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
+import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.menu.Menu;
@@ -43,6 +44,7 @@ public class RoleController {
      *
      * @return
      */
+    @PointLog(id = "3",value = "角色管理")
     @RequestMapping(value = "/role_native.html", method = RequestMethod.GET)
     public String showNativeRole() {
         return url + "/list";

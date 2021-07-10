@@ -62,14 +62,17 @@
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="sendEmail.html">
-            <i class="layui-icon">&#xe654;</i>
+            <i class="layui-icon">&#xe63a;</i>
             写信</button>
         <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">
             <i class="layui-icon">&#xe60f;</i>
             查看</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="allreaded.json">
-            <i class="layui-icon">&#xe640;</i>
+        <button class="layui-btn layui-btn-sm " lay-event="allreaded.json">
+            <i class="layui-icon">&#x1005;</i>
             全部已读</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="suchDelete.json">
+            <i class="layui-icon">&#xe640;</i>
+            删除</button>
     </div>
 </script>
 

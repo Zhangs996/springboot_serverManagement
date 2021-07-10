@@ -43,5 +43,12 @@ order by t1.create_time desc,t3.u_name
         select * from t_email where e_id=#{eId}
     </select>
 
+    <delete id="suchDelete">
+        delete from t_email
+        where e_id in
+        <foreach collection="eId" open="(" close=")" separator="," item="value">
+            #{value}
+        </foreach>
+    </delete>
 
 </mapper>

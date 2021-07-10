@@ -25,5 +25,6 @@ public interface EmailService {
     List<ShowEmailVo> list(int page, int limit, String isReaded, String sendMan, String reviceTime);
     //根据eid查询邮件
     Email queryEmailByEid(String eId);
-
+    //批量删除邮件、消息
+    void suchDelete(String[] eId);
 }

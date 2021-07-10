@@ -19,4 +19,12 @@
     <update id="allEmailReaded">
         update t_notice set is_readed='1' where recive_man=#{userId}
     </update>
+
+    <delete id="suchDelete">
+        delete from t_notice
+        where e_id in
+        <foreach collection="eId" open="(" close=")" separator="," item="value">
+            #{value}
+        </foreach>
+    </delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.zcl.demo.dao.notice;
 
 import com.zcl.demo.model.notice.Notice;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,4 +23,6 @@ public interface NoticeDao {
     void updateNoticeReaded(String eId);
     //全部已读
     void allEmailReaded(String userId);
+    //批量删除消息
+    void suchDelete(@Param("eId") String[] eId);
 }

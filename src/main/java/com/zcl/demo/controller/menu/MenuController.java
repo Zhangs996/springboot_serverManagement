@@ -1,5 +1,6 @@
 package com.zcl.demo.controller.menu;
 
+import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.model.menu.Menu;
 import com.zcl.demo.service.menu.MenuService;
@@ -37,6 +38,7 @@ public class MenuController {
     /**
      * 菜单管理主界面
      */
+    @PointLog(id = "6",value = "菜单管理")
     @RequestMapping(value = "/showindex.html", method = RequestMethod.GET)
     public String showIndex() {
         return prief + "/index";
