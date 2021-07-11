@@ -8,16 +8,19 @@ import com.zcl.demo.common.annotation.PointLog;
 import com.zcl.demo.common.exception.ZfException;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
+import com.zcl.demo.model.mq.MqNoticeBack;
+import com.zcl.demo.enums.notice.NoteTypeEnum;
 import com.zcl.demo.model.email.Email;
 import com.zcl.demo.model.user.User;
 import com.zcl.demo.service.email.EmailService;
 import com.zcl.demo.service.notice.NoticeService;
 import com.zcl.demo.service.user.UserService;
+import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.SessionUtil;
+import com.zcl.demo.vo.email.EmailCpVo;
+import com.zcl.demo.vo.email.EmailCpVoCopy;
 import com.zcl.demo.vo.email.ShowEmailVo;
-import com.zcl.demo.vo.emil.EmailVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author zcl
@@ -85,13 +89,19 @@ public class NoticeController {
     /**
      * 发送信件（生产者）
      *
-     * @param emailVo
+     * @param emailCpVo
      */
     @RequestMapping(value = "/saveEmailProducer.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map email(EmailVo emailVo) {
+    public Map sendEmail(EmailCpVo emailCpVo) {
+        if(StringUtils.isEmpty(emailCpVo)){
+            throw new ZfException("输入内容不能为空");
+        }
+        //在生产者端生成nid
+        String uuid = UUID.randomUUID().toString().replaceAll("-","");
         //发送至rabbitmq的交换机“emailExchange”,队列“email.k1"
-        byte[] bytes = JSON.toJSONString(emailVo).getBytes();
+        emailCpVo.setNId(uuid);
+        byte[] bytes = JSON.toJSONString(emailCpVo).getBytes();
         rabbitTemplate.convertAndSend("emailExchange", "email.k1", bytes);
         return CommonResponse.setResponseMsg("发送成功");
     }
@@ -106,38 +116,61 @@ public class NoticeController {
     @RabbitListener(queues = "email.k1")
     @ResponseBody
     public void saveEmail(@Payload String message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
+        MqNoticeBack mqNoticeBack = new MqNoticeBack();
+        EmailCpVo emailCpVo = JSONArray.parseObject(message, EmailCpVo.class);
+        EmailCpVoCopy emailCpVoCopy = new EmailCpVoCopy();
         try{
-            EmailVo emailVo = JSONArray.parseObject(message, EmailVo.class);
-            noticeService.saveNoticeAndEmail(emailVo);
+            noticeService.saveNoticeAndEmail(emailCpVo);
+            log.info("-----------------------------------手动确认完毕-----------------------");
+            mqNoticeBack.setStatus(StatusCode.SUCCESS.getName());
+            channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
+        }catch (Exception e){
+            //做失败处理，true为重回队列，false为丢弃,返回头部
+            //消息如果拒绝，大概率是异常，多以最好丢弃，做个消息补偿。
+            mqNoticeBack.setStatus(StatusCode.FAIL.getName());
+            channel.basicNack(deliveryTag,false,false);
+        }finally {
+            //将处理结果备份
+            String mqNid = UUID.randomUUID().toString().replace("-", "");
+            String s = DateInFo.dateFomart();
+
+            mqNoticeBack.setMqNoteId(mqNid);//主键
+            mqNoticeBack.setHandleTime(s);
+            mqNoticeBack.setMqNid(emailCpVo.getNId());//关联通知表
+            mqNoticeBack.setNoteType(NoteTypeEnum.EMIAL_NOTE.getCode());
+
+            emailCpVoCopy.setMqNid(mqNid);//关联备份表
+            emailCpVoCopy.setReciveMan(emailCpVo.getReciveMan());
+            emailCpVoCopy.setUserId(emailCpVo.getUserId());
+            emailCpVoCopy.setEContent(emailCpVo.getEContent());
+            emailCpVoCopy.setETopic(emailCpVo.getETopic());
+            emailCpVoCopy.setNId(emailCpVo.getNId());
+            noticeService.saveMqNoteBack(mqNoticeBack);
+            noticeService.saveEmailCopy(emailCpVoCopy);
+        }
+    }
+    //监听死信队列（TTL+死信队列=消息延迟）
+    @RequestMapping(value = "checkDelQueue", method = RequestMethod.POST)
+    @RabbitListener(queues = "delqueque")
+    public void checkDelQueue(@Payload String message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
+        try{
+            EmailCpVo emailCpVo = JSONArray.parseObject(message, EmailCpVo.class);
+            //检查nid是否存在于mq通知备份表中
+            boolean exist = noticeService.checkNidExist(emailCpVo.getNId());
+            if(false==exist){
+                //不存在则重新调用生产者
+                sendEmail(emailCpVo);
+            }
             log.info("-----------------------------------手动确认完毕-----------------------");
             channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
         }catch (Exception e){//做失败处理，true为重回队列，false为丢弃
-            channel.basicNack(deliveryTag,true,true);
+            //死信队列的消息都没有处理掉就丢失吧，备份表里有记录可以追溯
+            e.printStackTrace();
+            channel.basicNack(deliveryTag,false,false);
         }
 
     }
 
-//    /**
-//     * 保存信件（消息补偿）手动确认
-//     * email.k2队列为延迟队列
-//     * @param
-//     * @return
-//     */
-//    @RequestMapping(value = "/EmailConsumer.json", method = RequestMethod.POST)
-//    @RabbitListener(queues = "email.k2")
-//    @ResponseBody
-//    public void saveEmailCompensation(@Payload String message, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws IOException {
-//        try{
-//            //判断通知备份表中
-//            EmailVo emailVo = JSONArray.parseObject(message, EmailVo.class);
-//            noticeService.saveNoticeAndEmail(emailVo);
-//            log.info("-----------------------------------手动确认完毕-----------------------");
-//            channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
-//        }catch (Exception e){//做失败处理，true为重回队列，false为丢弃
-//            channel.basicNack(deliveryTag,true,true);
-//        }
-//
-//    }
 
     /**
      * 根据uid查询信件

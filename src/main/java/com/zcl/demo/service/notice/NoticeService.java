@@ -1,10 +1,9 @@
 package com.zcl.demo.service.notice;
 
-import com.zcl.demo.model.email.Email;
+import com.zcl.demo.model.mq.MqNoticeBack;
 import com.zcl.demo.model.notice.Notice;
-import com.zcl.demo.vo.emil.EmailVo;
-
-import java.util.List;
+import com.zcl.demo.vo.email.EmailCpVo;
+import com.zcl.demo.vo.email.EmailCpVoCopy;
 
 /**
 
@@ -20,9 +19,9 @@ public interface NoticeService {
 
     /**
      * 保存至notice和email
-     * @param emailVo
+     * @param
      */
-    void saveNoticeAndEmail(EmailVo emailVo);
+    void saveNoticeAndEmail(EmailCpVo emailCpVo);
 
     Integer queryNoticeNumByUid(String getuId);
 
@@ -36,4 +35,23 @@ public interface NoticeService {
      * 所有消息为已读
      */
     void allEmailReaded();
+
+    /**
+     * 保存信息到消息备份表中
+     * @param mqNoticeBack
+     */
+    void saveMqNoteBack(MqNoticeBack mqNoticeBack);
+
+    /**
+     * 备份邮件VO
+     * @param emailCpVo
+     */
+    void saveEmailCopy(EmailCpVoCopy emailCpVo);
+
+    /**
+     * 检查该消息在消息备份表中是否存在
+     * @param nId
+     * @return
+     */
+    boolean checkNidExist(String nId);
 }
