@@ -133,13 +133,14 @@ public class NoticeController {
             //将处理结果备份
             String mqNid = UUID.randomUUID().toString().replace("-", "");
             String s = DateInFo.dateFomart();
-
-            mqNoticeBack.setMqNoteId(mqNid);//主键
+            //mq通知结果表
+            mqNoticeBack.setMqNid(mqNid);//主键
+            mqNoticeBack.setMqNoteId(emailCpVo.getNId());//
             mqNoticeBack.setHandleTime(s);
-            mqNoticeBack.setMqNid(emailCpVo.getNId());//关联通知表
             mqNoticeBack.setNoteType(NoteTypeEnum.EMIAL_NOTE.getCode());
 
-            emailCpVoCopy.setMqNid(mqNid);//关联备份表
+            //信件备份表
+            emailCpVoCopy.setMqNid(mqNid);//关联mq通知结果表
             emailCpVoCopy.setReciveMan(emailCpVo.getReciveMan());
             emailCpVoCopy.setUserId(emailCpVo.getUserId());
             emailCpVoCopy.setEContent(emailCpVo.getEContent());
@@ -158,17 +159,16 @@ public class NoticeController {
             //检查nid是否存在于mq通知备份表中
             boolean exist = noticeService.checkNidExist(emailCpVo.getNId());
             if(false==exist){
-                //不存在则重新调用生产者
+                //不存在或第一次为消费失败则重新调用生产者
                 sendEmail(emailCpVo);
             }
-            log.info("-----------------------------------手动确认完毕-----------------------");
+            log.info("-----------------------------------延迟信件消息手动确认完毕-----------------------");
             channel.basicAck(deliveryTag, true); //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
         }catch (Exception e){//做失败处理，true为重回队列，false为丢弃
             //死信队列的消息都没有处理掉就丢失吧，备份表里有记录可以追溯
             e.printStackTrace();
             channel.basicNack(deliveryTag,false,false);
         }
-
     }
 
 
