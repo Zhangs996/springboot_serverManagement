@@ -44,9 +44,9 @@
                 <button class="layui-btn" lay-submit type="submit" lay-filter="sblogin">登陆</button>
             </div>
         </div>
-        <div class="layui-form-item" id="showPnum">
-            今日访问次数为：<span id="num"></span>
-        </div>
+<#--        <div class="layui-form-item" id="showPnum">-->
+<#--            今日访问次数为：<span id="num"></span>-->
+<#--        </div>-->
     </div>
 </form>
 <script src="../../static/frame/layui-v2.5.6/layui/layui.js"></script>

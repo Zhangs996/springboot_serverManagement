@@ -2,6 +2,7 @@ package com.zcl.demo.service.log;
 
 import com.zcl.demo.model.log.Log;
 import com.zcl.demo.model.user.User;
+import com.zcl.demo.vo.log.StaticSevNumVo;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -48,4 +49,9 @@ public interface LogService {
      * @return
      */
     List<Log> funLogQuery(int page, int limit, String userName, String createTime);
+
+    /**
+     * 近七日用户访问量统计
+     */
+    StaticSevNumVo staticSenvenDayLog();
 }

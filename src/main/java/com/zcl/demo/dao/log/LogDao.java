@@ -22,4 +22,5 @@ public interface LogDao {
    String statisNowDayPnum(String nowDate);
    //动态查询功能日志
    List<Log> funLogQuery(@Param("userName")String userName,@Param("createTime") String createTime);
+
 }

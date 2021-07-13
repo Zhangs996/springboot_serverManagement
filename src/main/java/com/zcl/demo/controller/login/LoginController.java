@@ -9,7 +9,9 @@ import com.zcl.demo.service.menu.MenuService;
 import com.zcl.demo.service.notice.NoticeService;
 import com.zcl.demo.service.role.RoleService;
 import com.zcl.demo.service.user.UserService;
+import com.zcl.demo.util.DateInFo;
 import com.zcl.demo.util.MD5Util;
+import com.zcl.demo.vo.log.StaticSevNumVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -26,6 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -119,5 +124,25 @@ public class LoginController {
     public Map statisNowDayPnum(){
         String s = logService.statisNowDayPnum();
         return CommonResponse.setResponseData(s);
+    }
+
+    /**
+     * 展示首页
+     * @return
+     */
+    @RequestMapping(value = "/showSYpage.html",method = RequestMethod.GET)
+    public String showSyPage(){
+        return url+"/souye";
+    }
+
+    /**
+     * 近七日用户访问统计
+     * @return
+     */
+    @RequestMapping(value = "/staticSevenDayLog.json",method = RequestMethod.GET)
+    @ResponseBody
+    public Map staticSevenDayLog(){
+        StaticSevNumVo staticSevNumVo = logService.staticSenvenDayLog();
+        return CommonResponse.setResponseData(staticSevNumVo);
     }
 }
