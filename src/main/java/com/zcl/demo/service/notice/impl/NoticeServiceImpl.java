@@ -1,6 +1,7 @@
 package com.zcl.demo.service.notice.impl;
 
 import com.zcl.demo.common.exception.ZfException;
+import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.dao.email.EmailDao;
 import com.zcl.demo.model.mq.MqNoticeBack;
 import com.zcl.demo.dao.notice.NoticeDao;
@@ -13,6 +14,7 @@ import com.zcl.demo.vo.email.EmailCpVo;
 import com.zcl.demo.vo.email.EmailCpVoCopy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.UUID;
@@ -32,8 +34,8 @@ public class NoticeServiceImpl implements NoticeService {
     public void save(Notice notice) {
 
     }
-
     @Override
+    @Transactional     //开启事务回滚，信件和消息需要一一对应
     public void saveNoticeAndEmail(EmailCpVo emailVo) {
         try {
 
@@ -102,7 +104,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public boolean checkNidExist(String nId) {
         String nid = noticeDao.checkNidExist(nId);
-        if (StringUtils.isEmpty(nid)) {
+        if (StringUtils.isEmpty(nid)|| StatusCode.FAIL.getName().equals(nid)) {
             return false;
         }
         return true;

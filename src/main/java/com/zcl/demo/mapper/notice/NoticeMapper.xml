@@ -41,6 +41,6 @@
         insert into t_eamil_copy values (#{eNid},#{mqNid},#{userId},#{reciveMan},#{eTopic},#{eContent},#{nId})
     </insert>
     <select id="checkNidExist" resultType="java.lang.String">
-        select mq_nid from mq_notice_back where mq_note_id =#{nId}
+        select status from mq_notice_back where mq_note_id =#{nId}
     </select>
 </mapper>
