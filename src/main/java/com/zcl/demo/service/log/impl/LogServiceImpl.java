@@ -15,10 +15,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,6 +95,9 @@ public class LogServiceImpl implements LogService {
         }
         ArrayList<Integer> realdates = dates.stream().map(date -> Integer.parseInt(date)).collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Integer> realnums = nums.stream().map(num -> Integer.parseInt(num)).collect(Collectors.toCollection(ArrayList::new));
+
+        Collections.reverse(realdates);
+        Collections.reverse(realnums);
         sevNumVo.setDate(realdates);
         sevNumVo.setNum(realnums);
         return sevNumVo;
