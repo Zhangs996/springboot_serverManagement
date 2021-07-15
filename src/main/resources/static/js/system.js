@@ -6,7 +6,7 @@ layui.use('element', function () {
 })
 
 //详情
-function info_view(data) {
+function basecar_view(data) {
     layui.use('layer', function () {
         var layIndex = layer.open({
             type: 2,

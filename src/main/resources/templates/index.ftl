@@ -39,7 +39,7 @@
                     ${userDao.uName}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a onclick="info_view()">基本资料</a></dd>
+                    <dd><a onclick="basecar_view()">基本资料</a></dd>
                     <dd><a onclick="reloadPw()">重置密码</a></dd>
                 </dl>
             </li>
