@@ -26,7 +26,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">创建时间：</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="test13" name="createTime" placeholder="yyyyMMdd">
+                <input type="text" class="layui-input" id="test13" placeholder="yyyyMMdd">
             </div>
         </div>
 
