@@ -107,7 +107,7 @@ $(function () {
                 }
             }, money: [
                 /^[0-9]+(.[0-9]{2})?$/
-                ,'金额必须为保留两位小数的正数'
+                , '金额必须为保留两位小数的正数'
             ]
         })
 
@@ -154,6 +154,7 @@ function info_add() {
 
 //修改
 function info_modify(data) {
+    console.log(data);
     if (data.length != 1) {
         layui.layer.msg('请选择一条记录', {icon: 2, time: 1500});
         return;
@@ -166,7 +167,7 @@ function info_modify(data) {
         anim: 1,
         maxmin: true,
         area: ['500px', '400px'],
-        content: [contextPath + '/productController/updatePage.html?' + $.param({id: data[0]['pId']})]
+        content: [contextPath + '/productController/updatePage.html?' + $.param({pId: data[0]['pId']})]
     });
 }
 

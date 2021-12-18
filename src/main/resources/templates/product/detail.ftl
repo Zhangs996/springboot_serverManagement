@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <form class="layui-form add-form"">
+    <form class="layui-form add-form">
 
         <div class="layui-row">
             <div class="layui-col-xs12">

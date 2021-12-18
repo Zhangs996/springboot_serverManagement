@@ -3,6 +3,7 @@ package com.zcl.demo.controller.product;
 import com.github.pagehelper.PageInfo;
 import com.sun.corba.se.spi.ior.ObjectKey;
 import com.zcl.demo.common.annotation.PointLog;
+import com.zcl.demo.common.exception.ZfException;
 import com.zcl.demo.common.response.CommonResponse;
 import com.zcl.demo.common.status.StatusCode;
 import com.zcl.demo.model.product.Product;
@@ -43,7 +44,7 @@ public class ProductController {
      *
      * @return
      */
-    @PointLog(id = "7",value = "商品列表")
+    @PointLog(id = "7", value = "商品列表")
     @RequestMapping(value = "/showlist.html", method = RequestMethod.GET)
     public String showListPage() {
         return url + "/list";
@@ -98,7 +99,7 @@ public class ProductController {
      *
      * @return
      */
-    @PointLog(id = "9",value = "商品销售详情")
+    @PointLog(id = "9", value = "商品销售详情")
     @RequestMapping(value = "/showSalePage.html")
     public String showSalePage() {
         return url + "/sale/list";
@@ -109,7 +110,7 @@ public class ProductController {
      *
      * @return
      */
-    @PointLog(id = "10",value = "商品生产详情")
+    @PointLog(id = "10", value = "商品生产详情")
     @RequestMapping(value = "/showProPage.html")
     public String showProPage() {
         return url + "/produce/list";
@@ -192,8 +193,24 @@ public class ProductController {
      * @return
      */
     @RequestMapping(value = "/updatePage.html", method = RequestMethod.GET)
-    public String updatePage(Model model, String Pid) {
+    public String updatePage(Model model, String pId) {
+        Product product=productService.queryProductById(pId);
+        model.addAttribute("product",product);
         return url + "/update";
+    }
+
+    @PostMapping("/updateProduct.json")
+    @ResponseBody
+    public Map updateProduct(Product product) {
+        if (StringUtils.isEmpty(product)) {
+            throw new ZfException("商品不能为空");
+        }
+        boolean flag = productService.updateProduct(product);
+        if(flag==true){
+            return CommonResponse.setResponseData(null, StatusCode.SUCCESS.getCode(), "新增成功", true);
+        }else{
+            throw new ZfException("更新失败");
+        }
     }
 
     /**

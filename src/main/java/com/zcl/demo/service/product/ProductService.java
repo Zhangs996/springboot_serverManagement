@@ -39,4 +39,8 @@ public interface ProductService {
     boolean addProduct(Product product);
     //删除商品
     void deleteProductById(String[] pIds);
+    //更新商品
+    boolean updateProduct(Product product);
+    //根据ID查商品
+    Product queryProductById(String pid);
 }

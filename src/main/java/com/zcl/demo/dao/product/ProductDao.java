@@ -102,4 +102,17 @@ public interface ProductDao {
      * @param pIds
      */
     void deleteProductById(@Param("pIds") String[] pIds);
+
+    /**
+     * 更新商品
+     * @param product
+     */
+    void updateProduct(Product product);
+
+    /**
+     * 根据ID差商品
+     * @param pid
+     * @return
+     */
+    Product queryProductById(String pid);
 }

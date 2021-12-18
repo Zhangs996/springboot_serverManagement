@@ -101,8 +101,21 @@
     </select>
 
     <insert id="addProduct">
-        insert into t_product(p_id,p_name,p_money) values (#{pId},#{pName},#{pMoney})
+        insert into t_product(p_id, p_name, p_money)
+        values (#{pId}, #{pName}, #{pMoney})
     </insert>
+
+    <update id="updateProduct"  parameterType="com.zcl.demo.model.product.Product">
+        update t_product
+        set p_name=#{pName},
+            p_money=#{pMoney}
+        where p_id = #{pId}
+    </update>
+    <select id="queryProductById" resultType="com.zcl.demo.model.product.Product">
+        select *
+        from t_product
+        where p_id = #{p_id}
+    </select>
 
     <delete id="deleteProductById" parameterType="java.lang.String">
         delete from t_product where p_id in

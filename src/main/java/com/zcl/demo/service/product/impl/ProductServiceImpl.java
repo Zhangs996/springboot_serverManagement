@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
         } else if (!StringUtils.isEmpty(pId) && StringUtils.isEmpty(pName)) {
             products = productDao.queryProductByPid(pId);
         } else {
-            products = productDao.queryProByNameAndId(pId,pName);
+            products = productDao.queryProByNameAndId(pId, pName);
         }
         return products;
     }
@@ -165,6 +165,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 新增商品
+     *
      * @param product
      */
     @Override
@@ -172,8 +173,8 @@ public class ProductServiceImpl implements ProductService {
         String s = productDao.queryPnameByPid(product.getpId());
         List<ProduceVO> produceVOS = productDao.queryAllProduce();
         List<ProduceVO> collect = produceVOS.stream().filter(produceVO -> produceVO.getPName().equals(product.getpName())).collect(Collectors.toList());
-        if(!StringUtils.isEmpty(s)||!collect.isEmpty()){
-                 return false;
+        if (!StringUtils.isEmpty(s) || !collect.isEmpty()) {
+            return false;
         }
         productDao.addProduct(product);
         return true;
@@ -181,11 +182,29 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 删除商品
+     *
      * @param pIds
      */
     @Override
     public void deleteProductById(String[] pIds) {
         productDao.deleteProductById(pIds);
+    }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        try {
+            productDao.updateProduct(product);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Product queryProductById(String pid) {
+        Product product = productDao.queryProductById(pid);
+        return product;
     }
 
 

@@ -57,9 +57,9 @@
         <button class="layui-btn layui-btn-sm" lay-event="add.html">
             <i class="layui-icon">&#xe654;</i>
             新增</button>
-<#--        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">-->
-<#--            <i class="layui-icon">&#xe642;</i>-->
-<#--            修改</button>-->
+        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="update.html">
+            <i class="layui-icon">&#xe642;</i>
+            修改</button>
 <#--        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail.html">-->
 <#--            <i class="layui-icon">&#xe60f;</i>-->
 <#--            详情</button>-->
